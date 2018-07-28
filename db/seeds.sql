@@ -1,0 +1,7 @@
+INSERT INTO Ingredients (id, IngredientName, isGlutenFree, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES (1, 'banana', 1, 0, 0, 100, 10, 15, 1, 5, "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Ingredients (id, IngredientName, isGlutenFree, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES (2, 'soy milk', 1, 0, 0, 200, 11, 16, 10, 6, "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Users (firstname, lastname,role,username, password,email, createdAt, updatedAt) VALUES ("Ally","Mao","admin","AllyMao","abc123","acmlq@msn.com", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Users (firstname, lastname,role,username, password,email, createdAt, updatedAt) VALUES ("Bicen","Ye","admin","BicenYe","abc123","BicenYe@gmail.com", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Users (firstname, lastname,role,username, password,email, createdAt, updatedAt) VALUES ("George","Chanturidz","admin","GeorgeChanturidz","abc123","GeorgeC@msn.com", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Users (firstname, lastname,role,username, password,email, createdAt, updatedAt) VALUES ("Levan","Dvalidze","admin","LevanDvalidze","abc123","levan@msn.com", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
+INSERT INTO Users (firstname, lastname,role,username, password,email, createdAt, updatedAt) VALUES ("Bob","Anger","employee","BobAnger","abc123","bobanger@msn.com", "1000-01-01 00:00:00", "1000-01-01 00:00:00");
