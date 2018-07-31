@@ -10,8 +10,8 @@ const DeleteModal = props => {
             Are you sure you want to delete <strong>{props.deleteIngredientName}</strong>?
           </ModalBody>
           <ModalFooter>
-            <Button color="primary">Delete</Button>{' '}
-            <Button color="secondary" onClick={()=>props.toggle("","")}>Cancel</Button>
+            <Button color="danger" onClick={()=> props.deleteIngredient(props.deleteId)}>Delete</Button>{' '}
+            <Button color="primary" onClick={()=>props.toggle("","")}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

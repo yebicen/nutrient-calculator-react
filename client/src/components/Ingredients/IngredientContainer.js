@@ -65,15 +65,18 @@ export default class IngredientContainer extends React.Component {
     });
   };
 
-  toggle = (ingredient,id) => {
-    console.log(ingredient)
-    console.log(id)
-    // event.preventDefault();
+  toggle = (deleteIngredient,deleteId) => {
     this.setState({
       modal: !this.state.modal,
-      deleteIngredientName: ingredient,
-      deleteId: id
+      deleteIngredientName: deleteIngredient,
+      deleteId: deleteId
     });
+  }
+
+  deleteIngredient = (deleteId) => {
+    API.deleteIngredient(deleteId)
+    .then(this.getIngredients());
+    this.toggle();
   }
 
   render() {
@@ -81,7 +84,7 @@ export default class IngredientContainer extends React.Component {
       <Container>
         <IngredientForm handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} state={this.state} />
         <IngredientList dbIngredients={this.state.dbIngredients} toggle={this.toggle}/>
-        <DeleteModal modal={this.state.modal} toggle={this.toggle} deleteIngredientName={this.state.deleteIngredientName}/>
+        <DeleteModal modal={this.state.modal} toggle={this.toggle} deleteId={this.state.deleteId} deleteIngredientName={this.state.deleteIngredientName} deleteIngredient={this.deleteIngredient}/>
       </Container>
     );
   }
