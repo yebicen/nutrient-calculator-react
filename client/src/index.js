@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Mainrouter from "./Mainrouter.js"
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Mainrouter />, document.getElementById("root"));
 

@@ -4,27 +4,34 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "predeploy": "yarn build",
+    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn client\"",
+    "client": "cd client && yarn start",
+    "install": "cd client && yarn install",
+    "build": "cd client && yarn build",
+    "heroku-postbuild": "yarn build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geochanto/nutrient-calculator.git"
+    "url": "git+https://github.com/geochanto/nutrient-calculator-react.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/geochanto/nutrient-calculator/issues"
+    "url": "https://github.com/geochanto/nutrient-calculator-react/issues"
   },
-  "homepage": "https://github.com/geochanto/nutrient-calculator#readme",
+  "homepage": "https://github.com/geochanto/nutrient-calculator-react#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
     "connect-flash": "^0.1.1",
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "install": "^0.11.0",
     "mysql": "^2.15.0",
@@ -34,6 +41,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "react-router-dom": "^4.3.1",
+    "reactstrap": "^6.3.1",
     "sequelize": "^4.37.10"
   }
 }

@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const PORT = process.env.PORT || 3800;
+const PORT = process.env.PORT || 3001;
 var flash = require('connect-flash');
 const db = require("./models");
 const session = require('express-session'); 
