@@ -1,6 +1,11 @@
 import React from 'react';
 import API from '../../utils/API'
 import { Table } from 'reactstrap';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFlag } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faFlag)
 
 export default class IngredientForm extends React.Component {
     state = {
@@ -25,26 +30,26 @@ export default class IngredientForm extends React.Component {
                 <thead>
                     <tr>
                         <th>Ingredient name</th>
-                        <th>Calories</th>
-                        <th>Sugar</th>
-                        <th>Fat</th>
-                        <th>Protein</th>
-                        <th>Carbs</th>
-                        <th>Gluten-Free?</th>
-                        <th>Nut?</th>
+                        <th className="ingredient-values">Calories</th>
+                        <th className="ingredient-values">Sugar</th>
+                        <th className="ingredient-values">Fat</th>
+                        <th className="ingredient-values">Protein</th>
+                        <th className="ingredient-values">Carbs</th>
+                        <th className="ingredient-values">Has Gluten?</th>
+                        <th className="ingredient-values">Is a Nut?</th>
                     </tr>
                 </thead>
                 <tbody>
                     {this.state.dbIngredients.map(item => (
                         <tr key={item.id}>
                             <td>{item.IngredientName}</td>
-                            <td>{item.Calories}</td>
-                            <td>{item.Sugar}</td>
-                            <td>{item.Fat}</td>
-                            <td>{item.Protein}</td>
-                            <td>{item.Carbs}</td>
-                            <td>{item.hasGluten}</td>
-                            <td>{item.isNut}</td>
+                            <td className="ingredient-values">{item.Calories}</td>
+                            <td className="ingredient-values">{item.Sugar}</td>
+                            <td className="ingredient-values">{item.Fat}</td>
+                            <td className="ingredient-values">{item.Protein}</td>
+                            <td className="ingredient-values">{item.Carbs}</td>
+                            <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag"/> : null}</td>
+                            <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag"/> : null}</td>
                         </tr>
                     ))}
                 </tbody>
