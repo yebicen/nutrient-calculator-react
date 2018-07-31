@@ -17,9 +17,7 @@ exports.deleteIngredient = function(req, res) {
     where: {
       id: req.params.id
     }
-  }).then(function() {
-    res.redirect('/ingredients');
-  });
+  })
 };
 
 exports.editIngredient = function(req, res) {

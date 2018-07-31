@@ -5,5 +5,11 @@ import axios from "axios";
 export default {
     getIngredients: function() {
         return axios.get('/ingredients');
+    },
+    addIngredient: function(newIngredient) {
+        return axios.post('/ingredients/new', newIngredient);
+    },
+    deleteIngredient: function(deleteIngredient) {
+        return axios.delete(`/ingredients/delete/${deleteIngredient}`);
     }
 };

@@ -1,54 +1,47 @@
 import React from 'react';
-import API from '../../utils/API'
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFlag } from '@fortawesome/free-solid-svg-icons'
 
-export default class IngredientForm extends React.Component {
-    state = {
-        dbIngredients: []
-    }
+library.add(faFlag)
 
-    getIngredients = () => {
-        API.getIngredients()
-            .then(res => {
-                console.log(res.data);
-                this.setState({ dbIngredients: res.data })
-            })
-    }
-
-    componentDidMount() {
-        this.getIngredients();
-    };
-
-    render() {
+const IngredientList = props => {
         return (
             <Table striped className="ingredient list">
                 <thead>
                     <tr>
                         <th>Ingredient name</th>
-                        <th>Calories</th>
-                        <th>Sugar</th>
-                        <th>Fat</th>
-                        <th>Protein</th>
-                        <th>Carbs</th>
-                        <th>Gluten-Free?</th>
-                        <th>Nut?</th>
+                        <th className="ingredient-values">Calories</th>
+                        <th className="ingredient-values">Sugar</th>
+                        <th className="ingredient-values">Fat</th>
+                        <th className="ingredient-values">Protein</th>
+                        <th className="ingredient-values">Carbs</th>
+                        <th className="ingredient-values">Has Gluten?</th>
+                        <th className="ingredient-values">Is a Nut?</th>
+                        <th className="ingredient-values">Edit</th>
+                        <th className="ingredient-values">Delete</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.dbIngredients.map(item => (
+                    {props.dbIngredients.map(item => (
                         <tr key={item.id}>
                             <td>{item.IngredientName}</td>
-                            <td>{item.Calories}</td>
-                            <td>{item.Sugar}</td>
-                            <td>{item.Fat}</td>
-                            <td>{item.Protein}</td>
-                            <td>{item.Carbs}</td>
-                            <td>{item.hasGluten}</td>
-                            <td>{item.isNut}</td>
+                            <td className="ingredient-values">{item.Calories}</td>
+                            <td className="ingredient-values">{item.Sugar}</td>
+                            <td className="ingredient-values">{item.Fat}</td>
+                            <td className="ingredient-values">{item.Protein}</td>
+                            <td className="ingredient-values">{item.Carbs}</td>
+                            <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag"/> : null}</td>
+                            <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag"/> : null}</td>
+                            <td className="ingredient-values"><Button color="primary">Edit</Button></td>
+                            <td className="ingredient-values"><Button color="danger" onClick={() => props.toggle(item.IngredientName,item.id)}>Delete</Button></td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
         )
-    }
 }
+
+export default IngredientList;
