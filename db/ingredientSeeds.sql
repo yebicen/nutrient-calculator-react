@@ -1,0 +1,8 @@
+-- All Ingredients
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('banana', '1', '0', '0', '100', '20', '10', '9', '6', '2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('chocalate', '1', '0', '0', '300', '10', '6', '9', '6','2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients(IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('mango', '1', '0', '0', '100', '20', '10','9', '6','2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('apple', '1', '0', '0', '200', '10', '6','9', '6', '2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('orange', '1', '0', '0', '120', '10', '6','9', '6', '2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('Strawberry', '1', '0', '0', '150', '10', '6','9', '6', '2018-06-21 06:05:48', '2018-06-21 06:05:50');
+INSERT INTO Ingredients (IngredientName, hasGluten, isNut, isGMO, Calories, Carbs, Sugar, Fat, Protein, createdAt, updatedAt) VALUES ('Pineapple', '1', '0', '0', '220', '10', '6', '9', '6','2018-06-21 06:05:48', '2018-06-21 06:05:50');

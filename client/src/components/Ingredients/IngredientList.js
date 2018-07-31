@@ -43,7 +43,7 @@ export default class IngredientForm extends React.Component {
                             <td>{item.Fat}</td>
                             <td>{item.Protein}</td>
                             <td>{item.Carbs}</td>
-                            <td>{item.isGlutenFree}</td>
+                            <td>{item.hasGluten}</td>
                             <td>{item.isNut}</td>
                         </tr>
                     ))}

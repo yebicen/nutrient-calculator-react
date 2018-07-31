@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1, 200]
             }
         },
-        isGlutenFree: {
+        hasGluten: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
