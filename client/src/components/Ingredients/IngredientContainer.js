@@ -17,9 +17,14 @@ export default class IngredientContainer extends React.Component {
     isNut: false,
     isGMO: false,
     dbIngredients: [],
-    modal: false,
+    //for inredient deletion
+    modalDelete: false,
     deleteIngredientName: "",
-    deleteId: ""
+    deleteId: "",
+    //for ingredient editing
+    modalEdit: false,
+    editIngredientName: "",
+    editId: ""
   };
 
   getIngredients = () => {
@@ -65,10 +70,10 @@ export default class IngredientContainer extends React.Component {
     });
   };
 
-  toggle = (deleteIngredient,deleteId) => {
+  toggleDeleteModal = (deleteIngredientName, deleteId) => {
     this.setState({
-      modal: !this.state.modal,
-      deleteIngredientName: deleteIngredient,
+      modalDelete: !this.state.modalDelete,
+      deleteIngredientName: deleteIngredientName,
       deleteId: deleteId
     });
   }
@@ -76,15 +81,27 @@ export default class IngredientContainer extends React.Component {
   deleteIngredient = (deleteId) => {
     API.deleteIngredient(deleteId)
     .then(this.getIngredients());
-    this.toggle();
+    this.toggleDeleteModal();
   }
 
   render() {
     return (
       <Container>
-        <IngredientForm handleInputChange={this.handleInputChange} handleFormSubmit={this.handleFormSubmit} state={this.state} />
-        <IngredientList dbIngredients={this.state.dbIngredients} toggle={this.toggle}/>
-        <DeleteModal modal={this.state.modal} toggle={this.toggle} deleteId={this.state.deleteId} deleteIngredientName={this.state.deleteIngredientName} deleteIngredient={this.deleteIngredient}/>
+        <IngredientForm 
+        handleInputChange={this.handleInputChange} 
+        handleFormSubmit={this.handleFormSubmit} 
+        state={this.state} />
+        <IngredientList 
+        dbIngredients={this.state.dbIngredients} 
+        toggleDeleteModal={this.toggleDeleteModal}
+        />
+        <DeleteModal 
+          modal={this.state.modalDelete} 
+          toggleDeleteModal={this.toggleDeleteModal} 
+          deleteId={this.state.deleteId} 
+          deleteIngredientName={this.state.deleteIngredientName} 
+          deleteIngredient={this.deleteIngredient}
+        />
       </Container>
     );
   }

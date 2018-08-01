@@ -36,7 +36,7 @@ const IngredientList = props => {
                             <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag"/> : null}</td>
                             <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag"/> : null}</td>
                             <td className="ingredient-values"><Button color="primary">Edit</Button></td>
-                            <td className="ingredient-values"><Button color="danger" onClick={() => props.toggle(item.IngredientName,item.id)}>Delete</Button></td>
+                            <td className="ingredient-values"><Button color="danger" onClick={() => props.toggleDeleteModal(item.IngredientName,item.id)}>Delete</Button></td>
                         </tr>
                     ))}
                 </tbody>
