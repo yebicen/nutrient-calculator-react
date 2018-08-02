@@ -21,7 +21,9 @@ export default class IngredientList extends React.Component {
         //for ingredient editing
         editModal: false,
         editIngredientName: "",
-        editIngredientId: ""
+        editIngredientId: "",
+
+        prepopulateForm: {}
     }
 
     toggleDeleteModal = (deleteIngredientName, deleteIngredientId) => {
@@ -33,11 +35,15 @@ export default class IngredientList extends React.Component {
     }
 
     toggleEditModal = (editIngredientName, editIngredientId) => {
-        this.setState({
-            editModal: !this.state.editModal,
-            editIngredientName: editIngredientName,
-            editIngredientId: editIngredientId
-        });
+        API.getOneIngredient(editIngredientId)
+        .then(res => {
+            this.setState({
+                editModal: !this.state.editModal,
+                editIngredientName: editIngredientName,
+                editIngredientId: editIngredientId,
+                prepopulateForm: res.data
+            })
+        })
     }
 
     render() {
@@ -89,6 +95,7 @@ export default class IngredientList extends React.Component {
                 editIngredientName={this.state.editIngredientName}
                 editIngredientId={this.state.editIngredientId}
                 getIngredients={this.props.getIngredients}
+                prepopulateForm={this.state.prepopulateForm}
             />
             </div>
         )

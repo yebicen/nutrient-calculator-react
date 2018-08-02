@@ -6,6 +6,9 @@ export default {
     getIngredients: function() {
         return axios.get('/ingredients');
     },
+    getOneIngredient: function(editIngredientId) {
+        return axios.get(`/ingredients/${editIngredientId}`);
+    },
     addIngredient: function(newIngredient) {
         return axios.post('/ingredients/new', newIngredient);
     },
