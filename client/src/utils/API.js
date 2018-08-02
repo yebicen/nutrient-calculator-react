@@ -6,10 +6,16 @@ export default {
     getIngredients: function() {
         return axios.get('/ingredients');
     },
+    getOneIngredient: function(editIngredientId) {
+        return axios.get(`/ingredients/${editIngredientId}`);
+    },
     addIngredient: function(newIngredient) {
         return axios.post('/ingredients/new', newIngredient);
     },
-    deleteIngredient: function(deleteIngredient) {
-        return axios.delete(`/ingredients/delete/${deleteIngredient}`);
+    deleteIngredient: function(deleteIngredientId) {
+        return axios.delete(`/ingredients/delete/${deleteIngredientId}`);
+    },
+    editIngredient: function(editIngredientId, editState) {
+        return axios.put(`/ingredients/edit/${editIngredientId}`, editState);
     }
 };
