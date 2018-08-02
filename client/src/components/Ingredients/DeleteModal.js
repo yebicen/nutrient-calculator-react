@@ -1,26 +1,34 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import API from '../../utils/API';
 
 
-export default class DeleteModal extends React.Component {
+const DeleteModal = props => {
+  //destructure props
+  const { toggle, modal, deleteIngredientName, deleteIngredientId, getIngredients } = props
 
-  render() {
-    //destructure props
-    const {modal, toggleDeleteModal, deleteIngredient, deleteId, deleteIngredientName} = this.props
+  const confirmDelete = (deleteIngredientId) => {
+    console.log(deleteIngredientId)
+    API.deleteIngredient(deleteIngredientId)
+      .then(getIngredients());
+    toggle();
+  }
+
     return (
       <div>
-        <Modal isOpen={modal} fade={false} toggle={() => toggleDeleteModal("","")}>
-          <ModalHeader toggle={() => toggleDeleteModal("","")}>Delete {deleteIngredientName}</ModalHeader>
+        <Modal isOpen={modal} fade={false} toggle={() => toggle("","")}>
+          <ModalHeader toggle={() => toggle("", "")}>Delete {deleteIngredientName}</ModalHeader>
           <ModalBody>
             Are you sure you want to delete <strong>{deleteIngredientName}</strong>?
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" onClick={()=> deleteIngredient(deleteId)}>Delete</Button>{' '}
-            <Button color="primary" onClick={()=> toggleDeleteModal("","")}>Cancel</Button>
+            <Button color="danger" onClick={() => confirmDelete(deleteIngredientId)}>Delete</Button>{' '}
+            <Button color="primary" onClick={() => toggle("","")}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
-    );
-  }
+    )
 }
+
+export default DeleteModal;

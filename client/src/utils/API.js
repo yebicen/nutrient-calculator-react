@@ -9,7 +9,7 @@ export default {
     addIngredient: function(newIngredient) {
         return axios.post('/ingredients/new', newIngredient);
     },
-    deleteIngredient: function(deleteIngredient) {
-        return axios.delete(`/ingredients/delete/${deleteIngredient}`);
+    deleteIngredient: function(deleteIngredientId) {
+        return axios.delete(`/ingredients/delete/${deleteIngredientId}`);
     }
 };
