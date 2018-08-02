@@ -1,15 +1,32 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import IngredientForm from './IngredientForm';
+import AddIngredientForm from './AddIngredientForm';
 import IngredientList from './IngredientList';
+import API from '../../utils/API';
+
 
 export default class IngredientContainer extends React.Component {
+  state = {
+    dbIngredients: []
+  }
+
+  getIngredients = () => {
+    API.getIngredients()
+      .then(res => {
+        console.log(res.data);
+        this.setState({ dbIngredients: res.data })
+      })
+  }
+
+  componentDidMount() {
+    this.getIngredients();
+  };
 
   render() {
     return (
       <Container>
-        <IngredientForm/>
-        <IngredientList/>
+        <AddIngredientForm getIngredients={this.getIngredients} dbIngredients={this.state.dbIngredients}/>
+        <IngredientList getIngredients={this.getIngredients} dbIngredients={this.state.dbIngredients}/>
       </Container>
     );
   }

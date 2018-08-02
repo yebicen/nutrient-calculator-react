@@ -12,9 +12,6 @@ library.add(faFlag)
 export default class IngredientList extends React.Component {
 
     state = {
-        //for ingredient list
-        dbIngredients: [],
-
         //for ingredient deletion
         deleteModal: false,
         deleteIngredientName: "",
@@ -26,17 +23,17 @@ export default class IngredientList extends React.Component {
         editIngredientId: ""
     }
 
-    getIngredients = () => {
-        API.getIngredients()
-            .then(res => {
-                console.log(res.data);
-                this.setState({ dbIngredients: res.data })
-            })
-    }
+    // getIngredients = () => {
+    //     API.getIngredients()
+    //         .then(res => {
+    //             console.log(res.data);
+    //             this.setState({ dbIngredients: res.data })
+    //         })
+    // }
 
-    componentDidMount() {
-        this.getIngredients();
-    };
+    // componentDidMount() {
+    //     this.getIngredients();
+    // };
 
     toggleDeleteModal = (deleteIngredientName, deleteIngredientId) => {
         this.setState({
@@ -66,7 +63,7 @@ export default class IngredientList extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.dbIngredients.map(item => (
+                    {this.props.dbIngredients.map(item => (
                         <tr key={item.id}>
                             <td>{item.IngredientName}</td>
                             <td className="ingredient-values">{item.Calories}</td>
@@ -87,7 +84,7 @@ export default class IngredientList extends React.Component {
             modal = {this.state.deleteModal}
             deleteIngredientName={this.state.deleteIngredientName}
             deleteIngredientId={this.state.deleteIngredientId}
-            getIngredients={this.getIngredients}
+            getIngredients={this.props.getIngredients}
             />
             </div>
         )
