@@ -4,6 +4,7 @@ import API from '../../utils/API';
 import IngredientForm from './IngredientForm'
 
 export default class AddIngredientForm extends React.Component {
+  
   state = {
     IngredientName: "",
     Calories: "",
@@ -29,9 +30,8 @@ export default class AddIngredientForm extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     API.addIngredient(this.state).then(
-      res=> {
         this.props.getIngredients()
-      })
+    )
     this.setState({
       IngredientName: "",
       Calories: "",
@@ -47,7 +47,7 @@ export default class AddIngredientForm extends React.Component {
 
   render () {
     return (
-      <div class="addIngredientForm">
+      <div className="addIngredientForm">
       <IngredientForm 
         handleInputChange={this.handleInputChange} 
         state={this.state}
