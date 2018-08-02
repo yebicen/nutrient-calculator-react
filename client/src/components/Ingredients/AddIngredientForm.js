@@ -32,7 +32,6 @@ export default class AddIngredientForm extends React.Component {
       res=> {
         this.props.getIngredients()
       })
-    console.log(this.state);
     this.setState({
       IngredientName: "",
       Calories: "",
@@ -48,11 +47,13 @@ export default class AddIngredientForm extends React.Component {
 
   render () {
     return (
+      <div class="addIngredientForm">
       <IngredientForm 
         handleInputChange={this.handleInputChange} 
-        handleFormSubmit={this.handleFormSubmit}
         state={this.state}
       />
+      <Button onClick={this.handleFormSubmit}>Submit</Button>
+      </div>
       )
   }
 }

@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import DeleteModal from './DeleteModal';
+import EditModal from './EditModal';
 
 import API from '../../utils/API';
 
@@ -23,23 +24,19 @@ export default class IngredientList extends React.Component {
         editIngredientId: ""
     }
 
-    // getIngredients = () => {
-    //     API.getIngredients()
-    //         .then(res => {
-    //             console.log(res.data);
-    //             this.setState({ dbIngredients: res.data })
-    //         })
-    // }
-
-    // componentDidMount() {
-    //     this.getIngredients();
-    // };
-
     toggleDeleteModal = (deleteIngredientName, deleteIngredientId) => {
         this.setState({
             deleteModal: !this.state.deleteModal,
             deleteIngredientName: deleteIngredientName,
             deleteIngredientId: deleteIngredientId
+        });
+    }
+
+    toggleEditModal = (editIngredientName, editIngredientId) => {
+        this.setState({
+            editModal: !this.state.editModal,
+            editIngredientName: editIngredientName,
+            editIngredientId: editIngredientId
         });
     }
 
@@ -73,18 +70,25 @@ export default class IngredientList extends React.Component {
                             <td className="ingredient-values">{item.Carbs}</td>
                             <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag" /> : null}</td>
                             <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag" /> : null}</td>
-                            <td className="ingredient-values"><Button color="primary">Edit</Button></td>
+                            <td className="ingredient-values"><Button color="primary"onClick={() => this.toggleEditModal(item.IngredientName, item.id)}>Edit</Button></td>
                             <td className="ingredient-values"><Button color="danger" onClick={() => this.toggleDeleteModal(item.IngredientName, item.id)}>Delete</Button></td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
             <DeleteModal 
-            toggle = {this.toggleDeleteModal}
-            modal = {this.state.deleteModal}
-            deleteIngredientName={this.state.deleteIngredientName}
-            deleteIngredientId={this.state.deleteIngredientId}
-            getIngredients={this.props.getIngredients}
+                toggle = {this.toggleDeleteModal}
+                modal = {this.state.deleteModal}
+                deleteIngredientName={this.state.deleteIngredientName}
+                deleteIngredientId={this.state.deleteIngredientId}
+                getIngredients={this.props.getIngredients}
+            />
+            <EditModal 
+                toggle = {this.toggleEditModal}
+                modal = {this.state.editModal}
+                editIngredientName={this.state.editIngredientName}
+                editIngredientId={this.state.editIngredientId}
+                getIngredients={this.props.getIngredients}
             />
             </div>
         )

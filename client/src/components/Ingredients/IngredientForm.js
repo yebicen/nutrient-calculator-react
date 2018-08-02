@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {Form, FormGroup, Label, Input } from 'reactstrap';
 
 const IngredientForm = props => {
-    const {handleInputChange, handleFormSubmit} = props
-    const {IngredientName, Calories, Carbs, Sugar, Fat, Protein, hasGluten, isNut, isGMO} = props.state
 
+    const {handleInputChange} = props
+    const {IngredientName, Calories, Carbs, Sugar, Fat, Protein, hasGluten, isNut, isGMO} = props.state
+    
       return (
         <Form>
           <FormGroup>
@@ -49,7 +50,6 @@ const IngredientForm = props => {
               is GMO?
                       </Label>
           </FormGroup>
-          <Button onClick={handleFormSubmit}>Submit</Button>
         </Form>)
   }
 

@@ -11,5 +11,8 @@ export default {
     },
     deleteIngredient: function(deleteIngredientId) {
         return axios.delete(`/ingredients/delete/${deleteIngredientId}`);
+    },
+    editIngredient: function(editIngredientId, editState) {
+        return axios.put(`/ingredients/edit/${editIngredientId}`, editState);
     }
 };
