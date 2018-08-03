@@ -14,8 +14,8 @@ const App = () =>
             <div>
                 <JumbotronComponent/>
                 <NavBar />
-                <Route path="/" component={Smoothie} />
-                <Route path="/Ingredients" component={Ingredients} />
+                <Route exact path="/" component={Smoothie} />
+                <Route exact path="/Ingredients" component={Ingredients} />
                 {/* <Route path="/Ingredients" component={Recipes} /> */}
             </div>
         </Router>

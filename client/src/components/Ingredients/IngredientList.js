@@ -34,69 +34,76 @@ export default class IngredientList extends React.Component {
         });
     }
 
+    // onClick = () => {
+    //     this.child.current.setEditState();
+    // };
+
     toggleEditModal = (editIngredientName, editIngredientId) => {
+        console.log(editIngredientId);
         API.getOneIngredient(editIngredientId)
-        .then(res => {
-            this.setState({
-                editModal: !this.state.editModal,
-                editIngredientName: editIngredientName,
-                editIngredientId: editIngredientId,
-                prepopulateForm: res.data
+            .then(res => {
+                this.setState({
+                    editModal: !this.state.editModal,
+                    editIngredientName: editIngredientName,
+                    editIngredientId: editIngredientId,
+                    prepopulateForm: res.data
+                })
+
+                this.state.editModal==true ? this.child.setEditState() : console.log("not needed");
             })
-        })
     }
 
     render() {
         return (
             <div className="ingredientListWrap">
-            <Table striped className="ingredient list">
-                <thead>
-                    <tr>
-                        <th>Ingredient name</th>
-                        <th className="ingredient-values">Calories</th>
-                        <th className="ingredient-values">Sugar</th>
-                        <th className="ingredient-values">Fat</th>
-                        <th className="ingredient-values">Protein</th>
-                        <th className="ingredient-values">Carbs</th>
-                        <th className="ingredient-values">Has Gluten?</th>
-                        <th className="ingredient-values">Is a Nut?</th>
-                        <th className="ingredient-values">Edit</th>
-                        <th className="ingredient-values">Delete</th>
+                <Table striped className="ingredient list">
+                    <thead>
+                        <tr>
+                            <th>Ingredient name</th>
+                            <th className="ingredient-values">Calories</th>
+                            <th className="ingredient-values">Sugar</th>
+                            <th className="ingredient-values">Fat</th>
+                            <th className="ingredient-values">Protein</th>
+                            <th className="ingredient-values">Carbs</th>
+                            <th className="ingredient-values">Has Gluten?</th>
+                            <th className="ingredient-values">Is a Nut?</th>
+                            <th className="ingredient-values">Edit</th>
+                            <th className="ingredient-values">Delete</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.dbIngredients.map(item => (
-                        <tr key={item.id}>
-                            <td>{item.IngredientName}</td>
-                            <td className="ingredient-values">{item.Calories}</td>
-                            <td className="ingredient-values">{item.Sugar}</td>
-                            <td className="ingredient-values">{item.Fat}</td>
-                            <td className="ingredient-values">{item.Protein}</td>
-                            <td className="ingredient-values">{item.Carbs}</td>
-                            <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag" /> : null}</td>
-                            <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag" /> : null}</td>
-                            <td className="ingredient-values"><Button color="primary"onClick={() => this.toggleEditModal(item.IngredientName, item.id)}>Edit</Button></td>
-                            <td className="ingredient-values"><Button color="danger" onClick={() => this.toggleDeleteModal(item.IngredientName, item.id)}>Delete</Button></td>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
-            <DeleteModal 
-                toggle = {this.toggleDeleteModal}
-                modal = {this.state.deleteModal}
-                deleteIngredientName={this.state.deleteIngredientName}
-                deleteIngredientId={this.state.deleteIngredientId}
-                getIngredients={this.props.getIngredients}
-            />
-            <EditModal 
-                toggle = {this.toggleEditModal}
-                modal = {this.state.editModal}
-                editIngredientName={this.state.editIngredientName}
-                editIngredientId={this.state.editIngredientId}
-                getIngredients={this.props.getIngredients}
-                prepopulateForm={this.state.prepopulateForm}
-            />
+                    </thead>
+                    <tbody>
+                        {this.props.dbIngredients.map(item => (
+                            <tr key={item.id}>
+                                <td>{item.IngredientName}</td>
+                                <td className="ingredient-values">{item.Calories}</td>
+                                <td className="ingredient-values">{item.Sugar}</td>
+                                <td className="ingredient-values">{item.Fat}</td>
+                                <td className="ingredient-values">{item.Protein}</td>
+                                <td className="ingredient-values">{item.Carbs}</td>
+                                <td className="ingredient-values flag">{item.hasGluten ? <FontAwesomeIcon icon="flag" /> : null}</td>
+                                <td className="ingredient-values flag">{item.isNut ? <FontAwesomeIcon icon="flag" /> : null}</td>
+                                <td className="ingredient-values"><Button color="primary" onClick={() => this.toggleEditModal(item.IngredientName, item.id)}>Edit</Button></td>
+                                <td className="ingredient-values"><Button color="danger" onClick={() => this.toggleDeleteModal(item.IngredientName, item.id)}>Delete</Button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+                <DeleteModal
+                    toggle={this.toggleDeleteModal}
+                    modal={this.state.deleteModal}
+                    deleteIngredientName={this.state.deleteIngredientName}
+                    deleteIngredientId={this.state.deleteIngredientId}
+                    getIngredients={this.props.getIngredients}
+                />
+                <EditModal ref={instance => { this.child = instance; }}
+                    toggle={this.toggleEditModal}
+                    modal={this.state.editModal}
+                    editIngredientName={this.state.editIngredientName}
+                    editIngredientId={this.state.editIngredientId}
+                    prepopulateForm={this.state.prepopulateForm}
+                    getIngredients={this.props.getIngredients}
+                />
             </div>
         )
     }

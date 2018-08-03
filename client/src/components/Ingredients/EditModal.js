@@ -16,19 +16,19 @@ export default class EditModal extends React.Component {
         isGMO: false
     };
 
-    // componentWillReceiveProps() {
-    //     this.setState({
-    //         IngredientName: 'meh',
-    //         Calories: this.props.prepopulateForm.Calories,
-    //         Carbs: this.props.prepopulateForm.Carbs,
-    //         Sugar: this.props.prepopulateForm.Sugar,
-    //         Fat: this.props.prepopulateForm.Fat,
-    //         Protein: this.props.prepopulateForm.Protein,
-    //         hasGluten: this.props.prepopulateForm.hasGluten,
-    //         isNut: this.props.prepopulateForm.isNut,
-    //         isGMO: this.props.prepopulateForm
-    //     })
-    // }
+    setEditState() {
+        this.setState({
+            IngredientName: this.props.prepopulateForm.IngredientName,
+            Calories: this.props.prepopulateForm.Calories,
+            Carbs: this.props.prepopulateForm.Carbs,
+            Sugar: this.props.prepopulateForm.Sugar,
+            Fat: this.props.prepopulateForm.Fat,
+            Protein: this.props.prepopulateForm.Protein,
+            hasGluten: this.props.prepopulateForm.hasGluten,
+            isNut: this.props.prepopulateForm.isNut,
+            isGMO: this.props.prepopulateForm.isGMO
+        })
+    }
 
     handleInputChange = event => {
         const target = event.target;
@@ -48,16 +48,17 @@ export default class EditModal extends React.Component {
 
     render() {
         const { toggle, modal, editIngredientName, editIngredientId } = this.props
-
+        console.log(this.state)
         return (
             <div>
-                <Modal isOpen={modal} fade={false} toggle={() => toggle("", "")}>
-                    <ModalHeader toggle={() => toggle("", "")}>Edit {editIngredientName}</ModalHeader>
+                <Modal isOpen={modal} fade={false} toggle={() => toggle("","")}>
+                    <ModalHeader toggle={() => toggle("","")}>Edit {editIngredientName}</ModalHeader>
                     <ModalBody>
                         <IngredientForm
                             key={editIngredientId}
                             state={this.state}
                             handleInputChange={this.handleInputChange}
+                            //prepopulateForm={this.props.prepopulateForm}
                         />
                     </ModalBody>
                     <ModalFooter>
@@ -67,5 +68,7 @@ export default class EditModal extends React.Component {
                 </Modal>
             </div>
         )
+
+        this.setEditState();
     }
 }

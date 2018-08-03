@@ -48,7 +48,8 @@ const IngredientForm = props => {
               is GMO?
                       </Label>
           </FormGroup>
-        </Form>)
+        </Form>
+        )
   }
 
   export default IngredientForm;
