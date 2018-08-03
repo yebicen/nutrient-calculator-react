@@ -39,7 +39,6 @@ export default class IngredientList extends React.Component {
     // };
 
     toggleEditModal = (editIngredientName, editIngredientId) => {
-        console.log(editIngredientId);
         API.getOneIngredient(editIngredientId)
             .then(res => {
                 this.setState({
@@ -49,7 +48,7 @@ export default class IngredientList extends React.Component {
                     prepopulateForm: res.data
                 })
 
-                this.state.editModal==true ? this.child.setEditState() : console.log("not needed");
+                this.state.editModal==true ? this.child.setEditState() : null;
             })
     }
 
@@ -69,7 +68,6 @@ export default class IngredientList extends React.Component {
                             <th className="ingredient-values">Is a Nut?</th>
                             <th className="ingredient-values">Edit</th>
                             <th className="ingredient-values">Delete</th>
-
                         </tr>
                     </thead>
                     <tbody>

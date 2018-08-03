@@ -48,7 +48,6 @@ export default class EditModal extends React.Component {
 
     render() {
         const { toggle, modal, editIngredientName, editIngredientId } = this.props
-        console.log(this.state)
         return (
             <div>
                 <Modal isOpen={modal} fade={false} toggle={() => toggle("","")}>
@@ -68,7 +67,5 @@ export default class EditModal extends React.Component {
                 </Modal>
             </div>
         )
-
-        this.setEditState();
     }
 }
