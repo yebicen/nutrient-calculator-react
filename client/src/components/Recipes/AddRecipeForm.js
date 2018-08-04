@@ -24,6 +24,7 @@ export default class AddRecipeForm extends React.Component {
             numChildren: this.state.numChildren + 1
         });
         console.log(this.state.numChildren)
+        this.render()
     }
 
     getIngredients = () => {
@@ -68,7 +69,8 @@ export default class AddRecipeForm extends React.Component {
         const children = [];
 
         for (var i = 0; i < this.state.numChildren; i += 1) {
-            children.push(<NewIngredient key={i} number={i} />);
+            children.push(<NewIngredient key={i} number={i} handleInputChange={this.handleInputChange}
+                state={this.state} />);
         };
 
         return (
@@ -76,13 +78,13 @@ export default class AddRecipeForm extends React.Component {
                 <RecipeForm
                     handleInputChange={this.handleInputChange}
                     state={this.state}
-                />
-                <NewIngredient
+                />{children}
+                {/* <NewIngredient
                     handleInputChange={this.handleInputChange}
                     state={this.state}
-                >  
-                {children}
-                </NewIngredient>
+                >   */}
+                {/* {children} */}
+                {/* </NewIngredient> */}
                 <Button onClick={this.onAddChild}>Add New Ingredient</Button>
                 <Row />
                 <Button onClick={this.handleFormSubmit}>Submit</Button>
