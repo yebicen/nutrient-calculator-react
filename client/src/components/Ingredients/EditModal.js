@@ -57,7 +57,6 @@ export default class EditModal extends React.Component {
                             key={editIngredientId}
                             state={this.state}
                             handleInputChange={this.handleInputChange}
-                            //prepopulateForm={this.props.prepopulateForm}
                         />
                     </ModalBody>
                     <ModalFooter>
