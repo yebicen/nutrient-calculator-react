@@ -1,11 +1,5 @@
 var db = require('../models');
 
-// //this is the users_controller.js file
-// exports.registrationPage = function(req,res) {
-//     res.render('users/registration', {
-//       layout: 'main-registration'
-//     });
-//   };
 
 //this is for employees to update their profile: username can be fullname, update email, phone number or password; editable data displayed in input
 exports.userProfileUpdate = function(req, res) {
@@ -116,13 +110,6 @@ exports.adminMain = function (req, res) {
         //where: query
       }).then(function(dbUser) {
         res.json(dbUser);
-        console.log(dbUser[0].firstname);
-        // res.render("admin",{
-        //     layout: 'main',
-        //     //username: req.user.username,
-        //     users: dbUser,
-        //     username: loginUser
-        // });
       });
 };
 
@@ -133,7 +120,7 @@ exports.signOutUser = function(req, res) {
   
   // login
 exports.loginUser = function(req, res) {
-  console.log(req.body);
+  // console.log(req.body);
     //  console.log(req.user.username);
     //  console.log(req.user);
       // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
