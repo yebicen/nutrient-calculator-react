@@ -1,8 +1,7 @@
 import React from "react";
 
 const Adduser = props => (
-  <div className="container"> 
-         
+  <div className="container">          
     <h1>Add New User</h1>
     <form>
       <div className="form-group">
@@ -19,14 +18,21 @@ const Adduser = props => (
         </tr>
       </thead>
       <tbody>
-        <td><input type="text" value={user.firstname} name="firstname" onChange={props.handleUserchange} /></td>
-        <td><input type="text" value={user.lastname} name="lastname" onChange={props.handleUserchange} /></td>
-        <td><input type="text" value={user.username} name="username" onChange={props.handleUserchange} /></td>
-        <td><input type="text" value={user.role} name="role" onChange={props.handleUserchange} /></td>          
-        <td><input type="text" value={user.password} name="password" onChange={props.handleUserchange} /></td>
-        <td><input type="text" value={user.email} name="email" onChange={props.handleUserchange} /></td>
+        <td><input type="text" name="firstname" value={props.firstname} onChange={props.handleUserchange} /></td>
+        <td><input type="text" name="lastname" value={props.lastname} onChange={props.handleUserchange} /></td>
+        <td><input type="text" name="username" value={props.username} onChange={props.handleUserchange} /></td>
+        <td><input type="text" name="role" value={props.value} onChange={props.handleUserchange} /></td>          
+        <td><input type="text" name="password" value={props.password} onChange={props.handleUserchange} /></td>
+        <td><input type="text" name="email" value={props.email} onChange={props.handleUserchange} /></td>
         <td>
-          <button onClick={prop.adduser}>Add</button>
+          <button type="submit" value="submit" onClick={prop.adduser({
+            firstname: props.firstname,
+            lastname: props.lastname,
+            username: props.username,
+            role: props.role,
+            password: props.password,
+            email: props.email
+          })}>Add</button>
         </td>
        </tbody>
        </Table>

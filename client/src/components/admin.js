@@ -12,9 +12,14 @@ export default class Example extends React.Component {
         this.state = {
           editmode: false,
           userList: [],
-          userData: ""
+          userData: "",
+          firstname: "",
+          lastname: "",
+          username: "",
+          role: "",
+          email: "",
+          password: ""
         };
-        console.log(this.state);
         this.edituser = this.edituser.bind(this);
         this.deleteuser = this.deleteuser.bind(this);
         this.saveuser = this.saveuser.bind(this);
@@ -22,7 +27,7 @@ export default class Example extends React.Component {
         this.handleUserChange = this.handleUserChange.bind(this);
       }
     
-    CompnentDidMount() {
+    ComponentDidMount() {
         UserAPI.getUsers()
         .then(res => {
             console.log(res.data);
@@ -32,19 +37,47 @@ export default class Example extends React.Component {
     }
     
 
-    edituser =event=> {
+    editUser =event=> {
         this.setState({
           editmode: true
         })
     }
     
-    saveuser = (param)=>event => {
+    saveUser = (param)=>event => {
         event.preventDefault();
         console.log(param);
+
+      UserAPI.updateUser(param)
+      .then(res => {
+        console.log("saved");
+        console.log(res);
+       })
+      .catch(err => console.log(err));
+       window.location.reload(); 
     }
 
-    adduser = event =>{
+    adduUser =(param) => event =>{
         event.preventDefault();
+        console.log(param);
+
+        API.addUser(param)
+        .then(res => {
+          console.log("added");
+          console.log(res);
+         })
+      .catch(err => console.log(err));
+       window.location.reload(); 
+    }
+    
+    deleteUser =(param) => event =>{
+      console.log(param);
+      API.deleteArticles(param)
+      .then(res => {
+        console.log("deleted");
+        console.log(res);      
+       })
+      .catch(err => console.log(err));
+       window.location.reload(); 
     }
 
     handleUserChange = event => {
@@ -57,8 +90,10 @@ export default class Example extends React.Component {
 
   render() {
     const isEditMode = this.state.editmode;
+    const {firstname, lastname, username, role, password, email} = this.state;
     return (
-      <Table striped>
+     <div className="container">
+       <Table striped>
         <thead>
           <tr>
             <th>#</th>
@@ -73,9 +108,11 @@ export default class Example extends React.Component {
           </tr>
         </thead>
         isEditMode? 
-        <Userlist users={this.state.Userlist} edituser={this.edituser} deleteuser={this.edituser}/> :
-        <Userlistedit users={this.state.Userlist} saveuser={this.saveuser} /> 
-      </Table>
+        <Userlist users={this.state.Userlist} edituser={this.editUser} deleteuser={this.editUser}/> :
+        <Userlistedit users={this.state.Userlist} saveuser={this.saveUser} handleUserChange={this.handleUserChange}/> 
+       </Table>
+      {/*<AddUser firstname={firstname} lastname={lastname} username={username} role={role} email={email} password={email} adduser={this.addUser} handleUserChange={this.handleUserChange}/>*/}
+     </div>
 
       )
    }

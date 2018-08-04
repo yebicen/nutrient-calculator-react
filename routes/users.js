@@ -23,14 +23,16 @@ router.delete("/api/users/:id",users_controller.adminDeleteuser);
 router.put("/api/users/:id",users_controller.adminUpdateuser);
 
 //below are user management html routes, need to add isAdmin middleware
-router.get('/admin', isAdmin, users_controller.adminMain);
+// router.get('/admin', isAdmin, users_controller.adminMain);
+router.get('/admin', users_controller.adminMain);
 
 router.get('/sign-out', users_controller.signOutUser);
 
+// router.post('/login', passport.authenticate("local"), users_controller.loginUser);
 router.post('/login', passport.authenticate("local"), users_controller.loginUser);
-
 //below are for use to edit their own profile; need to get user id
-router.get("/profile",isAuthenticated, users_controller.findUser);
+// router.get("/profile",isAuthenticated, users_controller.findUser);
+router.get("/profile", users_controller.findUser);
 //router.put('/profile/:id', users_controller.userProfileUpdate);
 //isAuthenticated
 

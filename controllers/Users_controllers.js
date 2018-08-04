@@ -9,7 +9,7 @@ var db = require('../models');
 
 //this is for employees to update their profile: username can be fullname, update email, phone number or password; editable data displayed in input
 exports.userProfileUpdate = function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     
     db.User.update(req.body,
         {
@@ -17,7 +17,7 @@ exports.userProfileUpdate = function(req, res) {
             id: req.params.id
           }
         }).then(function(dbUser){
-          console.log(dbUser);
+          // console.log(dbUser);
         //   res.render("editprofile",{
         //     layout: 'main',
         //     users: dbUser
@@ -38,16 +38,16 @@ exports.findUser = function (req, res) {
             id: userId
           }
         }).then(function(dbUser){
-          console.log(dbUser);
-          res.render("editprofile",{
-            layout: 'main',
-             firstname: dbUser[0].firstname,
-             lastname: dbUser[0].lastname,
-             username: dbUser[0].username,
-             password: dbUser[0].password,
-             email: dbUser[0].email,
-             id: dbUser[0].id
-           });
+          // console.log(dbUser);
+          // res.render("editprofile",{
+          //   layout: 'main',
+          //    firstname: dbUser[0].firstname,
+          //    lastname: dbUser[0].lastname,
+          //    username: dbUser[0].username,
+          //    password: dbUser[0].password,
+          //    email: dbUser[0].email,
+          //    id: dbUser[0].id
+          //  });
         });
 };
 //for admin to add new user
@@ -56,7 +56,7 @@ exports.adminAdduser = function(req, res) {
     db.User.findAll({
         where: {username: req.body.username}
       }).then(function(users) {
-        console.log(users);
+        // console.log(users);
         if (users.length > 0) {
           res.json({
             duplicateUser: true
@@ -115,14 +115,14 @@ exports.adminMain = function (req, res) {
     db.User.findAll({
         //where: query
       }).then(function(dbUser) {
-        //res.json(dbUser);
+        res.json(dbUser);
         console.log(dbUser[0].firstname);
-        res.render("admin",{
-            layout: 'main',
-            //username: req.user.username,
-            users: dbUser,
-            username: loginUser
-        });
+        // res.render("admin",{
+        //     layout: 'main',
+        //     //username: req.user.username,
+        //     users: dbUser,
+        //     username: loginUser
+        // });
       });
 };
 

@@ -14,7 +14,9 @@ const Userlist = props => (
          <td>{user.email}</td>
          <td>
              <button onClick={prop.edituser}>Edit</button>
-             <button onClick={prop.deleteuser}>Delete</button>
+             <button onClick={prop.deleteuser({
+               id: user.id
+             })}>Delete</button>
          </td>
        </tr> 
     )}
