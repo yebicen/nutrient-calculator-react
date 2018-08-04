@@ -9,13 +9,17 @@ class NewIngredient extends React.Component {
         AmountLarge: "",
     }
 
+    sendState = () => {
+        console.log("send state caalled in a child!")
+        this.props.setAddIngredients(this.state)
+        console.log("child state" + this.state)
+    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
-        console.log(this.state)
     };
 
     render() {
@@ -29,7 +33,7 @@ class NewIngredient extends React.Component {
                             <Label for="SelectIngredientName">Select Ingredient</Label>
                             <Input type="select" name="IngredientName" value={this.state.IngredientName} onChange={this.handleInputChange} id="SelectIngredientName">
                                 {dbIngredients.map(item => (
-                                    <option key={item.id}>{item.IngredientName}</option>
+                                    <option key={item.id} value={item.IngredientName} >{item.IngredientName}</option>
                                 ))}
                             </Input>
                         </FormGroup>

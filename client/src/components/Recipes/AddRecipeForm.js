@@ -11,11 +11,9 @@ export default class AddRecipeForm extends React.Component {
         RecipeName: "",
         RecipeDescription: "",
         RecipeType: "",
-        AmountSmall: "",
-        AmountMedium: "",
-        AmountLarge: "",
         dbIngredients: [],
-        numChildren: 0
+        addIngredients: [],
+        numChildren: 1
     };
 
     onAddChild = () => {
@@ -25,6 +23,19 @@ export default class AddRecipeForm extends React.Component {
         });
         console.log(this.state.numChildren)
         this.render()
+    }
+
+    setAddIngredients = (addIngredient) => {
+        const addIngredients = []
+        addIngredients.push(addIngredient)
+        console.log(addIngredients)
+
+        this.setState({
+            addIngredients: addIngredients, 
+        })
+        console.log("this is a parent state" + this.state)
+
+        this.handleFormSubmit()
     }
 
     getIngredients = () => {
@@ -48,17 +59,19 @@ export default class AddRecipeForm extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log("this is a handleFormSubmit")
+        console.log(this.state)
+
         API.addRecipe(this.state).then(
             this.props.getRecipes()
         )
+
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
             RecipeType: "",
-            AmountSmall: "",
-            AmountMedium: "",
-            AmountLarge: ""
         });
+        
     };
 
     cloneNewIngredient = () => {
@@ -68,8 +81,8 @@ export default class AddRecipeForm extends React.Component {
     render() {
         const children = [];
 
-        for (var i = 0; i < this.state.numChildren; i += 1) {
-            children.push(<NewIngredient key={i} number={i} handleInputChange={this.handleInputChange}
+        for (var i = 1; i < this.state.numChildren; i += 1) {
+            children.push(<NewIngredient ref={instance => { this.child = instance; }} key={i} number={i} handleInputChange={this.handleInputChange}
                 state={this.state} />);
         };
 
@@ -87,7 +100,7 @@ export default class AddRecipeForm extends React.Component {
                 {/* </NewIngredient> */}
                 <Button onClick={this.onAddChild}>Add New Ingredient</Button>
                 <Row />
-                <Button onClick={this.handleFormSubmit}>Submit</Button>
+                <Button onClick={() => this.child.sendState}>Submit</Button>
             </div>
         )
     }
