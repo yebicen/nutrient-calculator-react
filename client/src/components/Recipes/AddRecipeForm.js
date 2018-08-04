@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
 import API from '../../utils/API';
 import RecipeForm from './RecipeForm';
 import NewIngredient from './NewIngredient'
@@ -14,8 +14,17 @@ export default class AddRecipeForm extends React.Component {
         AmountSmall: "",
         AmountMedium: "",
         AmountLarge: "",
-        dbIngredients: []
+        dbIngredients: [],
+        numChildren: 0
     };
+
+    onAddChild = () => {
+        console.log("clicked")
+        this.setState({
+            numChildren: this.state.numChildren + 1
+        });
+        console.log(this.state.numChildren)
+    }
 
     getIngredients = () => {
         API.getIngredients()
@@ -51,7 +60,17 @@ export default class AddRecipeForm extends React.Component {
         });
     };
 
+    cloneNewIngredient = () => {
+        React.cloneElement(NewIngredient)
+    }
+
     render() {
+        const children = [];
+
+        for (var i = 0; i < this.state.numChildren; i += 1) {
+            children.push(<NewIngredient key={i} number={i} />);
+        };
+
         return (
             <div className="addRecipeForm">
                 <RecipeForm
@@ -61,8 +80,11 @@ export default class AddRecipeForm extends React.Component {
                 <NewIngredient
                     handleInputChange={this.handleInputChange}
                     state={this.state}
-                />
-                <Button >Add New Ingredient</Button>
+                >  
+                {children}
+                </NewIngredient>
+                <Button onClick={this.onAddChild}>Add New Ingredient</Button>
+                <Row />
                 <Button onClick={this.handleFormSubmit}>Submit</Button>
             </div>
         )
