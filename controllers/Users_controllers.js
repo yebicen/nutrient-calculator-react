@@ -120,7 +120,7 @@ exports.signOutUser = function(req, res) {
   
   // login
 exports.loginUser = function(req, res) {
-  // console.log(req.body);
+  console.log(req.body);
     //  console.log(req.user.username);
     //  console.log(req.user);
       // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request

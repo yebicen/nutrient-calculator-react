@@ -16,11 +16,16 @@ export default {
   },
 
   findUser: function (data) {
-    return axios.get("users/profile");
+    return axios.get("/users/profile");
   },
 
   updateUser: function (data) {
-    return axios.post("users/api/users/"+data.id, data );
+    return axios.post("/users/api/users/"+data.id, data );
+  },
+
+  loginUser: function(data) {
+
+    return axios.post("/users/login",data);
   }
 };
 
