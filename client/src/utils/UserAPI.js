@@ -3,24 +3,24 @@ import axios from "axios";
 export default {
 
   getUsers: function () {
-    return axios.get("/admin");
+    return axios.get("/users/admin");
   },
 
   deleteUser: function (data) {
     // console.log(data.id);
-    return axios.delete("/api/users/"+data.id, data);
+    return axios.delete("/users/api/users/"+data.id, data);
   },
 
   addUser: function (data) {
-    return axios.post("/api/users",  data );
+    return axios.post("/users/api/users",  data );
   },
 
   findUser: function (data) {
-    return axios.get("/profile");
+    return axios.get("users/profile");
   },
 
   updateUser: function (data) {
-    return axios.post("/api/users/"+data.id, data );
+    return axios.post("users/api/users/"+data.id, data );
   }
 };
 

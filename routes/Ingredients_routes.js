@@ -8,6 +8,8 @@ const ingredients_controller = require('../controllers/Ingredients_controllers')
 //add isAuthenticated once authentication works https://github.com/OSP123/TravelSecure/blob/master/routes/trips.js
 router.get('/ingredients', ingredients_controller.viewIngredients);
 
+router.get('/ingredients/:id', ingredients_controller.getOneIngredient)
+
 router.post('/ingredients/new', ingredients_controller.addIngredient);
 
 router.delete('/ingredients/delete/:id', ingredients_controller.deleteIngredient);

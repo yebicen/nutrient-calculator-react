@@ -1,7 +1,7 @@
 import React from "react";
-
+import { Table } from 'reactstrap';
 const Adduser = props => (
-  <div className="container">          
+  <div>          
     <h1>Add New User</h1>
     <form>
       <div className="form-group">
@@ -18,6 +18,7 @@ const Adduser = props => (
         </tr>
       </thead>
       <tbody>
+       <tr>
         <td><input type="text" name="firstname" value={props.firstname} onChange={props.handleUserchange} /></td>
         <td><input type="text" name="lastname" value={props.lastname} onChange={props.handleUserchange} /></td>
         <td><input type="text" name="username" value={props.username} onChange={props.handleUserchange} /></td>
@@ -25,7 +26,7 @@ const Adduser = props => (
         <td><input type="text" name="password" value={props.password} onChange={props.handleUserchange} /></td>
         <td><input type="text" name="email" value={props.email} onChange={props.handleUserchange} /></td>
         <td>
-          <button type="submit" value="submit" onClick={prop.adduser({
+          <button type="submit" value="submit" onClick={props.adduser({
             firstname: props.firstname,
             lastname: props.lastname,
             username: props.username,
@@ -34,6 +35,7 @@ const Adduser = props => (
             email: props.email
           })}>Add</button>
         </td>
+       </tr>
        </tbody>
        </Table>
      </div>

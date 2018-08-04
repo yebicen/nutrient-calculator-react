@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 import Adduser from "./adduser";
-import API from "../utils/UserAPI";
+import UserAPI from "../utils/UserAPI";
 import Userlist from "./userlist";
 import Userlistedit from "./userlistedit";
 
@@ -10,9 +10,8 @@ export default class Admin extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-          editmode: false,
+          editModeID: "",
           userList: [],
-          userData: "",
           firstname: "",
           lastname: "",
           username: "",
@@ -20,14 +19,14 @@ export default class Admin extends React.Component {
           email: "",
           password: ""
         };
-        this.edituser = this.edituser.bind(this);
-        this.deleteuser = this.deleteuser.bind(this);
-        this.saveuser = this.saveuser.bind(this);
-        this.adduser = this.adduser.bind(this);
+        this.editUser = this.editUser.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
+        this.saveUser = this.saveUser.bind(this);
+        this.addUser = this.addUser.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
       }
     
-    ComponentDidMount() {
+    componentDidMount() {
         UserAPI.getUsers()
         .then(res => {
             console.log(res.data);
@@ -36,16 +35,19 @@ export default class Admin extends React.Component {
         .catch(err => console.log(err));
     }
     
-
-    editUser =event=> {
-        this.setState({
-          editmode: true
-        })
-    }
-    
-    saveUser = (param)=>event => {
+  
+    editUser = (param) => event => {
         event.preventDefault();
         console.log(param);
+        
+        this.setState({
+          editModeID: param.id
+        });
+    }
+    
+    saveUser = (param) =>event => {
+      event.preventDefault();
+      console.log(param);
 
       UserAPI.updateUser(param)
       .then(res => {
@@ -54,13 +56,17 @@ export default class Admin extends React.Component {
        })
       .catch(err => console.log(err));
        window.location.reload(); 
+       this.setState({
+        editModeID: ""
+      });
+      console.log(this.state.editmode);
     }
 
-    adduUser =(param) => event =>{
+    addUser =(param) => event =>{
         event.preventDefault();
         console.log(param);
 
-        API.addUser(param)
+        UserAPI.addUser(param)
         .then(res => {
           console.log("added");
           console.log(res);
@@ -71,7 +77,7 @@ export default class Admin extends React.Component {
     
     deleteUser =(param) => event =>{
       console.log(param);
-      API.deleteArticles(param)
+      UserAPI.deleteArticles(param)
       .then(res => {
         console.log("deleted");
         console.log(res);      
@@ -80,19 +86,33 @@ export default class Admin extends React.Component {
        window.location.reload(); 
     }
 
-    handleUserChange = event => {
+    handleUserChange = (param )=> event => {
         event.preventDefault();
+        console.log(param);
+        console.log(event.target.name);
+        console.log(event.target.value);
+        // const arryId=param.key;
+        const fieldName=event.target.name;
+        const userData = this.state.userList;
+        userData[param.key].fieldName = event.target.value;
+        console.log(userData[param.key]);
         this.setState({
-            [event.target.name]:event.target.value
+            [event.target.name]:event.target.value,
+            userList: userData
             });
+        console.log(this.state.userList);
     };
 
 
   render() {
+    
     const isEditMode = this.state.editmode;
-    const {firstname, lastname, username, role, password, email} = this.state;
+    const {editModeID, firstname, lastname, username, role, password, email, userList} = this.state;
     return (
-     <div className="container">
+    <div>
+     <h1>Current Users</h1>
+     <form>
+       <div className="form-group">
        <Table striped>
         <thead>
           <tr>
@@ -107,14 +127,24 @@ export default class Admin extends React.Component {
             <th></th>
           </tr>
         </thead>
-        isEditMode? 
-        <Userlist users={this.state.Userlist} edituser={this.editUser} deleteuser={this.editUser}/> :
-        <Userlistedit users={this.state.Userlist} saveuser={this.saveUser} handleUserChange={this.handleUserChange}/> 
-       </Table>
+        <Userlist editModeID={editModeID} users={userList} edituser={this.editUser} deleteuser={this.editUser} saveuser={this.saveUser} handleUserchange={this.handleUserChange}/>
+        
+        {/*
+          {isEditMode? (
+          <Userlistedit users={userList} saveuser={this.saveUser} handleUserChange={this.handleUserChange}/> 
+          ): (       
+          <Userlist users={userList} edituser={this.editUser} deleteuser={this.editUser}/>
+          )}
+        */}
+     
+        </Table>
+       </div>
+      </form>
       {/*<AddUser firstname={firstname} lastname={lastname} username={username} role={role} email={email} password={email} adduser={this.addUser} handleUserChange={this.handleUserChange}/>*/}
+      <Adduser firstname={firstname} lastname={lastname} username={username} role={role} email={email} password={email} adduser={this.addUser} handleUserChange={this.handleUserChange}/>
+     
      </div>
-
-      )
+    )
    }
 
 }
