@@ -28,12 +28,12 @@ export default class AddRecipeForm extends React.Component {
     setAddIngredients = (addIngredient) => {
         const addIngredients = []
         addIngredients.push(addIngredient)
-        console.log(addIngredients)
+        console.log("addIngredients in Parent: " + JSON.stringify(addIngredients))
 
         this.setState({
             addIngredients: addIngredients, 
         })
-        console.log("this is a parent state" + this.state)
+        console.log("this is a parent state" + JSON.stringify(this.state))
 
         this.handleFormSubmit()
     }
@@ -58,13 +58,12 @@ export default class AddRecipeForm extends React.Component {
     };
 
     handleFormSubmit = event => {
-        event.preventDefault();
         console.log("this is a handleFormSubmit")
-        console.log(this.state)
+        console.log(JSON.stringify(this.state))
 
-        API.addRecipe(this.state).then(
-            this.props.getRecipes()
-        )
+        // API.addRecipe(this.state).then(
+        //     this.props.getRecipes()
+        // )
 
         this.setState({
             RecipeName: "",
@@ -82,7 +81,7 @@ export default class AddRecipeForm extends React.Component {
         const children = [];
 
         for (var i = 1; i < this.state.numChildren; i += 1) {
-            children.push(<NewIngredient ref={instance => { this.child = instance; }} key={i} number={i} handleInputChange={this.handleInputChange}
+            children.push(<NewIngredient setAddIngredients={this.setAddIngredients} ref={instance => { this.child = instance; }} key={i} number={i} handleInputChange={this.handleInputChange}
                 state={this.state} />);
         };
 
@@ -100,7 +99,7 @@ export default class AddRecipeForm extends React.Component {
                 {/* </NewIngredient> */}
                 <Button onClick={this.onAddChild}>Add New Ingredient</Button>
                 <Row />
-                <Button onClick={() => this.child.sendState}>Submit</Button>
+                <Button onClick={() => this.child.sendState()}>Submit</Button>
             </div>
         )
     }

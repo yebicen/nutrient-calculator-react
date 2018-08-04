@@ -9,10 +9,10 @@ class NewIngredient extends React.Component {
         AmountLarge: "",
     }
 
-    sendState = () => {
+    sendState = (event) => {
         console.log("send state caalled in a child!")
         this.props.setAddIngredients(this.state)
-        console.log("child state" + this.state)
+        console.log("child state" + JSON.stringify(this.state))
     }
 
     handleInputChange = event => {
