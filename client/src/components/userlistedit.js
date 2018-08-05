@@ -17,7 +17,7 @@ const Userlist = props => (
                 firstname: user.firstname,
                 lastname: user.lastname,
                 username: user.username,
-                // id: user.id,
+                id: user.id,
                 role: user.role,
                 password: user.password,
                 email: user.email

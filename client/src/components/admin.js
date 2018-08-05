@@ -80,7 +80,7 @@ export default class Admin extends React.Component {
     addUser =(param) => event =>{
         event.preventDefault();
         console.log(param);
-
+        console.log(this.state);
         UserAPI.addUser(param)
         .then(res => {
           console.log("added");
@@ -103,7 +103,7 @@ export default class Admin extends React.Component {
     
     deleteUser =(param) => event =>{
       console.log(param);
-      UserAPI.deleteArticles(param)
+      UserAPI.deleteUser(param)
       .then(res => {
         console.log("deleted");
         console.log(res);      
@@ -112,17 +112,14 @@ export default class Admin extends React.Component {
        window.location.reload(); 
     }
 
-    handleUserChange =  event => {
-        // event.preventDefault();
-     
+    handleUserChange = event => {
+        // event.preventDefault();  
         console.log(event.target.name);
         console.log(event.target.value);
         this.setState({
-            [event.target.name]:event.target.value
-            
-            });
+            [event.target.name]:event.target.value        
+            });    
           
-        
     };
 
 
@@ -193,14 +190,13 @@ export default class Admin extends React.Component {
         </Table>
        </div>
       </form>
-      {/*<AddUser firstname={firstname} lastname={lastname} username={username} role={role} email={email} password={email} adduser={this.addUser} handleUserChange={this.handleUserChange}/>*/}
       <Adduser 
             firstname={firstname} 
             lastname={lastname} 
             username={username} 
             role={role} 
             email={email} 
-            password={email} 
+            password={password} 
             adduser={this.addUser} 
             handleUserchange={this.handleUserChange}/>
      

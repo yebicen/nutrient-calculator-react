@@ -15,12 +15,14 @@ export default {
     return axios.post("/users/api/users",  data );
   },
 
-  findUser: function (data) {
+  findUser: function () {
+    
     return axios.get("/users/profile");
   },
 
   updateUser: function (data) {
-    return axios.post("/users/api/users/"+data.id, data );
+    console.log(data);
+    return axios.put("/users/api/users/"+data.id, data );
   },
 
   loginUser: function(data) {

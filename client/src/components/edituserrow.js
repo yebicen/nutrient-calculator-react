@@ -7,7 +7,7 @@ const Edituserrow = props => (
             <td><input type="text" value={props.firstname} name="firstname" onChange={props.handleUserchange} /></td>
             <td><input type="text" value={props.lastname} name="lastname" onChange={props.handleUserchange} /></td>
             <td><input type="text" value={props.username} name="username" onChange={props.handleUserchange} /></td>
-            <td><input type="text" value={props.id} name="id" onChange={props.handleUserchange} /></td>
+            <td>{props.id}</td>
             <td><input type="text" value={props.role} name="role" onChange={props.handleUserchange} /></td>          
             <td><input type="text" value={props.password} name="password" onChange={props.handleUserchange} /></td>
             <td><input type="text" value={props.email} name="email" onChange={props.handleUserchange} /></td>
@@ -16,7 +16,7 @@ const Edituserrow = props => (
                 firstname: props.firstname,
                 lastname: props.lastname,
                 username: props.username,
-                // id: user.id,
+                id: props.id,
                 role: props.role,
                 password: props.password,
                 email: props.email

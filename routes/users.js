@@ -11,10 +11,10 @@ var isAdmin = require("../config/middleware/isAdmin");
 //     next();
 // }
 //router.get("/api/users", user_controller.findUser);
-router.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/logintest.html"));
-    //res.render("login-modal");
-});
+// router.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname, "../public/logintest.html"));
+//     //res.render("login-modal");
+// });
 
 router.post("/api/users", users_controller.adminAdduser);
 

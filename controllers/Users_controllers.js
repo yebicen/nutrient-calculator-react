@@ -3,7 +3,7 @@ var db = require('../models');
 
 //this is for employees to update their profile: username can be fullname, update email, phone number or password; editable data displayed in input
 exports.userProfileUpdate = function(req, res) {
-    // console.log(req.body);
+    console.log(req.body);
     
     db.User.update(req.body,
         {
@@ -24,7 +24,7 @@ exports.findUser = function (req, res) {
     if (req.user) {
       var userId=req.user.id;
     } else {
-      var userId = 6;
+      var userId = 10;
     }
     db.User.findAll(
         {
@@ -32,6 +32,7 @@ exports.findUser = function (req, res) {
             id: userId
           }
         }).then(function(dbUser){
+          res.json(dbUser);
           // console.log(dbUser);
           // res.render("editprofile",{
           //   layout: 'main',
@@ -73,14 +74,14 @@ exports.adminAdduser = function(req, res) {
 exports.adminUpdateuser = function(req, res) {
 
     console.log(req.body);
-    
+    console.log(req.params.id);
     db.User.update(req.body,
         {
           where: {
             id: req.params.id
           }
         }).then(function(dbUser){
-        //   res.json(dbUser);
+          res.json(dbUser);
           
  
         });

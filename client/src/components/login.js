@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import UserAPI from "../utils/UserAPI";
 
 export default class Login extends React.Component {
@@ -44,18 +45,18 @@ export default class Login extends React.Component {
 
        return (
            <div>
-              <form>
-                 <label>
-                 Userame:
-                 <input name = "usernameLgIn" value = {this.state.usernameLgIn} onChange = {this.handleLoginChange} />
-                 </label>
-                 <label>
-                 Password: 
-                 <input name = "passwordLgIn" value = {this.state.passwordLgIn} onChange = {this.handleLoginChange} />
-                 </label>
-                 <button onClick = {this.handleLoginSubmit} >Submit </button>
+              <Form inline>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                   <label for="usernameLgIn" className="mr-sm-2">Userame: </label>                
+                   <input id="usernameLgIn" name = "usernameLgIn" value = {this.state.usernameLgIn} onChange = {this.handleLoginChange} />                
+                </FormGroup>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                   <label for="passwordLgIn" className="mr-sm-2">Password: </label>               
+                   <input id="passwordLgIn" name = "passwordLgIn" value = {this.state.passwordLgIn} onChange = {this.handleLoginChange} />               
+                </FormGroup>
+                <button onClick = {this.handleLoginSubmit} >Submit </button>
 
-              </form>
+              </Form>
            </div>
 
        );

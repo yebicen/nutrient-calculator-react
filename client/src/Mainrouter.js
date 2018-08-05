@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import JumbotronComponent from "./components/Jumbotron";
 import Smoothie from "./components/Smoothie";
 import Login from "./components/login";
+import Profile from "./components/profile";
 
 const App = () =>
     <Container>
@@ -20,6 +21,7 @@ const App = () =>
                 {/*<Route exact path="/Ingredients" component={Ingredients} /> */}
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
+                <Route path="/users/profile" component={Profile} />
                 {/* <Route path="/Ingredients" component={Recipes} /> */}
             </div>
         </Router>
