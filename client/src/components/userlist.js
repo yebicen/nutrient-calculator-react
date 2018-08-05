@@ -2,7 +2,7 @@ import React from "react";
 
 const Userlist = props => (
  <tbody>
-    {props.users.map((user, i) => (user.id==props.editModeID) ?
+    {props.users.map((user, i) => (user.id === props.editModeID) ?
        <tr key={i}>
             <th scope="row">{i}</th>
             <td><input type="text" value={user.firstname} name="firstname" onChange={props.handleUserchange({key: i})} /></td>

@@ -5,8 +5,8 @@ export default class Login extends React.Component {
     constructor (props) {
         super(props);
         this.state = {         
-          username: "",
-          password: ""
+          usernameLgIn: "",
+          passwordLgIn: ""
         };
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleLoginChange = this.handleLoginChange.bind(this);
@@ -23,8 +23,8 @@ export default class Login extends React.Component {
      handleLoginSubmit = event => {
          event.preventDefault();
          const login = {
-             username: this.state.username,
-             password: this.state.password
+             username: this.state.usernameLgIn,
+             password: this.state.passwordLgIn
          }
          UserAPI.loginUser(login)
         .then(res => {
@@ -33,8 +33,8 @@ export default class Login extends React.Component {
         .catch(err => console.log(err));
       
          this.setState({
-             username: "",
-             password: ""
+             usernameLgIn: "",
+             passwordLgIn: ""
          })
 
 
@@ -47,11 +47,11 @@ export default class Login extends React.Component {
               <form>
                  <label>
                  Userame:
-                 <input name = "username" value = {this.state.username} onChange = {this.handleLoginChange} />
+                 <input name = "usernameLgIn" value = {this.state.usernameLgIn} onChange = {this.handleLoginChange} />
                  </label>
                  <label>
                  Password: 
-                 <input name = "password" value = {this.state.password} onChange = {this.handleLoginChange} />
+                 <input name = "passwordLgIn" value = {this.state.passwordLgIn} onChange = {this.handleLoginChange} />
                  </label>
                  <button onClick = {this.handleLoginSubmit} >Submit </button>
 
