@@ -85,10 +85,23 @@ export default class AddRecipeForm extends React.Component {
     handleIngredientChange = (idx) => (evt) => {
         const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
             if (idx !== sidx) return addIngredient;
-            return (
-                { ...addIngredient, IngredientName: evt.target.value }
-                //   ,{ ...addIngredient, IngredientId: this.state.IngredientList[sidx].IngredientId}
-            );
+
+            for (let node of evt.target.children) {
+                if (node.value === evt.target.value) {
+                //   this.setState({
+                //     selected: node.getAttribute('data-id')
+                //   });
+                console.log('ingredient id: ' + node.getAttribute('data-id'))
+                return (
+                    { ...addIngredient, 
+                        IngredientName: evt.target.value,
+                        IngredientId: node.getAttribute('data-id') 
+                    }
+                );
+                }
+              }
+
+
         });
 
         this.setState({ RecipeIngredients: newIngredients });
@@ -149,7 +162,7 @@ export default class AddRecipeForm extends React.Component {
                                         onChange={this.handleIngredientChange(idx)}
                                         id="SelectIngredientName">
                                         {this.state.ingredientList.map(option => (
-                                            <option key={option.id} value={option.IngredientName} >{option.IngredientName}</option>
+                                            <option key={option.id} data-id={option.id} value={option.IngredientName} >{option.IngredientName}</option>
                                         ))}
                                     </Input>
                                 </FormGroup>
