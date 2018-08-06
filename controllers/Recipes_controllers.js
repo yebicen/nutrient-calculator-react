@@ -162,6 +162,7 @@ exports.recipeTotals = function (req, res) {
 }
 
 exports.addRecipe = function (req, res) {
+  console.log(req.body);
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription
