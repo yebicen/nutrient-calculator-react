@@ -14,15 +14,15 @@ const App = () =>
     <Container>
         <Router>
             <div>
-                {/*<JumbotronComponent/>*/}
-                {/*<NavBar />*/}
+                <JumbotronComponent/>
                 <NavBar />
                 <Route exact path="/" component={Smoothie} />
-                {/*<Route exact path="/Ingredients" component={Ingredients} /> */}
+                <Route exact path="/Ingredients" component={Ingredients} />
+                {/* <Route path="/Ingredients" component={Recipes} /> */}
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
-                {/* <Route path="/Ingredients" component={Recipes} /> */}
+                
             </div>
         </Router>
     </Container>
