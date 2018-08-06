@@ -1,11 +1,5 @@
 var db = require('../models');
 
-// //this is the users_controller.js file
-// exports.registrationPage = function(req,res) {
-//     res.render('users/registration', {
-//       layout: 'main-registration'
-//     });
-//   };
 
 //this is for employees to update their profile: username can be fullname, update email, phone number or password; editable data displayed in input
 exports.userProfileUpdate = function(req, res) {
@@ -17,7 +11,7 @@ exports.userProfileUpdate = function(req, res) {
             id: req.params.id
           }
         }).then(function(dbUser){
-          console.log(dbUser);
+          // console.log(dbUser);
         //   res.render("editprofile",{
         //     layout: 'main',
         //     users: dbUser
@@ -30,7 +24,7 @@ exports.findUser = function (req, res) {
     if (req.user) {
       var userId=req.user.id;
     } else {
-      var userId = 6;
+      var userId = 10;
     }
     db.User.findAll(
         {
@@ -38,16 +32,17 @@ exports.findUser = function (req, res) {
             id: userId
           }
         }).then(function(dbUser){
-          console.log(dbUser);
-          res.render("editprofile",{
-            layout: 'main',
-             firstname: dbUser[0].firstname,
-             lastname: dbUser[0].lastname,
-             username: dbUser[0].username,
-             password: dbUser[0].password,
-             email: dbUser[0].email,
-             id: dbUser[0].id
-           });
+          res.json(dbUser);
+          // console.log(dbUser);
+          // res.render("editprofile",{
+          //   layout: 'main',
+          //    firstname: dbUser[0].firstname,
+          //    lastname: dbUser[0].lastname,
+          //    username: dbUser[0].username,
+          //    password: dbUser[0].password,
+          //    email: dbUser[0].email,
+          //    id: dbUser[0].id
+          //  });
         });
 };
 //for admin to add new user
@@ -56,7 +51,7 @@ exports.adminAdduser = function(req, res) {
     db.User.findAll({
         where: {username: req.body.username}
       }).then(function(users) {
-        console.log(users);
+        // console.log(users);
         if (users.length > 0) {
           res.json({
             duplicateUser: true
@@ -79,14 +74,14 @@ exports.adminAdduser = function(req, res) {
 exports.adminUpdateuser = function(req, res) {
 
     console.log(req.body);
-    
+    console.log(req.params.id);
     db.User.update(req.body,
         {
           where: {
             id: req.params.id
           }
         }).then(function(dbUser){
-        //   res.json(dbUser);
+          res.json(dbUser);
           
  
         });
@@ -115,14 +110,7 @@ exports.adminMain = function (req, res) {
     db.User.findAll({
         //where: query
       }).then(function(dbUser) {
-        //res.json(dbUser);
-        console.log(dbUser[0].firstname);
-        res.render("admin",{
-            layout: 'main',
-            //username: req.user.username,
-            users: dbUser,
-            username: loginUser
-        });
+        res.json(dbUser);
       });
 };
 
