@@ -1,49 +1,37 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import API from '../../utils/API';
-import RecipeForm from './RecipeForm';
-import NewIngredient from './NewIngredient'
 
 
 export default class AddRecipeForm extends React.Component {
-
     state = {
         RecipeName: "",
         RecipeDescription: "",
         RecipeType: "",
-        dbIngredients: [],
-        addIngredients: [],
-        numChildren: 1
+        ingredientList: [],
+        addIngredients: []
     };
 
-    onAddChild = () => {
-        console.log("clicked")
+    handleAddIngredient = () => {
         this.setState({
-            numChildren: this.state.numChildren + 1
+            addIngredients: this.state.addIngredients.concat([
+                {
+                    IngredientName: '',
+                    AmountForSmall: 0,
+                    AmountForMedium: 0,
+                    AmountForLarge: 0
+                }
+            ])
         });
-        console.log(this.state.numChildren)
-        this.render()
-    }
-
-    setAddIngredients = (addIngredient) => {
-        const addIngredients = []
-        addIngredients.push(addIngredient)
-        console.log("addIngredients in Parent: " + JSON.stringify(addIngredients))
-
-        this.setState({
-            addIngredients: addIngredients, 
-        })
-        console.log("this is a parent state" + JSON.stringify(this.state))
-
-        this.handleFormSubmit()
+        console.log('addingredients:'+ JSON.stringify(this.state.addIngredients))
     }
 
     getIngredients = () => {
         API.getIngredients()
             .then(res => {
-                console.log(res.data);
-                this.setState({ dbIngredients: res.data })
+                this.setState({ ingredientList: res.data })
             })
+            console.log('Ingredientlist:')
     };
 
     componentDidMount() {
@@ -57,50 +45,145 @@ export default class AddRecipeForm extends React.Component {
         });
     };
 
+    handleAmountSmallChange = (idx) => (evt) => {
+        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
+          if (idx !== sidx) return addIngredient;
+          return { ...addIngredient, AmountForSmall: evt.target.value};
+        });
+        
+        this.setState({ addIngredients: newIngredients });
+      }
+
+      handleAmountMediumChange = (idx) => (evt) => {
+        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
+          if (idx !== sidx) return addIngredient;
+          return { ...addIngredient, AmountForMedium: evt.target.value};
+        });
+        
+        this.setState({ addIngredients: newIngredients });
+      }
+
+      handleAmountLargeChange = (idx) => (evt) => {
+        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
+          if (idx !== sidx) return addIngredient;
+          return { ...addIngredient, AmountForLarge: evt.target.value};
+        });
+        
+        this.setState({ addIngredients: newIngredients });
+      }
+
+      handleIngredientChange = (idx) => (evt) => {
+        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
+          if (idx !== sidx) return addIngredient;
+          return { ...addIngredient, IngredientName: evt.target.value};
+        });
+        // console.log('HOLA '+this.state.addIngredients)
+        this.setState({ addIngredients: newIngredients });
+      }
+
     handleFormSubmit = event => {
+        event.preventDefault();
         console.log("this is a handleFormSubmit")
         console.log(JSON.stringify(this.state))
-
         // API.addRecipe(this.state).then(
         //     this.props.getRecipes()
         // )
-
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
-            RecipeType: "",
+            RecipeType: ""
         });
-        
+
     };
 
-    cloneNewIngredient = () => {
-        React.cloneElement(NewIngredient)
-    }
-
     render() {
-        const children = [];
-
-        for (var i = 1; i < this.state.numChildren; i += 1) {
-            children.push(<NewIngredient setAddIngredients={this.setAddIngredients} ref={instance => { this.child = instance; }} key={i} number={i} handleInputChange={this.handleInputChange}
-                state={this.state} />);
-        };
 
         return (
             <div className="addRecipeForm">
-                <RecipeForm
-                    handleInputChange={this.handleInputChange}
-                    state={this.state}
-                />{children}
-                {/* <NewIngredient
-                    handleInputChange={this.handleInputChange}
-                    state={this.state}
-                >   */}
-                {/* {children} */}
-                {/* </NewIngredient> */}
-                <Button onClick={this.onAddChild}>Add New Ingredient</Button>
-                <Row />
-                <Button onClick={() => this.child.sendState()}>Submit</Button>
+                <Form >
+                    <Row>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeName">Recipe Name</Label>
+                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange} placeholder="Recipe Name" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeDescription">Recipe Descriptio</Label>
+                                <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" />
+                            </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeType">Recipe Type</Label>
+                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    {this.state.addIngredients.map((addIngredient, idx) => (
+                        <Row key={idx}>
+                            <Col xs="6" sm="3">
+                                <FormGroup>
+                                    <Label for="SelectIngredientName">Select Ingredient</Label>
+                                    <Input type="select" 
+                                            name="IngredientName" 
+                                            value={addIngredient.IngredientName} 
+                                            onChange={this.handleIngredientChange(idx)} 
+                                            id="SelectIngredientName">
+                                        {this.state.ingredientList.map(option => (
+                                            <option key={option.id} value={option.IngredientName} >{option.IngredientName}</option>
+                                        ))}
+                                    </Input>
+                                </FormGroup>
+                            </Col>
+                            <Col xs="6" sm="3">
+                                <FormGroup>
+                                    <Label for="AmountSmall">Amount for Small</Label>
+                                    <Input type="text"
+                                        name="AmountSmall"
+                                        placeholder="Amount for Small"
+                                        value={addIngredient.AmountSmall}
+                                        onChange={this.handleAmountSmallChange(idx)}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col xs="6" sm="3">
+                                <FormGroup>
+                                    <Label for="AmountMedium">Amount for Medium</Label>
+                                    <Input type="text"
+                                        name="AmountMedium"
+                                        placeholder="Amount for Mediumn"
+                                        value={addIngredient.AmountMedium}
+                                        onChange={this.handleAmountMediumChange(idx)}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col xs="6" sm="3">
+                                <FormGroup>
+                                    <Label for="AmountLarge">Amount for Large</Label>
+                                    <Input type="text"
+                                        name="AmountLarge"
+                                        placeholder="Amount for Large"
+                                        value={addIngredient.AmountLarge}
+                                        onChange={this.handleAmountLargeChange(idx)}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                    ))}
+                    <Row>
+                        <Button onClick={this.handleAddIngredient}>Add New Ingredient</Button>
+                    </Row>
+
+                    <Row>
+
+                    </Row>
+                    <Button onClick={this.handleFormSubmit}>Submit</Button>
+                </Form>
             </div>
+
         )
     }
 }
