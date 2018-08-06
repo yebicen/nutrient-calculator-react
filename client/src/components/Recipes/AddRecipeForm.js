@@ -20,7 +20,7 @@ export default class AddRecipeForm extends React.Component {
                     "id": null,
                     "IngredientName": ""
                 })
-                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList))
+                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList,null,2))
             })
         
     };
@@ -48,7 +48,7 @@ export default class AddRecipeForm extends React.Component {
                 }
             ])
         });
-        console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients))
+        console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
     }
 
     handleRemoveIngredient = (idx) => () => {
@@ -97,7 +97,7 @@ export default class AddRecipeForm extends React.Component {
     handleFormSubmit = event => {
         event.preventDefault();
         console.log("this is a handleFormSubmit")
-        console.log(JSON.stringify(this.state))
+        console.log(JSON.stringify(this.state, null, 2))
         API.addRecipe(this.state).then(
             console.log('posted')
         )
@@ -194,11 +194,11 @@ export default class AddRecipeForm extends React.Component {
                     ))}
 
                     <Row>
-                        <Button onClick={this.handleAddIngredient}>Add New Ingredient</Button>
+                        <Button color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
                     </Row>
 
                     <Row>
-                        <Button onClick={this.handleFormSubmit}>Submit</Button>
+                        <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
                     </Row>
 
                 </Form>
