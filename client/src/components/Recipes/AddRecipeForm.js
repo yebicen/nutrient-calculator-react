@@ -16,8 +16,13 @@ export default class AddRecipeForm extends React.Component {
         API.getIngredients()
             .then(res => {
                 this.setState({ ingredientList: res.data })
+                this.state.ingredientList.unshift({
+                    "id": null,
+                    "IngredientName": ""
+                })
+                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList))
             })
-        console.log('Ingredientlist:')
+        
     };
 
     componentDidMount() {
@@ -141,7 +146,6 @@ export default class AddRecipeForm extends React.Component {
                                     <Input type="select"
                                         name="IngredientName"
                                         value={addIngredient.IngredientName}
-                                        // options={this.state.ingredientList.IngredientName}
                                         onChange={this.handleIngredientChange(idx)}
                                         id="SelectIngredientName">
                                         {this.state.ingredientList.map(option => (
