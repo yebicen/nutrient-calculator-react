@@ -1,11 +1,16 @@
 import React from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import {NavLink,Nav, NavItem, Col, Row, Container  } from 'reactstrap';
+
+
+
 
 class NavBar extends React.Component {
   render() {
     return (
-      <div>
-        <Nav vertical>
+      <Container fluid>
+      <Row>
+      <Col xs="3">
+        <Nav className="navbar navbar-light bg-light" vertical>
           <NavItem>
             <NavLink href="/">Home</NavLink>
           </NavItem>
@@ -16,20 +21,21 @@ class NavBar extends React.Component {
             <NavLink href="/ingredients">Manage Ingredients</NavLink>
           </NavItem>
         </Nav>
-        <hr />
 
-        <Nav vertical>
+
+        <Nav className="navbar navbar-light bg-light" vertical>
           <NavLink href="/admin">Admin</NavLink> 
           <NavLink href="/login">Login</NavLink> 
         </Nav>
 
-        <hr />
-        <Nav vertical>
+
+         <Nav className="navbar navbar-light bg-light" vertical>
           <NavLink href="/contact">Contact</NavLink> 
         </Nav>
         
-
-      </div>
+        </Col>
+        </Row>
+      </Container>
     );
   }
 }
