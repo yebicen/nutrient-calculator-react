@@ -9,29 +9,15 @@ export default class AddRecipeForm extends React.Component {
         RecipeDescription: "",
         RecipeType: "",
         ingredientList: [],
-        addIngredients: []
+        RecipeIngredients: []
     };
-
-    handleAddIngredient = () => {
-        this.setState({
-            addIngredients: this.state.addIngredients.concat([
-                {
-                    IngredientName: '',
-                    AmountForSmall: 0,
-                    AmountForMedium: 0,
-                    AmountForLarge: 0
-                }
-            ])
-        });
-        console.log('addingredients:'+ JSON.stringify(this.state.addIngredients))
-    }
 
     getIngredients = () => {
         API.getIngredients()
             .then(res => {
                 this.setState({ ingredientList: res.data })
             })
-            console.log('Ingredientlist:')
+        console.log('Ingredientlist:')
     };
 
     componentDidMount() {
@@ -45,49 +31,71 @@ export default class AddRecipeForm extends React.Component {
         });
     };
 
+    handleAddIngredient = () => {
+        this.setState({
+            RecipeIngredients: this.state.RecipeIngredients.concat([
+                {
+                    IngredientName: '',
+                    IngredientId: null,
+                    AmountForSmall: 0,
+                    AmountForMedium: 0,
+                    AmountForLarge: 0
+                }
+            ])
+        });
+        console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients))
+    }
+
+    handleRemoveIngredient = (idx) => () => {
+        this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
+    }
+
     handleAmountSmallChange = (idx) => (evt) => {
-        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
-          if (idx !== sidx) return addIngredient;
-          return { ...addIngredient, AmountForSmall: evt.target.value};
+        const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
+            if (idx !== sidx) return addIngredient;
+            return { ...addIngredient, AmountForSmall: evt.target.value };
         });
-        
-        this.setState({ addIngredients: newIngredients });
-      }
 
-      handleAmountMediumChange = (idx) => (evt) => {
-        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
-          if (idx !== sidx) return addIngredient;
-          return { ...addIngredient, AmountForMedium: evt.target.value};
-        });
-        
-        this.setState({ addIngredients: newIngredients });
-      }
+        this.setState({ RecipeIngredients: newIngredients });
+    }
 
-      handleAmountLargeChange = (idx) => (evt) => {
-        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
-          if (idx !== sidx) return addIngredient;
-          return { ...addIngredient, AmountForLarge: evt.target.value};
+    handleAmountMediumChange = (idx) => (evt) => {
+        const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
+            if (idx !== sidx) return addIngredient;
+            return { ...addIngredient, AmountForMedium: evt.target.value };
         });
-        
-        this.setState({ addIngredients: newIngredients });
-      }
 
-      handleIngredientChange = (idx) => (evt) => {
-        const newIngredients = this.state.addIngredients.map((addIngredient, sidx) => {
-          if (idx !== sidx) return addIngredient;
-          return { ...addIngredient, IngredientName: evt.target.value};
+        this.setState({ RecipeIngredients: newIngredients });
+    }
+
+    handleAmountLargeChange = (idx) => (evt) => {
+        const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
+            if (idx !== sidx) return addIngredient;
+            return { ...addIngredient, AmountForLarge: evt.target.value };
         });
-        // console.log('HOLA '+this.state.addIngredients)
-        this.setState({ addIngredients: newIngredients });
-      }
+
+        this.setState({ RecipeIngredients: newIngredients });
+    }
+
+    handleIngredientChange = (idx) => (evt) => {
+        const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
+            if (idx !== sidx) return addIngredient;
+            return (
+                { ...addIngredient, IngredientName: evt.target.value }
+                //   ,{ ...addIngredient, IngredientId: this.state.IngredientList[sidx].IngredientId}
+            );
+        });
+
+        this.setState({ RecipeIngredients: newIngredients });
+    }
 
     handleFormSubmit = event => {
         event.preventDefault();
         console.log("this is a handleFormSubmit")
         console.log(JSON.stringify(this.state))
-        // API.addRecipe(this.state).then(
-        //     this.props.getRecipes()
-        // )
+        API.addRecipe(this.state).then(
+            console.log('posted')
+        )
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
@@ -122,23 +130,27 @@ export default class AddRecipeForm extends React.Component {
                         </Col>
                     </Row>
 
-                    {this.state.addIngredients.map((addIngredient, idx) => (
+                    {this.state.RecipeIngredients.map((addIngredient, idx) => (
                         <Row key={idx}>
-                            <Col xs="6" sm="3">
+                        <Col xs="12" sm="3" md="2">
+                            Ingredient {idx+1}
+                        </Col>
+                            <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
-                                    <Input type="select" 
-                                            name="IngredientName" 
-                                            value={addIngredient.IngredientName} 
-                                            onChange={this.handleIngredientChange(idx)} 
-                                            id="SelectIngredientName">
+                                    <Input type="select"
+                                        name="IngredientName"
+                                        value={addIngredient.IngredientName}
+                                        // options={this.state.ingredientList.IngredientName}
+                                        onChange={this.handleIngredientChange(idx)}
+                                        id="SelectIngredientName">
                                         {this.state.ingredientList.map(option => (
                                             <option key={option.id} value={option.IngredientName} >{option.IngredientName}</option>
                                         ))}
                                     </Input>
                                 </FormGroup>
                             </Col>
-                            <Col xs="6" sm="3">
+                            <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="AmountSmall">Amount for Small</Label>
                                     <Input type="text"
@@ -149,7 +161,7 @@ export default class AddRecipeForm extends React.Component {
                                     />
                                 </FormGroup>
                             </Col>
-                            <Col xs="6" sm="3">
+                            <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="AmountMedium">Amount for Medium</Label>
                                     <Input type="text"
@@ -160,7 +172,7 @@ export default class AddRecipeForm extends React.Component {
                                     />
                                 </FormGroup>
                             </Col>
-                            <Col xs="6" sm="3">
+                            <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="AmountLarge">Amount for Large</Label>
                                     <Input type="text"
@@ -171,16 +183,20 @@ export default class AddRecipeForm extends React.Component {
                                     />
                                 </FormGroup>
                             </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <Button onClick={this.handleRemoveIngredient(idx)}>Remove</Button>
+                            </Col>
                         </Row>
                     ))}
+
                     <Row>
                         <Button onClick={this.handleAddIngredient}>Add New Ingredient</Button>
                     </Row>
 
                     <Row>
-
+                        <Button onClick={this.handleFormSubmit}>Submit</Button>
                     </Row>
-                    <Button onClick={this.handleFormSubmit}>Submit</Button>
+
                 </Form>
             </div>
 
