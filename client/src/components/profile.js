@@ -7,13 +7,13 @@ export default class Profile extends React.Component {
       super(props);
       this.state = {
         user: "",
-        // userid: "",
-        // firstname: "",
-        // lastname: "",
-        // username: "",
-        // role: "",
-        // email: "",
-        // password: ""
+        userid: "",
+        firstname: "",
+        lastname: "",
+        username: "",
+        role: "",
+        email: "",
+        password: ""
       };
       
       this.saveUser = this.saveUser.bind(this);
@@ -25,7 +25,17 @@ export default class Profile extends React.Component {
       UserAPI.findUser()
       .then(res => {
           console.log(res);
-          this.setState({ user: res.data[0]});
+          this.setState({ 
+            user: res.data[0],
+            id: res.data[0].id,
+            firstname: res.data[0].firstname,
+            lastname: res.data[0].lastname,
+            username: res.data[0].username,
+            role: res.data[0].role,
+            email: res.data[0].email,
+            password: res.data[0].password
+
+          });
       })
       .catch(err => console.log(err));
       console.log(this.state.user);
@@ -50,49 +60,52 @@ export default class Profile extends React.Component {
     const field = event.target.name;
     const userValue = event.target.value;
     const updatedUser = this.state.user;
-    updatedUser.field = userValue;   
+    updatedUser.field = userValue;
+    console.log(field);   
+    console.log(userValue);
+    console.log(updatedUser);
     this.setState({
-        // [event.target.name]:event.target.value
-        user: updatedUser       
+        [event.target.name]:event.target.value
+        // user: updatedUser       
         });         
   };
 
   render() {
-    const {user} = this.state;
+    const {user, firstname, lastname, id, role, username, email, password} = this.state;
     return (
         <div className="container"> 
               
-          <h1>{user.username}'s Porfile</h1>
+          <h1>{username}'s Porfile</h1>
           <Form>
             <FormGroup>
               <Label>First Name</Label>
-              <Input value={user.firstname}  readOnly />  
+              <Input value={firstname}  readOnly />  
             </FormGroup>
             <FormGroup> 
               <Label>Last Name</Label>
-              <Input value={user.lastname} readOnly />
+              <Input value={lastname} readOnly />
             </FormGroup>
             <FormGroup>
               <Label>Username</Label>
-              <Input type="text" value={user.username} name="username" onChange={this.handleProfileChange} />
+              <Input type="text" value={username} name="username" onChange={this.handleProfileChange} />
             </FormGroup>
             <FormGroup>
               <Label>Role</Label>  
-              <Input value={user.role}  readOnly /> 
+              <Input value={role}  readOnly /> 
             </FormGroup>
             <FormGroup> 
               <Label>Password: </Label>     
-              <Input type="text" value={user.password} name="password" onChange={this.handleProfileChange} />
+              <Input type="text" value={password} name="password" onChange={this.handleProfileChange} />
             </FormGroup>
             <FormGroup>
               <Label>Email: </Label>   
-              <Input type="text" value={user.email} name="email" onChange={this.handleProfileChange} />
+              <Input type="text" value={email} name="email" onChange={this.handleProfileChange} />
             </FormGroup>
               <Button onClick={this.saveUser({
-                username: user.username,
-                id: user.id,
-                password: user.password,
-                email: user.email
+                username: username,
+                id: id,
+                password: password,
+                email: email
               })}>Save Changes</Button>
           </Form>  
       
