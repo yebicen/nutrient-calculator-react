@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Mainrouter from "./Mainrouter.js"
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import Mainrouter from "./Mainrouter"
+// import Admin from "./components/admin";
 
 ReactDOM.render(<Mainrouter />, document.getElementById("root"));
 
