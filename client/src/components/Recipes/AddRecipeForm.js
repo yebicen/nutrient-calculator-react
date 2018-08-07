@@ -20,9 +20,9 @@ export default class AddRecipeForm extends React.Component {
                     "id": null,
                     "IngredientName": ""
                 })
-                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList,null,2))
+                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList, null, 2))
             })
-        
+
     };
 
     componentDidMount() {
@@ -42,9 +42,9 @@ export default class AddRecipeForm extends React.Component {
                 {
                     IngredientName: '',
                     IngredientId: null,
-                    AmountForSmall: 0,
-                    AmountForMedium: 0,
-                    AmountForLarge: 0
+                    AmountForSmall: '',
+                    AmountForMedium: '',
+                    AmountForLarge: ''
                 }
             ])
         });
@@ -52,8 +52,27 @@ export default class AddRecipeForm extends React.Component {
     }
 
     handleRemoveIngredient = (idx) => () => {
-        this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
+        console.log(idx)
+        // console.log(JSON.stringify(this.state.RecipeIngredients,null,2))
+        // this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
+        let newIgrdients = this.state.RecipeIngredients
+        newIgrdients.splice(idx, 1)
+        this.setState({ RecipeIngredients: newIgrdients });
+        console.log(JSON.stringify(this.state.RecipeIngredients, null, 2))
+        // this.handleIngredientChange(idx)
     }
+
+    // handleAmountChange = idx => event => {
+    //     const { name, value } = event.target;
+    //     const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
+    //         if (idx !== sidx) return addIngredient;
+    //         return {
+    //             ...addIngredient,
+    //             [name]: value
+    //         }
+    //     });
+    //     this.setState({ RecipeIngredients: newIngredients });
+    // }
 
     handleAmountSmallChange = (idx) => (evt) => {
         const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
@@ -88,20 +107,19 @@ export default class AddRecipeForm extends React.Component {
 
             for (let node of evt.target.children) {
                 if (node.value === evt.target.value) {
-                //   this.setState({
-                //     selected: node.getAttribute('data-id')
-                //   });
-                console.log('ingredient id: ' + node.getAttribute('data-id'))
-                return (
-                    { ...addIngredient, 
-                        IngredientName: evt.target.value,
-                        IngredientId: node.getAttribute('data-id') 
-                    }
-                );
+                    //   this.setState({
+                    //     selected: node.getAttribute('data-id')
+                    //   });
+                    console.log('ingredient id: ' + node.getAttribute('data-id'))
+                    return (
+                        {
+                            ...addIngredient,
+                            IngredientName: evt.target.value,
+                            IngredientId: node.getAttribute('data-id')
+                        }
+                    );
                 }
-              }
-
-
+            }
         });
 
         this.setState({ RecipeIngredients: newIngredients });
@@ -150,9 +168,9 @@ export default class AddRecipeForm extends React.Component {
 
                     {this.state.RecipeIngredients.map((addIngredient, idx) => (
                         <Row key={idx}>
-                        <Col xs="12" sm="3" md="2">
-                            Ingredient {idx+1}
-                        </Col>
+                            <Col xs="12" sm="3" md="2">
+                                Ingredient {idx + 1}
+                            </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
@@ -161,8 +179,13 @@ export default class AddRecipeForm extends React.Component {
                                         value={addIngredient.IngredientName}
                                         onChange={this.handleIngredientChange(idx)}
                                         id="SelectIngredientName">
+
                                         {this.state.ingredientList.map(option => (
-                                            <option key={option.id} data-id={option.id} value={option.IngredientName} >{option.IngredientName}</option>
+                                            <option key={option.id}
+                                                data-id={option.id}
+                                                value={option.IngredientName} >
+                                                {option.IngredientName}
+                                            </option>
                                         ))}
                                     </Input>
                                 </FormGroup>
@@ -173,7 +196,8 @@ export default class AddRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountSmall"
                                         placeholder="Amount for Small"
-                                        value={addIngredient.AmountSmall}
+                                        value={addIngredient.AmountForSmall}
+                                        data-id={addIngredient.IngredientName}
                                         onChange={this.handleAmountSmallChange(idx)}
                                     />
                                 </FormGroup>
@@ -184,7 +208,7 @@ export default class AddRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountMedium"
                                         placeholder="Amount for Mediumn"
-                                        value={addIngredient.AmountMedium}
+                                        value={addIngredient.AmountForMedium}
                                         onChange={this.handleAmountMediumChange(idx)}
                                     />
                                 </FormGroup>
@@ -195,7 +219,7 @@ export default class AddRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountLarge"
                                         placeholder="Amount for Large"
-                                        value={addIngredient.AmountLarge}
+                                        value={addIngredient.AmountForLarge}
                                         onChange={this.handleAmountLargeChange(idx)}
                                     />
                                 </FormGroup>
