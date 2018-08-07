@@ -20,5 +20,8 @@ export default {
     },
     addRecipe: function(newRecipe) {
         return axios.post('/recipes/new', newRecipe);
+    },
+    getRecipes: function() {
+        return axios.get('/recipes');
     }
 };

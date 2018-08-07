@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import API from '../../utils/API';
+import RecipeList from './RecipeList';
+
 
 
 export default class AddRecipeForm extends React.Component {
@@ -215,6 +217,8 @@ export default class AddRecipeForm extends React.Component {
                     </Row>
 
                 </Form>
+
+                <RecipeList />
             </div>
 
         )
