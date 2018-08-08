@@ -10,9 +10,9 @@ import JumbotronComponent from "./components/Jumbotron";
 import Smoothie from "./components/Smoothie";
 import Login from "./components/login";
 import Profile from "./components/profile";
-
+ 
 const App = () =>
-    <Container>
+    <Container> 
         <Router>
             <div>
                 <JumbotronComponent/>

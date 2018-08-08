@@ -27,7 +27,7 @@ export default class SmoothieDisplay extends React.Component {
   render() {
     return (
       <Wrapper>
-        <div>
+  
           {this.state.smoothiecards.length > 0 ? this.state.smoothiecards.map(data => (
             <div className="card">
               <div className="img-container">
@@ -149,7 +149,7 @@ export default class SmoothieDisplay extends React.Component {
           ))
             : ""
           }
-        </div>
+   
       </Wrapper>
     );
   }
