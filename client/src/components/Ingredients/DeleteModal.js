@@ -9,7 +9,6 @@ const DeleteModal = props => {
   const { toggle, modal, deleteIngredientName, deleteIngredientId, getIngredients } = props
 
   const confirmDelete = (deleteIngredientId) => {
-    console.log(deleteIngredientId)
     API.deleteIngredient(deleteIngredientId)
       .then(getIngredients());
     toggle();

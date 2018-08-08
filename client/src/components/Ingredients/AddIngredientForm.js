@@ -4,7 +4,6 @@ import API from '../../utils/API';
 import IngredientForm from './IngredientForm'
 
 export default class AddIngredientForm extends React.Component {
-  
   state = {
     IngredientName: "",
     Calories: "",
