@@ -1,44 +1,62 @@
 import React from 'react';
-import {NavLink,Nav, NavItem, Col, Row, Container  } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
+export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
 
-
-
-class NavBar extends React.Component {
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
   render() {
     return (
-      <Container fluid>
-      <Row>
-      <Col xs="3">
-        <Nav className="navbar navbar-light bg-light" vertical>
-          <NavItem>
-            <NavLink href="/">Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/recipes">Manage Recipes</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/ingredients">Manage Ingredients</NavLink>
-          </NavItem>
-        </Nav>
-
-
-        <Nav className="navbar navbar-light bg-light" vertical>
-          <NavLink href="/admin">Admin</NavLink> 
-          <NavLink href="/login">Login</NavLink> 
-        </Nav>
-
-
-         <Nav className="navbar navbar-light bg-light" vertical>
-          <NavLink href="/contact">Contact</NavLink> 
-        </Nav>
-        
-        </Col>
-        </Row>
-      </Container>
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Hello User</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/">Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/recipes">Manage Recipes</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/ingredients">Manage Ingredients</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/users/login">Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/users/admin">Admin</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/users/profile">Profile</NavLink>
+              </NavItem>
+          
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
 }
-
-
-export default NavBar;
