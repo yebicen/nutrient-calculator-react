@@ -18,24 +18,42 @@ exports.index = function (req, res) {
   });
 };
 
-exports.viewRecipes = function (req, res) {
+// exports.viewRecipes = function (req, res) {
+//   var arr = [];
+//   db.Ingredient.findAll({}).then(
+//     function (data) {
+//       arr.push(data);
+//     },
+//     db.Recipe.findAll({}).then(
+//       function (data2) {
+//         arr.push(data2);
+//       }),
+//     db.RecipeAmount.findAll({
+//       include: [db.Recipe, db.Ingredient]
+//     }).then(function (data3) {
+//       arr.push(data3);
+//       res.json(arr)
+//       // console.log(arr)
+//     })
+//   );
+// };
 
-  var arr = [];
-  db.Ingredient.findAll({}).then(
-    function (data) {
-      arr.push(data);
-    },
-    db.Recipe.findAll({}).then(
-      function (data2) {
-        arr.push(data2);
-      }),
-    db.RecipeAmount.findAll({
-      include: [db.Recipe, db.Ingredient]
-    }).then(function (data3) {
-      arr.push(data3);
-      res.json(arr)
-    })
-  );
+exports.viewRecipes = function (req, res) {
+  db.RecipeAmount.findAll({
+    // include: [db.Recipe, db.Ingredient]
+    include: [
+      {
+        model: db.Recipe,
+        as: 'Recipe'
+      },
+      {
+        model: db.Ingredient,
+        as: 'Ingredient'
+      }
+    ]
+  }).then(function (data) {
+    res.json(data)
+  })
 };
 
 //query recipes by id
@@ -46,7 +64,8 @@ exports.recipeTotals = function (req, res) {
   db.Recipe.findAll({})
     .then(function (data) {
       calculateTotals(data, function () {
-      res.json(totalsArr);
+        res.json(totalsArr);
+        // console.log(totalsArr);
       });
     });
 
@@ -77,53 +96,53 @@ exports.recipeTotals = function (req, res) {
           var totalProteinLarge = 0;
 
           for (var j = 0; j < data2.length; j++) {
-            console.log("======== DataValues ========")
-            console.log(data2[j].dataValues.Size);
-            console.log("======== DataValues ========")
+            // console.log("======== DataValues ========")
+            // console.log(data2[0]);
+            // console.log("======== DataValues ========")
             var size = data2[j].dataValues.Size;
-            if (size === "sm"){
-            var RecipeId = data2[j].dataValues.Recipe.dataValues.id
-            var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
-            var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
-            var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
-            var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
-            var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
-            var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
-            totalCaloriesSmall += Calories;
-            totalCarbsSmall += Carbs;
-            totalSugarSmall += Sugar;
-            totalFatSmall += Fat;
-            totalProteinSmall += Protein;
+            if (size === "sm") {
+              var RecipeId = data2[j].dataValues.Recipe.dataValues.id
+              var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
+              var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
+              var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
+              var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
+              var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
+              var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
+              totalCaloriesSmall += Calories;
+              totalCarbsSmall += Carbs;
+              totalSugarSmall += Sugar;
+              totalFatSmall += Fat;
+              totalProteinSmall += Protein;
+            }
+            else if (size === "md") {
+              var RecipeId = data2[j].dataValues.Recipe.dataValues.id
+              var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
+              var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
+              var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
+              var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
+              var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
+              var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
+              totalCaloriesMedium += Calories;
+              totalCarbsMedium += Carbs;
+              totalSugarMedium += Sugar;
+              totalFatMedium += Fat;
+              totalProteinMedium += Protein;
+            }
+            else if (size === "lg") {
+              var RecipeId = data2[j].dataValues.Recipe.dataValues.id
+              var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
+              var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
+              var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
+              var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
+              var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
+              var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
+              totalCaloriesLarge += Calories;
+              totalCarbsLarge += Carbs;
+              totalSugarLarge += Sugar;
+              totalFatLarge += Fat;
+              totalProteinLarge += Protein;
+            }
           }
-          else if (size === "md"){
-            var RecipeId = data2[j].dataValues.Recipe.dataValues.id
-            var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
-            var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
-            var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
-            var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
-            var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
-            var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
-            totalCaloriesMedium += Calories;
-            totalCarbsMedium += Carbs;
-            totalSugarMedium += Sugar;
-            totalFatMedium += Fat;
-            totalProteinMedium += Protein;
-          }
-          else if (size === "lg"){
-            var RecipeId = data2[j].dataValues.Recipe.dataValues.id
-            var RecipeName = data2[j].dataValues.Recipe.dataValues.RecipeName;
-            var Calories = parseInt(data2[j].dataValues.Ingredient.dataValues.Calories) * parseInt(data2[j].Amount);
-            var Carbs = parseInt(data2[j].dataValues.Ingredient.dataValues.Carbs) * parseInt(data2[j].Amount);
-            var Sugar = parseInt(data2[j].dataValues.Ingredient.dataValues.Sugar) * parseInt(data2[j].Amount);
-            var Fat = parseInt(data2[j].dataValues.Ingredient.dataValues.Fat) * parseInt(data2[j].Amount);
-            var Protein = parseInt(data2[j].dataValues.Ingredient.dataValues.Protein) * parseInt(data2[j].Amount);
-            totalCaloriesLarge += Calories;
-            totalCarbsLarge += Carbs;
-            totalSugarLarge += Sugar;
-            totalFatLarge += Fat;
-            totalProteinLarge += Protein;
-          }
-        }
           var totals = {
             RecipeId: RecipeId,
             RecipeName: RecipeName,
@@ -157,7 +176,7 @@ exports.recipeTotals = function (req, res) {
           }
         });
     }
-    
+
   };
 }
 
