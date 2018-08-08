@@ -1,7 +1,7 @@
 .card {
   background: #fff;
   border-radius: 2px;
-  /* height: 600px; */
+  height: 500px;
   margin: 1rem;
   position: relative;
   width: 300px;
@@ -13,7 +13,7 @@
   height: 100%;
   overflow: hidden;
   text-align: center;
-  background:#6CADDC;
+  background:rgb(255, 230, 228)
 }
 .card > .img-container > img {
   width: 100%;
@@ -29,6 +29,11 @@
 .card > .content > ul {
   list-style-type: none;
 }
+
+.card > li.nav-item{
+  cursor: pointer;
+}
+
 
 /* .card > .content > TabList {
   list-style-type: square type;
