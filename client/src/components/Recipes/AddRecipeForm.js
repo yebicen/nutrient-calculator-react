@@ -1,4 +1,5 @@
 import React from 'react';
+import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import API from '../../utils/API';
 
@@ -140,11 +141,112 @@ export default class AddRecipeForm extends React.Component {
 
     };
 
+    handleSubmit() {
+        console.log("this is a handleSubmit")    
+    }
+
     render() {
 
         return (
             <div className="addRecipeForm">
-                <Form >
+                <AvForm onSubmit={this.handleSubmit}>
+                    <Row>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeName">Recipe Name</Label>
+                                <AvField type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange} placeholder="Recipe Name" required />
+                            </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeDescription">Recipe Descriptio</Label>
+                                <AvField type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" required />
+                            </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeType">Recipe Type</Label>
+                                <AvField type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" required />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    {this.state.RecipeIngredients.map((addIngredient, idx) => (
+                        <Row key={idx}>
+                            <Col xs="12" sm="3" md="2">
+                                Ingredient {idx + 1}
+                            </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <FormGroup>
+                                    <Label for="SelectIngredientName">Select Ingredient</Label>
+                                    <AvField type="select"
+                                        name="IngredientName"
+                                        value={addIngredient.IngredientName}
+                                        onChange={this.handleIngredientChange(idx)}
+                                        id="SelectIngredientName" required >
+
+                                        {this.state.ingredientList.map(option => (
+                                            <option key={option.id}
+                                                data-id={option.id}
+                                                value={option.IngredientName} >
+                                                {option.IngredientName}
+                                            </option>
+                                        ))}
+                                    </AvField>
+                                </FormGroup>
+                            </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <FormGroup>
+                                    <Label for="AmountSmall">Amount for Small</Label>
+                                    <AvField type="number"
+                                        name="AmountSmall"
+                                        placeholder="Amount for Small"
+                                        value={addIngredient.AmountForSmall}
+                                        data-id={addIngredient.IngredientName}
+                                        onChange={this.handleAmountSmallChange(idx)}
+                                        required
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <FormGroup>
+                                    <Label for="AmountMedium">Amount for Medium</Label>
+                                    <AvField type="number"
+                                        name="AmountMedium"
+                                        placeholder="Amount for Mediumn"
+                                        value={addIngredient.AmountForMedium}
+                                        onChange={this.handleAmountMediumChange(idx)}
+                                        required
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <FormGroup>
+                                    <Label for="AmountLarge">Amount for Large</Label>
+                                    <AvField type="number"
+                                        name="AmountLarge"
+                                        placeholder="Amount for Large"
+                                        value={addIngredient.AmountForLarge}
+                                        onChange={this.handleAmountLargeChange(idx)}
+                                        required
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col xs="12" sm="3" md="2">
+                                <Button onClick={this.handleRemoveIngredient(idx)}>Remove</Button>
+                            </Col>
+                        </Row>
+                    ))}
+
+                    <Row>
+                        <Button color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                    </Row>
+
+                    <Row>
+                        <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                    </Row>
+                </AvForm>
+                {/* <Form >
                     <Row>
                         <Col xs="6" sm="4">
                             <FormGroup>
@@ -238,7 +340,7 @@ export default class AddRecipeForm extends React.Component {
                         <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
                     </Row>
 
-                </Form>
+                </Form> */}
             </div>
 
         )

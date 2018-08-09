@@ -3,18 +3,13 @@ import { AvForm, AvField, AvGroup, AvInput } from 'availity-reactstrap-validatio
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class IngredientForm extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
 
     render() {
 
         return (
 
             <div>
-                <AvField type="text" name="IngredientName" label="IngredientName" value={this.props.IngredientName} onChange={this.props.handleInputChange} required />
+                <AvField type="text" name="IngredientName" label="Ingredient Name" value={this.props.IngredientName} onChange={this.props.handleInputChange} required />
                 <AvField type="number" name="Calories" label="Calories per oz" value={this.props.Calories} onChange={this.props.handleInputChange} required />
                 <AvField type="number" name="Carbs" label="Carbs per oz" value={this.props.Carbs} onChange={this.props.handleInputChange} required />
                 <AvField type="number" name="Sugar" label="Sugar per oz" value={this.props.Sugar} onChange={this.props.handleInputChange} required />
@@ -37,7 +32,7 @@ export default class IngredientForm extends React.Component {
                 </AvGroup>
             </div>
             // <Form>
-            //   <FormGroup>
+            //   <FormGroup onClick={this.props.handleFormSubmit}>
             //     <Label for="IngredientName">Ingredient Name</Label>
             //     <Input type="text" name="IngredientName" value={IngredientName} onChange={handleInputChange} placeholder="Ingredient Name"/>
             //   </FormGroup>

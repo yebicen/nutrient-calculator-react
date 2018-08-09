@@ -6,13 +6,14 @@ import API from '../../utils/API';
 import IngredientForm from './Valid_IngredientForm.js'
 
 export default class AddIngredientForm extends React.Component {
+
   state = {
     IngredientName: "",
-    Calories: 11,
-    Carbs: 11,
-    Sugar: 11,
-    Fat: 11,
-    Protein: 11,
+    Calories: "",
+    Carbs: "",
+    Sugar: "",
+    Fat: "",
+    Protein: "",
     hasGluten: false,
     isNut: false,
     isGMO: false
@@ -28,7 +29,7 @@ export default class AddIngredientForm extends React.Component {
     });
   };
 
-  handleFormSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
     API.addIngredient(this.state).then(
       this.props.getIngredients()
@@ -44,18 +45,25 @@ export default class AddIngredientForm extends React.Component {
       isNut: false,
       isGMO: false
     });
+    console.log("handleSubmit worked!")
+    console.log(this.state)
+
   };
 
   render() {
     return (
       <div className="addIngredientForm">
-        <AvForm>
+        <AvForm onSubmit={this.handleSubmit}>
           <IngredientForm
             handleInputChange={this.handleInputChange}
             state={this.state}
           />
-
-          <Button onClick={this.handleFormSubmit}>Submit</Button>
+          <FormGroup>
+            <Button>Submit</Button>
+          </FormGroup>
+          {/* <FormGroup>
+            <Button handleFormSubmit={()=>this.handleFormSubmit}>Submit</Button>
+          </FormGroup> */}
         </AvForm>
       </div>
     )
