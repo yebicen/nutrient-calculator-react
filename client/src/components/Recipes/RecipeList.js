@@ -5,7 +5,7 @@ import API from '../../utils/API';
 
 export default class RecipeContainer extends React.Component {
     state = {
-        dbRecipes: [],
+        dbRecipes: {},
         dbRecipeTotals: []
     }
 

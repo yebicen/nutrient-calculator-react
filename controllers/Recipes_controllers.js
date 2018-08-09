@@ -40,7 +40,6 @@ exports.index = function (req, res) {
 
 exports.viewRecipes = function (req, res) {
   db.RecipeAmount.findAll({
-    // include: [db.Recipe, db.Ingredient]
     include: [
       {
         model: db.Recipe,
@@ -52,10 +51,9 @@ exports.viewRecipes = function (req, res) {
       }
     ]
   }).then(function (data) {
-    // let uniqueRecipesIds = [...new Set(data.map(item => item.dataValues.RecipeId))];
-    // console.log('UNIQUE: ' + JSON.stringify(uniqueRecipesIds, null, 2))
-    
 
+    //allows to check if array already contains value
+    //JSON.stringify converts objects to strings to allow for accurate comparison
     Array.prototype.contains = function (value) {
       for (var i = 0; i < this.length; i++) {
         if (JSON.stringify(this[i]) === JSON.stringify(value))
@@ -64,30 +62,70 @@ exports.viewRecipes = function (req, res) {
       return false;
     }
 
+    var totalCaloriesSmall = 0;
+    var totalCarbsSmall = 0;
+    var totalSugarSmall = 0;
+    var totalFatSmall = 0;
+    var totalProteinSmall = 0;
+    var totalCaloriesMedium = 0;
+    var totalCarbsMedium = 0;
+    var totalSugarMedium = 0;
+    var totalFatMedium = 0;
+    var totalProteinMedium = 0;
+    var totalCaloriesLarge = 0;
+    var totalCarbsLarge = 0;
+    var totalSugarLarge = 0;
+    var totalFatLarge = 0;
+    var totalProteinLarge = 0;
 
-    var groups = {};
-    const small = [];
+    var recipes = {};
+    const small = {
+      ingredients: [],
+      totals: {
+        Calories: totalCaloriesSmall,
+        Carbs: totalCarbsSmall,
+        Sugar: totalSugarSmall,
+        Fat: totalFatSmall, 
+        Protein: totalProteinSmall
+      }
+    };
     const medium = [];
     const large = [];
+
     for (var i = 0; i < data.length; i++) {
-      var groupId = data[i].dataValues.RecipeId;
-      if (!groups[groupId]) {
-        groups[groupId] = [];
+      var recipeId = data[i].dataValues.RecipeId;
+      if (!recipes[recipeId]) {
+        recipes[recipeId] = [];
       }
 
-      if (!groups[groupId].contains(data[i].Recipe)) {
-        groups[groupId].push(data[i].Recipe);
+      //Use Array.prototype.contains to push only unique recipe info into the recipe recipeId object
+      if (!recipes[recipeId].contains(data[i].Recipe)) {
+        recipes[recipeId].push(data[i].Recipe);
       }
 
+      //ingredients, amounts and totals for small size
       if (data[i].Size === "sm") {
-        small.push(
+
+        var Calories = parseInt(data[i].dataValues.Ingredient.dataValues.Calories) * parseInt(data[i].Amount);
+        var Carbs = parseInt(data[i].dataValues.Ingredient.dataValues.Carbs) * parseInt(data[i].Amount);
+        var Sugar = parseInt(data[i].dataValues.Ingredient.dataValues.Sugar) * parseInt(data[i].Amount);
+        var Fat = parseInt(data[i].dataValues.Ingredient.dataValues.Fat) * parseInt(data[i].Amount);
+        var Protein = parseInt(data[i].dataValues.Ingredient.dataValues.Protein) * parseInt(data[i].Amount);
+        totalCaloriesSmall += Calories;
+        totalCarbsSmall += Carbs;
+        totalSugarSmall += Sugar;
+        totalFatSmall += Fat;
+        totalProteinSmall += Protein;
+
+        small.ingredients.push(
           {
-            Ingredient: data[i].Ingredient,
-            Amount: data[i].Amount
+              Ingredient: data[i].Ingredient,
+              Amount: data[i].Amount
           }
         )
       }
 
+      //ingredients, amounts and totals for medium size
       else if (data[i].Size === "md") {
         medium.push(
           {
@@ -97,6 +135,7 @@ exports.viewRecipes = function (req, res) {
         )
       }
 
+      //ingredients, amounts and totals for large size
       else if (data[i].Size === "lg") {
         large.push(
           {
@@ -105,13 +144,12 @@ exports.viewRecipes = function (req, res) {
           }
         )
       }
-
     }
 
     newData = [];
-    for (var groupId in groups) {
+    for (var recipeId in recipes) {
       newData.push({
-        RecipeInfo: groups[groupId],
+        RecipeInfo: recipes[recipeId],
         sizes: {
           'small': small,
           'medium': medium,
@@ -119,7 +157,7 @@ exports.viewRecipes = function (req, res) {
         }
       });
     }
-    console.log(JSON.stringify(newData, null, 2))
+    // console.log(JSON.stringify(newData, null, 2))
     res.json(newData)
   })
 };
