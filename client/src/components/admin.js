@@ -2,9 +2,10 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import Adduser from "./adduser";
 import UserAPI from "../utils/UserAPI";
-
 import Userrow from "./userrow";
 import Edituserrow from "./edituserrow";
+import './admin.css'
+
 
 export default class Admin extends React.Component {
     constructor (props) {
@@ -122,6 +123,8 @@ export default class Admin extends React.Component {
           
     };
 
+   
+    
 
   render() {
     
@@ -129,11 +132,11 @@ export default class Admin extends React.Component {
     const {editModeID, firstname, lastname, username, role, password, email, id, userList} = this.state;
     return (
     <div>
-     <h1>Current Users</h1>
+     <h5>Current Users</h5>
      <form>
        <div className="form-group">
        <Table striped>
-        <thead>
+        <thead className="userheader">
           <tr>
             <th>#</th>
             <th>First Name</th>
@@ -146,7 +149,7 @@ export default class Admin extends React.Component {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="userrow">
          {userList.map((user, i) => (user.id === editModeID) ?
           <Edituserrow 
               key = {i}

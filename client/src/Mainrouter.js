@@ -9,6 +9,7 @@ import JumbotronComponent from "./components/Jumbotron";
 import Smoothie from "./components/Smoothie";
 import Login from "./components/login";
 import Profile from "./components/profile";
+import Imguploader from "./components/uploadimg";
 
 const App = () =>
     <Container>
@@ -22,7 +23,8 @@ const App = () =>
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
-                {/* <Route path="/Ingredients" component={Recipes} /> */}
+                <Route path="/image" component={Imguploader} /> 
+                {/* <Route path="/imageuploader" component={MyUploader} /> */}
             </div>
         </Router>
     </Container>

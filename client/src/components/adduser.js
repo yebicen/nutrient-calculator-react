@@ -1,12 +1,15 @@
 import React from "react";
 import { Table } from 'reactstrap';
+import './admin.css'
+
+
 const Adduser = props => (
   <div>          
-    <h1>Add New User</h1>
+    <h5>Add New User</h5>
     <form>
       <div className="form-group">
       <Table striped>
-      <thead>
+      <thead className="userheader">
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
@@ -17,7 +20,7 @@ const Adduser = props => (
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="userrow">
        <tr>
         <td><input type="text" name="firstname" value={props.firstname} onChange={props.handleUserchange} /></td>
         <td><input type="text" name="lastname" value={props.lastname} onChange={props.handleUserchange} /></td>
