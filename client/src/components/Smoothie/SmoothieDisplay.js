@@ -27,18 +27,21 @@ export default class SmoothieDisplay extends React.Component {
   render() {
     return (
       <Wrapper>
-        <div>
+  
           {this.state.smoothiecards.length > 0 ? this.state.smoothiecards.map(data => (
             <div className="card">
               <div className="img-container">
                 <img alt={data.RecipeName} src={data.RecipeImage} />
-              </div>
+              </div> 
               <div className="img-container">
                 <h4>
                   <strong>{data.RecipeName}</strong>
                 </h4>
                 <p>
                   {data.Description}
+                </p>
+                <p>
+                  Recipes: {data.Recipes}
                 </p>
               </div>
               <div className="content">
@@ -48,7 +51,7 @@ export default class SmoothieDisplay extends React.Component {
                     <NavItem>
                       <NavLink
                         className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
+                        onClick={() => { this.toggle('1');}}
                       >
                         SM
                        </NavLink>
@@ -149,7 +152,7 @@ export default class SmoothieDisplay extends React.Component {
           ))
             : ""
           }
-        </div>
+   
       </Wrapper>
     );
   }
