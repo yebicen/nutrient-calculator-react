@@ -52,39 +52,46 @@ exports.viewRecipes = function (req, res) {
       }
     ]
   }).then(function (data) {
-    let uniqueRecipesIds = [...new Set(data.map(item => item.dataValues.RecipeId))];
-    
-    let i = 0;
-    const arrayToObject = (arr) =>
-    Object.assign({}, ...arr.map(item => ({[i++]: item})));
-    console.log('OBJECT: ' + JSON.stringify(arrayToObject(uniqueRecipesIds)));
-
-    // function loop(data) {
-    //   for (let i = 0; i < data.length; i++) {
-    //     // for (let j = 0; j < uniqueRecipes.length; j++) {
-    //     //   if (data[i].dataValues.RecipeId === uniqueRecipes[j]) {
-    //     //     console.log('EQUALS! :' + j)
-    //     //     // uniqueRecipes.recipes.push(data[i].dataValues.RecipeId)
-    //     //   }
-    //     // }
-
-    //     // console.log(data[i].dataValues.RecipeId)
-    //     if (i === data.length - 1) {
-
-    //       sendResponse();
-    //     }
-    //   }
-    // }
-
-    // loop(data);
-
-
-    // function sendResponse() {
-      console.log('UNIQUE: ' + JSON.stringify(uniqueRecipesIds, null, 2))
-      // console.log('Recipes: ' + JSON.stringify(recipes, null, 2))
-      
-    // }
+    // let uniqueRecipesIds = [...new Set(data.map(item => item.dataValues.RecipeId))];
+    // console.log('UNIQUE: ' + JSON.stringify(uniqueRecipesIds, null, 2))
     res.json(data)
+
+    Array.prototype.contains = function (value) {
+      for (var i = 0; i < this.length; i++) {
+        if (JSON.stringify(this[i]) === JSON.stringify(value))
+          return true;
+      }
+      return false;
+    }
+
+
+    var groups = {};
+    for (var i = 0; i < data.length; i++) {
+      var groupId = data[i].dataValues.RecipeId;
+      if (!groups[groupId]) {
+        groups[groupId] = [];
+      }
+
+      if (!groups[groupId].contains(data[i].Recipe)) {
+        groups[groupId].push(data[i].Recipe);
+      }
+
+    }
+
+    newData = [];
+    for (var groupId in groups) {
+      newData.push({ group: groupId, Recipe: groups[groupId] });
+    }
+    console.log(JSON.stringify(newData, null, 2))
+
+
+    // if (JSON.stringify(newData[0].Recipe[0]) === JSON.stringify(newData[0].Recipe[1])) {
+    //   console.log('SAME DATA')
+    // }
+    // else {
+    //   console.log('Different Data?!')
+    // }
+
 
   })
 };
