@@ -18,7 +18,7 @@ export default class NavBar extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false 
     };
   }
   toggle() {
@@ -38,10 +38,10 @@ export default class NavBar extends React.Component {
                 <NavLink href="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/recipes">Manage Recipes</NavLink>
+                <NavLink href="/recipes">Recipes</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/ingredients">Manage Ingredients</NavLink>
+                <NavLink href="/ingredients">Ingredients</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/users/login">Login</NavLink>
