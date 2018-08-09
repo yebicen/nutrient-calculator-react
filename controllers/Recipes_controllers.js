@@ -54,7 +54,7 @@ exports.viewRecipes = function (req, res) {
   }).then(function (data) {
     // let uniqueRecipesIds = [...new Set(data.map(item => item.dataValues.RecipeId))];
     // console.log('UNIQUE: ' + JSON.stringify(uniqueRecipesIds, null, 2))
-    res.json(data)
+    
 
     Array.prototype.contains = function (value) {
       for (var i = 0; i < this.length; i++) {
@@ -66,6 +66,9 @@ exports.viewRecipes = function (req, res) {
 
 
     var groups = {};
+    const small = [];
+    const medium = [];
+    const large = [];
     for (var i = 0; i < data.length; i++) {
       var groupId = data[i].dataValues.RecipeId;
       if (!groups[groupId]) {
@@ -76,23 +79,48 @@ exports.viewRecipes = function (req, res) {
         groups[groupId].push(data[i].Recipe);
       }
 
+      if (data[i].Size === "sm") {
+        small.push(
+          {
+            Ingredient: data[i].Ingredient,
+            Amount: data[i].Amount
+          }
+        )
+      }
+
+      else if (data[i].Size === "md") {
+        medium.push(
+          {
+            Ingredient: data[i].Ingredient,
+            Amount: data[i].Amount
+          }
+        )
+      }
+
+      else if (data[i].Size === "lg") {
+        large.push(
+          {
+            Ingredient: data[i].Ingredient,
+            Amount: data[i].Amount
+          }
+        )
+      }
+
     }
 
     newData = [];
     for (var groupId in groups) {
-      newData.push({ group: groupId, Recipe: groups[groupId] });
+      newData.push({
+        RecipeInfo: groups[groupId],
+        sizes: {
+          'small': small,
+          'medium': medium,
+          'large': large
+        }
+      });
     }
     console.log(JSON.stringify(newData, null, 2))
-
-
-    // if (JSON.stringify(newData[0].Recipe[0]) === JSON.stringify(newData[0].Recipe[1])) {
-    //   console.log('SAME DATA')
-    // }
-    // else {
-    //   console.log('Different Data?!')
-    // }
-
-
+    res.json(newData)
   })
 };
 
