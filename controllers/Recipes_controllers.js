@@ -13,7 +13,7 @@ exports.index = function (req, res) {
   db.Recipe.findAll({
 
   }).then(function (data) {
-    console.log(data);
+    // console.log(data);
     res.json(data);
   });
 };
@@ -51,6 +51,11 @@ exports.viewRecipes = function (req, res) {
       }
     ]
   }).then(function (data) {
+    let recipes = {};
+    let small = {}
+    let medium = {}
+    let large = {}
+    const newData = [];
 
     //allows to check if array already contains value
     //JSON.stringify converts objects to strings to allow for accurate comparison
@@ -62,38 +67,9 @@ exports.viewRecipes = function (req, res) {
       return false;
     }
 
-    var totalCaloriesSmall = 0;
-    var totalCarbsSmall = 0;
-    var totalSugarSmall = 0;
-    var totalFatSmall = 0;
-    var totalProteinSmall = 0;
-    var totalCaloriesMedium = 0;
-    var totalCarbsMedium = 0;
-    var totalSugarMedium = 0;
-    var totalFatMedium = 0;
-    var totalProteinMedium = 0;
-    var totalCaloriesLarge = 0;
-    var totalCarbsLarge = 0;
-    var totalSugarLarge = 0;
-    var totalFatLarge = 0;
-    var totalProteinLarge = 0;
-
-    var recipes = {};
-    const small = {
-      ingredients: [],
-      totals: {
-        Calories: totalCaloriesSmall,
-        Carbs: totalCarbsSmall,
-        Sugar: totalSugarSmall,
-        Fat: totalFatSmall, 
-        Protein: totalProteinSmall
-      }
-    };
-    const medium = [];
-    const large = [];
-
-    for (var i = 0; i < data.length; i++) {
-      var recipeId = data[i].dataValues.RecipeId;
+    for (let i = 0; i < data.length; i++) {
+      // console.log('DATA  :' + JSON.stringify(data[i],null,2))
+      const recipeId = data[i].dataValues.RecipeId;
       if (!recipes[recipeId]) {
         recipes[recipeId] = [];
       }
@@ -103,60 +79,112 @@ exports.viewRecipes = function (req, res) {
         recipes[recipeId].push(data[i].Recipe);
       }
 
-      //ingredients, amounts and totals for small size
+      //create empty arrays
+      if (!small[recipeId]) {
+        small[recipeId] = [];
+      }
+      if (!medium[recipeId]) {
+        medium[recipeId] = [];
+      }
+      if (!large[recipeId]) {
+        large[recipeId] = [];
+      }
+
+      //set ingredient & amount data for small size
       if (data[i].Size === "sm") {
+        let ingredient = {
+          ingredientInfo: data[i].Ingredient,
+          ingredientAmount: data[i].Amount
+        }
 
-        var Calories = parseInt(data[i].dataValues.Ingredient.dataValues.Calories) * parseInt(data[i].Amount);
-        var Carbs = parseInt(data[i].dataValues.Ingredient.dataValues.Carbs) * parseInt(data[i].Amount);
-        var Sugar = parseInt(data[i].dataValues.Ingredient.dataValues.Sugar) * parseInt(data[i].Amount);
-        var Fat = parseInt(data[i].dataValues.Ingredient.dataValues.Fat) * parseInt(data[i].Amount);
-        var Protein = parseInt(data[i].dataValues.Ingredient.dataValues.Protein) * parseInt(data[i].Amount);
-        totalCaloriesSmall += Calories;
-        totalCarbsSmall += Carbs;
-        totalSugarSmall += Sugar;
-        totalFatSmall += Fat;
-        totalProteinSmall += Protein;
-
-        small.ingredients.push(
-          {
-              Ingredient: data[i].Ingredient,
-              Amount: data[i].Amount
-          }
-        )
+        small[recipeId].push(ingredient)
       }
 
-      //ingredients, amounts and totals for medium size
       else if (data[i].Size === "md") {
-        medium.push(
-          {
-            Ingredient: data[i].Ingredient,
-            Amount: data[i].Amount
-          }
-        )
+        let ingredient = {
+          ingredientInfo: data[i].Ingredient,
+          ingredientAmount: data[i].Amount
+        }
+
+        medium[recipeId].push(ingredient)
       }
 
-      //ingredients, amounts and totals for large size
       else if (data[i].Size === "lg") {
-        large.push(
-          {
-            Ingredient: data[i].Ingredient,
-            Amount: data[i].Amount
-          }
-        )
+         ingredient = {
+          ingredientInfo: data[i].Ingredient,
+          ingredientAmount: data[i].Amount
+        }
+
+        large[recipeId].push(ingredient)
       }
     }
 
-    newData = [];
-    for (var recipeId in recipes) {
+
+    for (let recipeId in recipes) {
       newData.push({
         RecipeInfo: recipes[recipeId],
+        // sizes: {
+        //   'small': small,
+        //   'medium': medium,
+        //   'large': large
+        // }
         sizes: {
-          'small': small,
-          'medium': medium,
-          'large': large
+          small: {
+            ingredients: small[recipeId]
+          },
+          medium: {
+            ingredients: medium[recipeId]
+          },
+          large: {
+            ingredients: large[recipeId]
+          }
         }
+
       });
     }
+
+    // function calculateTotals() {
+    //   // console.log('HOLA!')
+
+    //   for (let i = 0; i < newData.length; i++) {
+
+    //     const sizes = newData[i].sizes;
+    //     // console.log('ingredients HERE: ' + JSON.stringify(sizes.small.ingredients))
+    //     // console.log(sizes)
+    //     // for (size in sizes) {
+    //     if (sizes.small) {
+    //       // console.log(JSON.stringify(sizes.small,null,2))
+    //       // console.log(sizes.small)
+
+    //       for (let j = 0; j < sizes.small.ingredients.length; j++) {
+    //         var totalCaloriesSmall = 0;
+    //         var totalCarbsSmall = 0;
+    //         var totalSugarSmall = 0;
+    //         var totalFatSmall = 0;
+    //         var totalProteinSmall = 0;
+    //         const Calories = parseInt(sizes.small.ingredients[j].Ingredient.Calories) * parseInt(sizes.small.ingredients[j].Amount);
+    //         const Carbs = parseInt(sizes.small.ingredients[j].Ingredient.Carbs) * parseInt(sizes.small.ingredients[j].Amount);
+    //         const Sugar = parseInt(sizes.small.ingredients[j].Ingredient.Sugar) * parseInt(sizes.small.ingredients[j].Amount);
+    //         const Fat = parseInt(sizes.small.ingredients[j].Ingredient.Fat) * parseInt(sizes.small.ingredients[j].Amount);
+    //         const Protein = parseInt(sizes.small.ingredients[j].Ingredient.Protein) * parseInt(sizes.small.ingredients[j].Amount);
+    //         totalCaloriesSmall += Calories;
+    //         totalCarbsSmall += Carbs;
+    //         totalSugarSmall += Sugar;
+    //         totalFatSmall += Fat;
+    //         totalProteinSmall += Protein;
+    //         // console.log('calories: ' + sizes.small.ingredients[j].Ingredient.Calories)
+    //         // console.log('total calories: ' + totalCaloriesSmall)
+    //         sizes.small.nutritionTotals.Calories = totalCaloriesSmall
+    //       }
+
+    //     }
+    //     // }
+
+    //   }
+    // }
+
+    // calculateTotals();
+
     // console.log(JSON.stringify(newData, null, 2))
     res.json(newData)
   })
@@ -287,7 +315,7 @@ exports.recipeTotals = function (req, res) {
 }
 
 exports.addRecipe = function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription
@@ -327,7 +355,7 @@ exports.addRecipe = function (req, res) {
     }
 
     sequelize.Promise.all(promises).then(function () {
-      console.log('All done YAYYYYYYY!!!!!!!');
+      // console.log('All done YAYYYYYYY!!!!!!!');
     });
 
   });
