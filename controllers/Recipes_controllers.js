@@ -52,7 +52,40 @@ exports.viewRecipes = function (req, res) {
       }
     ]
   }).then(function (data) {
+    let uniqueRecipesIds = [...new Set(data.map(item => item.dataValues.RecipeId))];
+    
+    let i = 0;
+    const arrayToObject = (arr) =>
+    Object.assign({}, ...arr.map(item => ({[i++]: item})));
+    console.log('OBJECT: ' + JSON.stringify(arrayToObject(uniqueRecipesIds)));
+
+    // function loop(data) {
+    //   for (let i = 0; i < data.length; i++) {
+    //     // for (let j = 0; j < uniqueRecipes.length; j++) {
+    //     //   if (data[i].dataValues.RecipeId === uniqueRecipes[j]) {
+    //     //     console.log('EQUALS! :' + j)
+    //     //     // uniqueRecipes.recipes.push(data[i].dataValues.RecipeId)
+    //     //   }
+    //     // }
+
+    //     // console.log(data[i].dataValues.RecipeId)
+    //     if (i === data.length - 1) {
+
+    //       sendResponse();
+    //     }
+    //   }
+    // }
+
+    // loop(data);
+
+
+    // function sendResponse() {
+      console.log('UNIQUE: ' + JSON.stringify(uniqueRecipesIds, null, 2))
+      // console.log('Recipes: ' + JSON.stringify(recipes, null, 2))
+      
+    // }
     res.json(data)
+
   })
 };
 

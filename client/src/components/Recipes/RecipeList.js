@@ -15,12 +15,13 @@ export default class RecipeContainer extends React.Component {
                 this.setState({
                     dbRecipes: res.data
                 })
-                for (let i = 0; i<this.state.dbRecipes.length; i++) {
-                if (this.state.dbRecipes[i].Size==='sm') {
-                    console.log('HOLA')
-                    console.log(JSON.stringify(this.state.dbRecipes[i],null,2))
-                }
-            }
+                console.log('dbRecipes: ' + JSON.stringify(this.state.dbRecipes,null,2))
+                // for (let i = 0; i<this.state.dbRecipes.length; i++) {
+                // if (this.state.dbRecipes[i].Size==='sm') {
+                //     console.log('HOLA')
+                //     console.log(JSON.stringify(this.state.dbRecipes[i],null,2))
+                // }
+                // }
             })
 
         API.getRecipeTotals()
