@@ -23,9 +23,8 @@ exports.findUser = function (req, res) {
     //console.log(req.user.username);
     if (req.user) {
       var userId=req.user.id;
-    } else {
-      var userId = 10;
     }
+
     db.User.findAll(
         {
           where: {
@@ -117,6 +116,7 @@ exports.adminMain = function (req, res) {
 exports.signOutUser = function(req, res) {
     req.logout();
     res.redirect("/");
+    console.log("log out");
 };
   
   // login
@@ -128,6 +128,7 @@ exports.loginUser = function(req, res) {
       // So we're sending the user back the route to the members page because the redirect will happen on the front end
       // They won't get this or even be able to access this page if they aren't authed
     res.json("/");
+    res.redirect("/");
 };
   
   
