@@ -532,11 +532,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-<<<<<<< HEAD
 classnames@^2.2.3, classnames@^2.2.6:
-=======
-classnames@^2.2.3:
->>>>>>> master
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -3233,9 +3229,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-<<<<<<< HEAD
-react-dom@^16.4.2:
-=======
 react-d3-basic@^1.6.11:
   version "1.6.11"
   resolved "https://registry.yarnpkg.com/react-d3-basic/-/react-d3-basic-1.6.11.tgz#6e0359434588e8da01294823ab8c0343aee5aa68"
@@ -3266,7 +3259,6 @@ react-d3-shape@^0.2.13:
     react-d3-core "^1.2.8"
 
 react-dom@^16.4.1:
->>>>>>> master
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
   dependencies:
@@ -3325,7 +3317,7 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.4.2:
+react@^16.4.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:

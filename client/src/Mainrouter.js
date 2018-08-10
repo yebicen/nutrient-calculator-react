@@ -10,6 +10,7 @@ import JumbotronComponent from "./components/Jumbotron";
 import Smoothie from "./components/Smoothie";
 import Login from "./components/login";
 import Profile from "./components/profile";
+import Imguploader from "./components/uploadimg";
  
 const App = () =>
     <Container> 
