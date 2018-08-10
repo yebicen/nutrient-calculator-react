@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+require('./routes')(app);
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
@@ -34,10 +36,11 @@ app.use(passport.session());
 app.use(authCheck);
 
 app.use(flash());
-require('./routes')(app);
-const Ingredients_routes = require('./routes/Ingredients_routes');
 
-app.use(Ingredients_routes);
+// const Ingredients_routes = require('./routes/Ingredients_routes');
+
+// app.use(Ingredients_routes);
+
 
 //upload images using multer
 const storage = multer.diskStorage({

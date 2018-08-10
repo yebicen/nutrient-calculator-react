@@ -3,17 +3,16 @@ var sequelize = require('sequelize');
 var Promise = require("bluebird");
 
 exports.index = function (req, res) {
-  var loggedIn = false;
-  var userText = "";
-  if (req.user) {
-    loggedIn = true;
-    userText = "Logged In as " + req.user.username;
-  };
+  // var loggedIn = false;
+  // var userText = "";
+  // if (req.user) {
+  //   loggedIn = true;
+  //   userText = "Logged In as " + req.user.username;
+  // };
 
   db.Recipe.findAll({
 
   }).then(function (data) {
-    // console.log(data);
     res.json(data);
   });
 };
@@ -244,9 +243,12 @@ exports.viewRecipes = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
+<<<<<<< HEAD
   // console.log(req.body);
   console.log(req.file);
   
+=======
+>>>>>>> master
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription,

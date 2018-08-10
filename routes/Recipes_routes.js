@@ -6,13 +6,6 @@ const uuidv4 = require('uuid/v4');
 const path = require("path");
 var Recipes_controllers = require('../controllers/Recipes_controllers');
 var isAuthenticated = require("../config/middleware/isAuthenticated");
-var calculator = require("../config/middleware/nutrient-calculator");
-
-router.get('/', Recipes_controllers.index);
-
-router.get('/recipes', Recipes_controllers.viewRecipes);
-
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -26,10 +19,13 @@ const storage = multer.diskStorage({
   })
    
 const upload = multer({ storage: storage });
-router.post('/recipes/new', upload.single('selectedFile'), Recipes_controllers.addRecipe);
 
-router.put('/recipes/update/:id', Recipes_controllers.editRecipe);
+router.get('/', Recipes_controllers.viewRecipes);
 
-router.delete('/recipes/delete/:id', Recipes_controllers.deleteRecipe);
+router.post('/new', upload.single('selectedFile'), Recipes_controllers.addRecipe);
+
+router.put('/update/:id', Recipes_controllers.editRecipe);
+
+router.delete('/delete/:id', Recipes_controllers.deleteRecipe);
 
 module.exports = router;
