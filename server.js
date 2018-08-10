@@ -28,7 +28,7 @@ require('./routes')(app);
 // Serve static content for the app from the "public" directory in the application directory.
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, 'build')));
+  app.use(express.static(path.join(__dirname, '/client/build')));
 }
 
 else {
