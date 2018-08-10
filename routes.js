@@ -8,8 +8,4 @@ module.exports = function(app){
     app.use('/recipes', recipes_routes);
     app.use('/users',users);
     app.use('/ingredients', ingredients_routes);
-
-    app.get("*", function(req, res) {
-        res.sendFile(path.join(__dirname, "./client/public/index.html"));
-    });
 }
