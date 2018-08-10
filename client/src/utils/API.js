@@ -23,8 +23,5 @@ export default {
     },
     getRecipes: function() {
         return axios.get('/recipes');
-    },
-    getRecipeTotals: function() {
-        return axios.get('/recipetotals');
     }
 };
