@@ -6,6 +6,11 @@ module.exports = function(app){
     app.use('/recipes', recipes_routes);
     app.use('/users',users);
     app.use('/ingredients', Ingredients_routes);
+
+    app.get("*", function(req, res) {
+        res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    });
+      
     // app.use('/search', searches);
     console.log('routes.js works');
 //other routes..
