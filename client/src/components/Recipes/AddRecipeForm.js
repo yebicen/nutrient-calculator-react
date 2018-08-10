@@ -21,7 +21,7 @@ export default class AddRecipeForm extends React.Component {
                     "id": null,
                     "IngredientName": ""
                 })
-                // console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList, null, 2))
+                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList, null, 2))
             })
 
     };
@@ -49,17 +49,17 @@ export default class AddRecipeForm extends React.Component {
                 }
             ])
         });
-        // console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
+        console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
     }
 
     handleRemoveIngredient = (idx) => () => {
-        // console.log(idx)
+        console.log(idx)
         // console.log(JSON.stringify(this.state.RecipeIngredients,null,2))
         // this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
         let newIgrdients = this.state.RecipeIngredients
         newIgrdients.splice(idx, 1)
         this.setState({ RecipeIngredients: newIgrdients });
-        // console.log(JSON.stringify(this.state.RecipeIngredients, null, 2))
+        console.log(JSON.stringify(this.state.RecipeIngredients, null, 2))
         // this.handleIngredientChange(idx)
     }
 
@@ -111,7 +111,7 @@ export default class AddRecipeForm extends React.Component {
                     //   this.setState({
                     //     selected: node.getAttribute('data-id')
                     //   });
-                    // console.log('ingredient id: ' + node.getAttribute('data-id'))
+                    console.log('ingredient id: ' + node.getAttribute('data-id'))
                     return (
                         {
                             ...addIngredient,
@@ -127,11 +127,12 @@ export default class AddRecipeForm extends React.Component {
     }
 
     handleFormSubmit = event => {
-        event.preventDefault();
-        // console.log("this is a handleFormSubmit")
-        // console.log(JSON.stringify(this.state, null, 2))
+        event.persist();
+        // event.preventDefault();
+        console.log("this is a handleFormSubmit")
+        console.log(JSON.stringify(this.state, null, 2))
         API.addRecipe(this.state).then(
-            // console.log('posted')
+            console.log('posted')
         )
         this.setState({
             RecipeName: "",
@@ -141,9 +142,6 @@ export default class AddRecipeForm extends React.Component {
 
     };
 
-    handleSubmit() {
-        console.log("this is a handleSubmit")    
-    }
     // onSubmit={this.handleSubmit}
     render() {
 
