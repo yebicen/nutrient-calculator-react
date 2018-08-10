@@ -9,3 +9,49 @@
 .flag {
     color:#B22222;
 }
+
+.recipesWrapper {
+    margin-top: 40px;
+}
+
+.singleRecipeWrapper {
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.recipesWrapper .singleRecipeWrapper:nth-child(odd) {
+    background-color: #F08080;
+}
+
+.recipesWrapper .singleRecipeWrapper:nth-child(even) {
+    background-color: #ADD8E6;
+}
+
+.recipeName {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.recipeDescription {
+    padding: 15px;
+    background-color: #eee;
+}
+
+.recipesWrapper h2 {
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.smallSize, .mediumSize, .largeSize {
+    padding: 15px;
+    /* border: 1px solid #fff; */
+    background-color: #fff;
+}
+
+.table.table-striped {
+    border: 1px solid #ccc;
+}
+
+.addIngredientButton {
+    margin-bottom: 20px;
+}

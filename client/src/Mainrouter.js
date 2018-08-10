@@ -29,8 +29,4 @@ const App = () =>
         </Router>
     </Container>
 
-    
-
-    
-
 export default App;
