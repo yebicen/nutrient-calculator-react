@@ -2,8 +2,7 @@
   "name": "nutrient-calculator",
   "version": "1.0.0",
   "engines": {
-    "node": "8.10.0",
-    "yarn": "^1.9.2"
+    "node": "9.11.1"
   },
   "description": "",
   "main": "server.js",
@@ -27,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/geochanto/nutrient-calculator-react/issues"
   },
-  "homepage": "https://github.com/geochanto/nutrient-calculator-react#readme",
+  "homepage": "https://tranquil-earth-28341.herokuapp.com/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
