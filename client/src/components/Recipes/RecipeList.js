@@ -14,7 +14,7 @@ export default class RecipeContainer extends React.Component {
                 this.setState({
                     dbRecipes: res.data
                 })
-                console.log('dbRecipes: ' + JSON.stringify(this.state.dbRecipes,null,2))
+                console.log(JSON.stringify(this.state.dbRecipes,null,2))
             })
 
 
@@ -26,10 +26,6 @@ export default class RecipeContainer extends React.Component {
 
     render() {
         return (
-            //get ingredient names from dbIngredients
-            //get recipe names, desc, image from dbRecipes
-            //get sizes and amounts from dbRecipeAmounts
-            //get totals from dbRecipeTotals
             <Table striped className="ingredient list">
                 <thead>
                     <tr>
