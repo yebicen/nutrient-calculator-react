@@ -45,12 +45,14 @@ export default class RecipeContainer extends React.Component {
                             <Col className="recipeIngredient">
                                 <Table striped>
                                     <thead>
-                                        <th>Ingredient</th>
-                                        <th>Amount (ounces)</th>
+                                        <tr>
+                                            <th>Ingredient</th>
+                                            <th>Amount (ounces)</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {recipe.sizes.small.ingredients.map(ingredient => (
-                                            <tr key={ingredient.id}>
+                                            <tr key={ingredient.ingredientInfo.id}>
                                                 <td className="ingredientName">{ingredient.ingredientInfo.IngredientName}</td>
                                                 <td className="ingredientAmount">{ingredient.ingredientAmount}</td>
                                             </tr>
@@ -61,11 +63,13 @@ export default class RecipeContainer extends React.Component {
                             <Col className="recipeTotals">
                                 <Table striped>
                                     <thead>
+                                        <tr>
                                         <th>Total Calories</th>
                                         <th>Total Carbs</th>
                                         <th>Total Sugar</th>
                                         <th>Total Fat</th>
                                         <th>Total Protein</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -85,12 +89,14 @@ export default class RecipeContainer extends React.Component {
                             <Col className="recipeIngredient">
                                 <Table striped>
                                     <thead>
-                                        <th>Ingredient</th>
-                                        <th>Amount (ounces)</th>
+                                        <tr>
+                                            <th>Ingredient</th>
+                                            <th>Amount (ounces)</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {recipe.sizes.medium.ingredients.map(ingredient => (
-                                            <tr key={ingredient.id}>
+                                            <tr key={ingredient.ingredientInfo.id}>
                                                 <td className="ingredientName">{ingredient.ingredientInfo.IngredientName}</td>
                                                 <td className="ingredientAmount">{ingredient.ingredientAmount}</td>
                                             </tr>
@@ -101,11 +107,13 @@ export default class RecipeContainer extends React.Component {
                             <Col className="recipeTotals">
                                 <Table striped>
                                     <thead>
-                                        <th>Total Calories</th>
-                                        <th>Total Carbs</th>
-                                        <th>Total Sugar</th>
-                                        <th>Total Fat</th>
-                                        <th>Total Protein</th>
+                                        <tr>
+                                            <th>Total Calories</th>
+                                            <th>Total Carbs</th>
+                                            <th>Total Sugar</th>
+                                            <th>Total Fat</th>
+                                            <th>Total Protein</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -120,17 +128,19 @@ export default class RecipeContainer extends React.Component {
                             </Col>
                         </Row>
 
-                         <Row><h2>Large Size</h2></Row>
+                        <Row><h2>Large Size</h2></Row>
                         <Row className="largeSize">
                             <Col className="recipeIngredient">
                                 <Table striped>
                                     <thead>
-                                        <th>Ingredient</th>
-                                        <th>Amount (ounces)</th>
+                                        <tr>
+                                            <th>Ingredient</th>
+                                            <th>Amount (ounces)</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {recipe.sizes.large.ingredients.map(ingredient => (
-                                            <tr key={ingredient.id}>
+                                            <tr key={ingredient.ingredientInfo.id}>
                                                 <td className="ingredientName">{ingredient.ingredientInfo.IngredientName}</td>
                                                 <td className="ingredientAmount">{ingredient.ingredientAmount}</td>
                                             </tr>
@@ -141,11 +151,13 @@ export default class RecipeContainer extends React.Component {
                             <Col className="recipeTotals">
                                 <Table striped>
                                     <thead>
-                                        <th>Total Calories</th>
-                                        <th>Total Carbs</th>
-                                        <th>Total Sugar</th>
-                                        <th>Total Fat</th>
-                                        <th>Total Protein</th>
+                                        <tr>
+                                            <th>Total Calories</th>
+                                            <th>Total Carbs</th>
+                                            <th>Total Sugar</th>
+                                            <th>Total Fat</th>
+                                            <th>Total Protein</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>

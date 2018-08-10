@@ -19,8 +19,8 @@ const App = () =>
                 <JumbotronComponent/>
                 <NavBar />
                 <Route exact path="/" component={Smoothie} />
-                <Route exact path="/Ingredients" component={Ingredients} />
-                <Route exact path="/Recipes" component={Recipes} />
+                <Route exact path="/ingredients" component={Ingredients} />
+                <Route exact path="/recipes" component={Recipes} />
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
