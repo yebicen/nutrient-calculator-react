@@ -34,10 +34,6 @@ export default class IngredientList extends React.Component {
         });
     }
 
-    // onClick = () => {
-    //     this.child.current.setEditState();
-    // };
-
     toggleEditModal = (editIngredientName, editIngredientId) => {
         API.getOneIngredient(editIngredientId)
             .then(res => {

@@ -15,6 +15,8 @@ const Userrow = props => (
                     id: props.id,
                     key: props.num
                   })}>Edit</button>
+             </td>
+             <td>
                   <button onClick={props.deleteuser({
                     id: props.id
                   })}>Delete</button>

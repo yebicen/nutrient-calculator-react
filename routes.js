@@ -6,6 +6,7 @@ module.exports = function(app){
     app.use('/', recipes_routes);
     app.use('/users',users);
     app.use('/ingredients', Ingredients_routes);
+    // app.use('/search', searches);
     console.log('routes.js works');
 //other routes..
 
