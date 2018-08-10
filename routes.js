@@ -3,7 +3,7 @@ module.exports = function(app){
     const users = require('./routes/users');
     const recipes_routes = require('./routes/Recipes_routes');
 
-    app.use('/', recipes_routes);
+    app.use('/recipes', recipes_routes);
     app.use('/users',users);
     app.use('/ingredients', Ingredients_routes);
     // app.use('/search', searches);
