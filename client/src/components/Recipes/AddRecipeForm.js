@@ -8,6 +8,7 @@ export default class AddRecipeForm extends React.Component {
         RecipeName: "",
         RecipeDescription: "",
         RecipeType: "",
+        selectedFile: null,
         ingredientList: [],
         RecipeIngredients: []
     };
@@ -127,18 +128,38 @@ export default class AddRecipeForm extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients} = this.state;
+          let formData = new FormData();
+          formData.append('RecipeName',RecipeName);
+          formData.append('RecipeDescription',RecipeDescription);
+          formData.append('selectedFile', selectedFile);
+          formData.append('RecipeType',RecipeType);
+          formData.append('ingredientList',ingredientList);
+          formData.append('RecipeIngredients',RecipeIngredients);
         // console.log("this is a handleFormSubmit")
         // console.log(JSON.stringify(this.state, null, 2))
-        API.addRecipe(this.state).then(
+        API.addRecipe(formData).then(
             // console.log('posted')
         )
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
-            RecipeType: ""
+            RecipeType: "",
+            selectedFile:null
+
         });
 
     };
+    
+    fileChangedHandler = (event) => {
+        const file = event.target.files[0];
+        console.log(file);
+        this.setState({selectedFile: event.target.files[0]})
+      }
+      
+
+
+
 
     render() {
 
@@ -154,7 +175,7 @@ export default class AddRecipeForm extends React.Component {
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeDescription">Recipe Descriptio</Label>
+                                <Label for="RecipeDescription">Recipe Description</Label>
                                 <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" />
                             </FormGroup>
                         </Col>
@@ -163,6 +184,13 @@ export default class AddRecipeForm extends React.Component {
                                 <Label for="RecipeType">Recipe Type</Label>
                                 <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" />
                             </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeImage">Recipe Image</Label>
+                                <Input type="file" name="RecipeImage" onChange={this.fileChangedHandler} />
+                            </FormGroup>
+
                         </Col>
                     </Row>
 

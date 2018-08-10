@@ -245,9 +245,12 @@ exports.viewRecipes = function (req, res) {
 
 exports.addRecipe = function (req, res) {
   // console.log(req.body);
+  console.log(req.file);
+  
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
-    RecipeDescription: req.body.RecipeDescription
+    RecipeDescription: req.body.RecipeDescription,
+    RecipeImage: req.file.path
   }).then(function (newRecipe) {
     var promises = [];
     for (var i = 0; i < req.body.RecipeIngredients.length; i++) {
