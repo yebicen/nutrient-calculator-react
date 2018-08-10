@@ -8,7 +8,7 @@ module.exports = function(app){
     app.use('/ingredients', Ingredients_routes);
 
     app.get("*", function(req, res) {
-        res.sendFile(path.join(__dirname, "./client/build/index.html"));
+        res.sendFile(path.join(__dirname, "./client/public/index.html"));
     });
       
     // app.use('/search', searches);
