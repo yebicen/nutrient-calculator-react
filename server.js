@@ -12,7 +12,6 @@ const uuidv4 = require('uuid/v4');
 // const upload = multer({ dest: 'uploads/' });
 const app = express();
 
-
 var sequelize = require('sequelize');
 
 const isAuth 				 = require("./config/middleware/isAuthenticated");
@@ -26,9 +25,9 @@ app.use(bodyParser.json());
 require('./routes')(app);
 
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/client/public')));
 app.use(session({ secret: config.sessionKey, resave: true, saveUninitialized: true }));
 
 app.use(passport.initialize());
@@ -36,11 +35,6 @@ app.use(passport.session());
 app.use(authCheck);
 
 app.use(flash());
-
-// const Ingredients_routes = require('./routes/Ingredients_routes');
-
-// app.use(Ingredients_routes);
-
 
 //upload images using multer
 const storage = multer.diskStorage({
