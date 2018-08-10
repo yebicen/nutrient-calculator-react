@@ -15,8 +15,8 @@ const App = () =>
     <Container> 
         <Router>
             <div>
-                {/* <JumbotronComponent/>
-                <NavBar /> */}
+                <JumbotronComponent/>
+                <NavBar />
                 <Route exact path="/" component={Smoothie} />
                 <Route exact path="/Ingredients" component={Ingredients} />
                 <Route exact path="/Recipes" component={Recipes} />
