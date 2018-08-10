@@ -144,12 +144,12 @@ export default class AddRecipeForm extends React.Component {
     handleSubmit() {
         console.log("this is a handleSubmit")    
     }
-
+    // onSubmit={this.handleSubmit}
     render() {
 
         return (
             <div className="addRecipeForm">
-                <AvForm onSubmit={this.handleSubmit}>
+                <AvForm >
                     <Row>
                         <Col xs="6" sm="4">
                             <FormGroup>
@@ -160,13 +160,13 @@ export default class AddRecipeForm extends React.Component {
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeDescription">Recipe Descriptio</Label>
-                                <AvField type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" required />
+                                <AvField type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeType">Recipe Type</Label>
-                                <AvField type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" required />
+                                <AvField type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" />
                             </FormGroup>
                         </Col>
                     </Row>
@@ -204,7 +204,6 @@ export default class AddRecipeForm extends React.Component {
                                         value={addIngredient.AmountForSmall}
                                         data-id={addIngredient.IngredientName}
                                         onChange={this.handleAmountSmallChange(idx)}
-                                        required
                                     />
                                 </FormGroup>
                             </Col>
@@ -216,7 +215,6 @@ export default class AddRecipeForm extends React.Component {
                                         placeholder="Amount for Mediumn"
                                         value={addIngredient.AmountForMedium}
                                         onChange={this.handleAmountMediumChange(idx)}
-                                        required
                                     />
                                 </FormGroup>
                             </Col>
@@ -228,7 +226,6 @@ export default class AddRecipeForm extends React.Component {
                                         placeholder="Amount for Large"
                                         value={addIngredient.AmountForLarge}
                                         onChange={this.handleAmountLargeChange(idx)}
-                                        required
                                     />
                                 </FormGroup>
                             </Col>
