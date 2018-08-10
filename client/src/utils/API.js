@@ -17,5 +17,14 @@ export default {
     },
     editIngredient: function(editIngredientId, editState) {
         return axios.put(`/ingredients/edit/${editIngredientId}`, editState);
+    },
+    addRecipe: function(newRecipe) {
+        return axios.post('/recipes/new', newRecipe);
+    },
+    getRecipes: function() {
+        return axios.get('/recipes');
+    },
+    getRecipeTotals: function() {
+        return axios.get('/recipetotals');
     }
 };

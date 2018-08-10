@@ -1,19 +1,19 @@
 .card {
   background: #fff;
   border-radius: 2px;
-  height: 600px;
+  height: 500px;
   margin: 1rem;
   position: relative;
-  width: 325px;
+  width: 300px;
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
   text-align: left;
 }
 
 .card > .img-container {
-  height: 60%;
+  height: 100%;
   overflow: hidden;
   text-align: center;
-  background:#6CADDC;
+  background:rgb(255, 230, 228)
 }
 .card > .img-container > img {
   width: 100%;
@@ -30,11 +30,24 @@
   list-style-type: none;
 }
 
+.card > li.nav-item{
+  cursor: pointer;
+}
+
+
+/* .card > .content > TabList {
+  list-style-type: square type;
+}
+
+.card > .content > Tab {
+  list-style-type: square type;
+} */
+
 .card > .content > ul > li {
   margin-top: 18px;
 }
 
-.card > .remove {
+/* .card > .remove {
   color: #ff1744;
   font-size: 48px;
   position: absolute;
@@ -45,4 +58,4 @@
 
 .card > .remove:hover {
   color: #d50000;
-}
+} */

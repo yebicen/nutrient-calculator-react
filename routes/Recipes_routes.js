@@ -10,8 +10,6 @@ router.get('/', Recipes_controllers.index);
 
 router.get('/recipes', Recipes_controllers.viewRecipes);
 
-router.get('/recipetotals', Recipes_controllers.recipeTotals);
-
 router.post('/recipes/new', Recipes_controllers.addRecipe);
 
 router.put('/recipes/update/:id', Recipes_controllers.editRecipe);
