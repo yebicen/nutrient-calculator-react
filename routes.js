@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(app){
     const ingredients_routes = require('./routes/Ingredients_routes');
     const users = require('./routes/users');
