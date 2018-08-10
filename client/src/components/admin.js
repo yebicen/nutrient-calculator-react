@@ -51,6 +51,7 @@ export default class Admin extends React.Component {
           password: userData.password,
           email: userData.email
         });
+        window.location.reload(); 
     }
     
     saveUser = (param) =>event => {

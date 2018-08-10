@@ -32,13 +32,9 @@ export default class Imguploder extends React.Component {
           console.log(formData);
           // axios.post('/photos/upload', this.state.selectedFile)
           axios.post('/uploader', formData
-                // {
-                //   onUploadProgress: progressEvent => {
-                //     console.log(progressEvent.loaded / progressEvent.total)
-                //  }}
             )
               .then((response) => {
-            console.log(response); // do something with the response
+            console.log(response.data); // do something with the response
           });
       }
           
@@ -49,7 +45,7 @@ export default class Imguploder extends React.Component {
            <div>
               <Form inline>
                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                   <label className="mr-sm-2">Image: </label>                
+    
                    <input data-id="2" type="file" onChange={this.fileChangedHandler} />
                 </FormGroup>
                 <button onClick={this.uploadHandler}>Upload!</button>

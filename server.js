@@ -71,7 +71,7 @@ app.post('/uploader', upload.single('selectedFile'), function (req, res, next) {
       res.json(result);
       // res.redirect('/recipes');
     });
-  // res.send;
+  res.send;
 })
 
 // db.sequelize.sync({force: true}).then(function() {
