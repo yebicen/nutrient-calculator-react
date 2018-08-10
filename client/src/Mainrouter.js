@@ -23,6 +23,7 @@ const App = () =>
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
+                <Route path="/image" component={Imguploader} /> 
             </div>
         </Router>
     </Container>
