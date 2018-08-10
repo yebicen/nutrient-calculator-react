@@ -24,8 +24,6 @@ const App = () =>
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
                 <Route path="/image" component={Imguploader} /> 
-                {/* <Route path="/imageuploader" component={MyUploader} /> */}
-                
             </div>
         </Router>
     </Container>
