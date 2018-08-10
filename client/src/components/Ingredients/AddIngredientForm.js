@@ -30,7 +30,8 @@ export default class AddIngredientForm extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    event.persist();
+    // event.preventDefault();
     API.addIngredient(this.state).then(
       this.props.getIngredients()
     )
