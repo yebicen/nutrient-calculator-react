@@ -128,7 +128,7 @@ exports.loginUser = function(req, res) {
       // So we're sending the user back the route to the members page because the redirect will happen on the front end
       // They won't get this or even be able to access this page if they aren't authed
     res.json("/");
-    res.redirect("/");
+    // res.redirect("/");
 };
   
   

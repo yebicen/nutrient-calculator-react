@@ -22,7 +22,7 @@ export default class NavBar extends React.Component {
       isOpen: false,
       loggedIn: false,
       isAdmin: false,
-      user: "",
+      firstname: "",
     };
   }
 
@@ -31,15 +31,14 @@ export default class NavBar extends React.Component {
     UserAPI.findUser()
     .then(res => {
         console.log(res.data[0].role);
-        console.log(res.data);
-        if (res.data.id >= 0) {
+        console.log(res.data[0].id);      
         this.setState({ 
-           loggedIn: true,
+           loggedIn: res.data[0].id? true : false,
            isAdmin: res.data[0].role ==="admin"? true : false,
-           user: res.data[0].firstname
+           firstname: res.data[0].firstname
           //  userId:  res.data[0].id
-        });
-      }
+        });     
+        console.log(this.state);
     })
     .catch(err => console.log(err));
     
@@ -55,9 +54,11 @@ export default class NavBar extends React.Component {
     this.setState({ 
       loggedIn: false,
       isAdmin: false,
-      user: "" 
+      firstname: "" 
    });
-  }  
+  }
+  
+  
 
   toggle() {
     this.setState({
@@ -65,11 +66,11 @@ export default class NavBar extends React.Component {
     });
   }
   render() {
-    const {user, isAdmin, loggedIn} = this.state;
+    const {user, isAdmin, loggedIn, firstname} = this.state;
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Hello {this.state.user}</NavbarBrand>
+          <NavbarBrand href="/">Hello {firstname}</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -86,7 +87,7 @@ export default class NavBar extends React.Component {
                 {loggedIn?
                 <NavLink href="/users/sign-out" onClick={e=>this.logoutHandler(e)}>Logout</NavLink>
                   :
-                <NavLink href="/users/login" >Login</NavLink>
+                <NavLink href="/users/login" onClick={e=>this.loginHandler(e)}>Login</NavLink>
                 }
               </NavItem>
               <NavItem>
