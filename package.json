@@ -1,6 +1,10 @@
 {
   "name": "nutrient-calculator",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.10.0",
+    "yarn": "^1.9.2"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -48,6 +52,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "react": "^16.4.1",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "reactstrap": "^6.3.1",

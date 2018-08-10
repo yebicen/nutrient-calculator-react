@@ -259,11 +259,15 @@ export default class AddRecipeForm extends React.Component {
                     ))}
 
                     <Row>
-                        <Button color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                        <Col>
+                            <Button className="addIngredientButton" color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                        </Col>
                     </Row>
 
                     <Row>
-                        <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        <Col>
+                            <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        </Col>
                     </Row>
 
                 </Form>
