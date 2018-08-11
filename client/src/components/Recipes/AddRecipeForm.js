@@ -1,6 +1,12 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import API from '../../utils/API';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faPlus,faTrash)
 
 
 export default class AddRecipeForm extends React.Component {
@@ -16,7 +22,9 @@ export default class AddRecipeForm extends React.Component {
     getIngredients = () => {
         API.getIngredients()
             .then(res => {
-                this.setState({ ingredientList: res.data })
+                this.setState({ 
+                    ingredientList: res.data
+                })
                 this.state.ingredientList.unshift({
                     "id": null,
                     "IngredientName": ""
@@ -148,49 +156,43 @@ export default class AddRecipeForm extends React.Component {
         console.log(file);
         this.setState({selectedFile: event.target.files[0]})
       }
-      
-
-
-
 
     render() {
 
         return (
             <div className="addRecipeForm">
-                <Form >
-                    <Row>
+            <h3>Add a New Recipe:</h3>
+                <Form>
+                    <Row className="recipeInfo">
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeName">Recipe Name</Label>
-                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange} placeholder="Recipe Name" />
+                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange}/>
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeDescription">Recipe Description</Label>
-                                <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" />
+                                <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeType">Recipe Type</Label>
-                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" />
+                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange}/>
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeImage">Recipe Image</Label>
-                                <Input type="file" name="RecipeImage" onChange={this.fileChangedHandler} />
+                                <Input className="btn btn-secondary" type="file" name="RecipeImage" onChange={this.fileChangedHandler} />
                             </FormGroup>
 
                         </Col>
                     </Row>
 
                     {this.state.RecipeIngredients.map((addIngredient, idx) => (
-                        <Row key={idx}>
-                            <Col xs="12" sm="3" md="2">
-                                Ingredient {idx + 1}
-                            </Col>
+                        <Row key={idx} className="formIngredient">
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
@@ -215,7 +217,7 @@ export default class AddRecipeForm extends React.Component {
                                     <Label for="AmountSmall">Amount for Small</Label>
                                     <Input type="text"
                                         name="AmountSmall"
-                                        placeholder="Amount for Small"
+                                        placeholder=""
                                         value={addIngredient.AmountForSmall}
                                         data-id={addIngredient.IngredientName}
                                         onChange={this.handleAmountSmallChange(idx)}
@@ -227,7 +229,7 @@ export default class AddRecipeForm extends React.Component {
                                     <Label for="AmountMedium">Amount for Medium</Label>
                                     <Input type="text"
                                         name="AmountMedium"
-                                        placeholder="Amount for Mediumn"
+                                        placeholder=""
                                         value={addIngredient.AmountForMedium}
                                         onChange={this.handleAmountMediumChange(idx)}
                                     />
@@ -238,27 +240,24 @@ export default class AddRecipeForm extends React.Component {
                                     <Label for="AmountLarge">Amount for Large</Label>
                                     <Input type="text"
                                         name="AmountLarge"
-                                        placeholder="Amount for Large"
+                                        placeholder=""
                                         value={addIngredient.AmountForLarge}
                                         onChange={this.handleAmountLargeChange(idx)}
                                     />
                                 </FormGroup>
                             </Col>
                             <Col xs="12" sm="3" md="2">
-                                <Button onClick={this.handleRemoveIngredient(idx)}>Remove</Button>
+                                <Button className="removeIngredientButton" color="danger" onClick={this.handleRemoveIngredient(idx)}><FontAwesomeIcon icon="trash" /></Button>
                             </Col>
                         </Row>
                     ))}
 
                     <Row>
-                        <Col>
-                            <Button className="addIngredientButton" color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                        <Col lg="10">
+                            <Button className="addIngredientButton" color="success" onClick={this.handleAddIngredient}><FontAwesomeIcon icon="plus" /></Button>
                         </Col>
-                    </Row>
-
-                    <Row>
-                        <Col>
-                            <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        <Col lg="2">
+                        <Button className="submitRecipeButton" color="primary" onClick={this.handleFormSubmit}>Submit Recipe</Button>
                         </Col>
                     </Row>
 

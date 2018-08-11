@@ -16,15 +16,30 @@
 
 .singleRecipeWrapper {
     padding: 40px;
+    padding-top:25px;
     margin-bottom: 30px;
+    background-size: cover;
+}
+
+.infoBar {
+    margin-bottom: 20px;
+}
+
+.infoBar h3 {
+    text-align: center;
 }
 
 .recipesWrapper .singleRecipeWrapper:nth-child(odd) {
-    background-color: #F08080;
+    background-image: url('../img/odd.jpg');
 }
 
 .recipesWrapper .singleRecipeWrapper:nth-child(even) {
-    background-color: #ADD8E6;
+    background-image: url('../img/even.jpg');
+}
+
+.singleRecipeWrapper>div {
+    box-shadow:0px 0px 20px #000;
+
 }
 
 .recipeImage {
@@ -53,10 +68,62 @@
     background-color: #fff;
 }
 
+.sizes h4 {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0px 1px 2px #000;
+}
+
+.smallSize{
+    background-color: #BCD1EC;
+} 
+.mediumSize{
+    background-color: #96BFF4;
+}
+.largeSize{
+    background-color: #68A3EE;
+}
+
 .table.table-striped {
-    border: 1px solid #ccc;
+    border: 1px solid #fff;
+    /* box-shadow: 0px 0px 3px 0px #000; */
 }
 
 .addIngredientButton {
-    margin-bottom: 20px;
+    margin: 20px;
+    margin-left: 0;
+    border-radius: 25px !important;
 }
+
+.submitRecipeButton {
+    margin: 20px;
+    margin-right: 0;
+    border-radius: 25px !important;
+}
+
+.removeIngredientButton {
+    border-radius: 25px !important;
+    position: absolute;
+    bottom: 18px;
+}
+
+.addRecipeForm .recipeInfo {
+    background: #eee;
+    padding: 7px;
+    padding-top: 25px;
+}
+
+.addRecipeForm .formIngredient {
+    padding: 7px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #eee;
+    border-top: none;
+    /* border-radius: 5px; */
+}
+
+.addRecipeForm h3 {
+    text-align: center;
+    margin: 15px;
+}
+

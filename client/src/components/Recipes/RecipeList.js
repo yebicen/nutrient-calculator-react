@@ -27,12 +27,17 @@ export default class RecipeContainer extends React.Component {
     render() {
         return (
             <div className="recipesWrapper">
+            <Row className="infoBar">
+                <Col >
+                <h3>A total of <strong>{this.state.dbRecipes.length}</strong> Recipes:</h3>
+                </Col>
+                </Row>
                 {this.state.dbRecipes.map(recipe => (
                     <div key={recipe.RecipeInfo[0].id} className="singleRecipeWrapper">
+                    <div>
                         <Row className="recipeInfo">
                             <Col lg="3" className="recipeImage">
                                 <div>
-                                    <div><strong>Image:</strong></div>
                                     <img src={recipe.RecipeInfo[0].RecipeImage} className="img-fluid" />
                                 </div>
                             </Col>
@@ -45,10 +50,11 @@ export default class RecipeContainer extends React.Component {
                                 {recipe.RecipeInfo[0].RecipeDescription}
                             </Col>
                         </Row>
-                        <Row><h2>Small Size</h2></Row>
-                        <Row className="">
+                        
+                        <Row className="sizes">
 
-                            <Col className="recipeIngredient">
+                            <Col className="smallSize">
+                            <h4>Small</h4>
                                 <Table striped>
                                     <thead>
                                         <tr>
@@ -91,7 +97,8 @@ export default class RecipeContainer extends React.Component {
                                 </Table>
                             </Col>
 
-                            <Col className="recipeIngredient">
+                            <Col className="mediumSize">
+                            <h4>Medium</h4>
                                 <Table striped>
                                     <thead>
                                         <tr>
@@ -134,7 +141,8 @@ export default class RecipeContainer extends React.Component {
                                 </Table>
                             </Col>
 
-                            <Col className="recipeIngredient">
+                            <Col className="largeSize">
+                            <h4>Large</h4>
                                 <Table striped>
                                     <thead>
                                         <tr>
@@ -179,93 +187,7 @@ export default class RecipeContainer extends React.Component {
 
                         </Row>
 
-                        <Row><h2>Medium Size</h2></Row>
-                        <Row className="mediumSize">
-                            <Col className="recipeIngredient">
-                                <Table striped>
-                                    <thead>
-                                        <tr>
-                                            <th>Ingredient</th>
-                                            <th>Amount (ounces)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {recipe.sizes.medium.ingredients.map(ingredient => (
-                                            <tr key={ingredient.ingredientInfo.id}>
-                                                <td className="ingredientName">{ingredient.ingredientInfo.IngredientName}</td>
-                                                <td className="ingredientAmount">{ingredient.ingredientAmount}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </Col>
-                            <Col className="recipeTotals">
-                                <Table striped>
-                                    <thead>
-                                        <tr>
-                                            <th>Total Calories</th>
-                                            <th>Total Carbs</th>
-                                            <th>Total Sugar</th>
-                                            <th>Total Fat</th>
-                                            <th>Total Protein</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="totalCalories">{recipe.sizes.medium.nutritionTotals.Calories}</td>
-                                            <td className="totalCarbs">{recipe.sizes.medium.nutritionTotals.Carbs}</td>
-                                            <td className="totalSugar">{recipe.sizes.medium.nutritionTotals.Sugar}</td>
-                                            <td className="totalFat">{recipe.sizes.medium.nutritionTotals.Fat}</td>
-                                            <td className="totalProtein">{recipe.sizes.medium.nutritionTotals.Protein}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </Col>
-                        </Row>
-
-                        <Row><h2>Large Size</h2></Row>
-                        <Row className="largeSize">
-                            <Col className="recipeIngredient">
-                                <Table striped>
-                                    <thead>
-                                        <tr>
-                                            <th>Ingredient</th>
-                                            <th>Amount (ounces)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {recipe.sizes.large.ingredients.map(ingredient => (
-                                            <tr key={ingredient.ingredientInfo.id}>
-                                                <td className="ingredientName">{ingredient.ingredientInfo.IngredientName}</td>
-                                                <td className="ingredientAmount">{ingredient.ingredientAmount}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </Col>
-                            <Col className="recipeTotals">
-                                <Table striped>
-                                    <thead>
-                                        <tr>
-                                            <th>Total Calories</th>
-                                            <th>Total Carbs</th>
-                                            <th>Total Sugar</th>
-                                            <th>Total Fat</th>
-                                            <th>Total Protein</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="totalCalories">{recipe.sizes.large.nutritionTotals.Calories}</td>
-                                            <td className="totalCarbs">{recipe.sizes.large.nutritionTotals.Carbs}</td>
-                                            <td className="totalSugar">{recipe.sizes.large.nutritionTotals.Sugar}</td>
-                                            <td className="totalFat">{recipe.sizes.large.nutritionTotals.Fat}</td>
-                                            <td className="totalProtein">{recipe.sizes.large.nutritionTotals.Protein}</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </Col>
-                        </Row>
+                        </div>
                     </div>
 
                 ))}
