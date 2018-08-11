@@ -10,7 +10,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // router.get('/', Recipes_controllers.index);
 
-router.get('/', Recipes_controllers.viewRecipes);
+router.get('/api/recipes', Recipes_controllers.viewRecipes);
 
 router.post('/new', Recipes_controllers.addRecipe);
 
