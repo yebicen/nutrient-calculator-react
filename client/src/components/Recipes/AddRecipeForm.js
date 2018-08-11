@@ -21,13 +21,9 @@ export default class AddRecipeForm extends React.Component {
                     "id": null,
                     "IngredientName": ""
                 })
-<<<<<<< HEAD
-                console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList, null, 2))
-=======
->>>>>>> master
             })
-
-    };
+        }
+    
 
     componentDidMount() {
         this.getIngredients();
@@ -56,20 +52,9 @@ export default class AddRecipeForm extends React.Component {
     }
 
     handleRemoveIngredient = (idx) => () => {
-<<<<<<< HEAD
-        console.log(idx)
-        // console.log(JSON.stringify(this.state.RecipeIngredients,null,2))
-        // this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
         let newIgrdients = this.state.RecipeIngredients
         newIgrdients.splice(idx, 1)
         this.setState({ RecipeIngredients: newIgrdients });
-        console.log(JSON.stringify(this.state.RecipeIngredients, null, 2))
-        // this.handleIngredientChange(idx)
-=======
-        let newIgrdients = this.state.RecipeIngredients
-        newIgrdients.splice(idx, 1)
-        this.setState({ RecipeIngredients: newIgrdients });
->>>>>>> master
     }
 
     handleAmountSmallChange = (idx) => (evt) => {
@@ -105,13 +90,6 @@ export default class AddRecipeForm extends React.Component {
 
             for (let node of evt.target.children) {
                 if (node.value === evt.target.value) {
-<<<<<<< HEAD
-                    //   this.setState({
-                    //     selected: node.getAttribute('data-id')
-                    //   });
-                    console.log('ingredient id: ' + node.getAttribute('data-id'))
-=======
->>>>>>> master
                     return (
                         {
                             ...addIngredient,
@@ -126,15 +104,10 @@ export default class AddRecipeForm extends React.Component {
         this.setState({ RecipeIngredients: newIngredients });
     }
 
-    handleFormSubmit = event => {
-<<<<<<< HEAD
-        event.persist();
-        // event.preventDefault();
-        console.log("this is a handleFormSubmit")
-        console.log(JSON.stringify(this.state, null, 2))
-=======
+    
+
+    handleSubmit = event => {
         event.preventDefault();
->>>>>>> master
         API.addRecipe(this.state).then(
             console.log('posted')
         )
@@ -152,7 +125,7 @@ export default class AddRecipeForm extends React.Component {
 
         return (
             <div className="addRecipeForm">
-                <AvForm >
+                <AvForm onSubmit={this.handleSubmit}>
                     <Row>
                         <Col xs="6" sm="4">
                             <FormGroup>
@@ -182,7 +155,7 @@ export default class AddRecipeForm extends React.Component {
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
-                                    <AvField type="select"
+                                    <Input type="select"
                                         name="IngredientName"
                                         value={addIngredient.IngredientName}
                                         onChange={this.handleIngredientChange(idx)}
@@ -195,7 +168,7 @@ export default class AddRecipeForm extends React.Component {
                                                 {option.IngredientName}
                                             </option>
                                         ))}
-                                    </AvField>
+                                    </Input>
                                 </FormGroup>
                             </Col>
                             <Col xs="12" sm="3" md="2">
@@ -243,7 +216,7 @@ export default class AddRecipeForm extends React.Component {
                     </Row>
 
                     <Row>
-                        <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        <Button color="primary">Submit</Button>
                     </Row>
                 </AvForm>
                 {/* <Form >
