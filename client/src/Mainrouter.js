@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Ingredients from "./components/Ingredients";
 import Recipes from "./components/Recipes";
 import Admin from "./components/admin";
@@ -15,6 +15,7 @@ import Imguploader from "./components/uploadimg";
 const Mainrouter = () =>
     <Container> 
         <Router>
+            <Switch>
             <div>
                 <JumbotronComponent/>
                 
@@ -27,6 +28,7 @@ const Mainrouter = () =>
                 <Route path="/users/profile" component={Profile} />
                 <Route path="/image" component={Imguploader} /> 
             </div>
+            </Switch>
         </Router>
     </Container>
 

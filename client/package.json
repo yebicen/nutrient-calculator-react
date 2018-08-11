@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:3001/",
+  "proxy": "if-env NODE_ENV!=production && http://localhost:3001/",
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
