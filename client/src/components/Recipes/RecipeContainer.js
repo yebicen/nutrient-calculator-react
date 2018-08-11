@@ -17,14 +17,17 @@ getRecipes = () => {
           this.setState({
               dbRecipes: res.data
           })
-          console.log(JSON.stringify(this.state.dbRecipes, null, 2))
       })
 }
+
+componentDidMount() {
+  this.getRecipes();
+};
 
   render() {
     return (
       <Container>
-        <AddRecipeForm getRecipes={this.getRecipes}/>
+        <AddRecipeForm getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes}/>
         <RecipeList getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes}/>
       </Container>
     );

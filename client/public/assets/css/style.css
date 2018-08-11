@@ -57,6 +57,15 @@
     background-color: #ddd;
 }
 
+.recipeDeleteEdit {
+    background-color: #ccc;
+    padding: 15px;
+}
+
+.deleteRecipeButton {
+    margin-right: 10px;
+}
+
 .recipesWrapper h2 {
     font-size: 25px;
     margin-top: 20px;

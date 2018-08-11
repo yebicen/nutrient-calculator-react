@@ -112,20 +112,6 @@ export default class AddRecipeForm extends React.Component {
         this.setState({ RecipeIngredients: newIngredients });
     }
 
-    // handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     API.addRecipe(this.state).then(
-    //         console.log('posted')
-    //     )
-    //     this.setState({
-    //         RecipeName: "",
-    //         RecipeDescription: "",
-    //         RecipeType: "",
-    //         RecipeIngredients: []
-    //     });
-
-    // };
-
     handleFormSubmit = event => {
         event.preventDefault();
         const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients} = this.state;
@@ -140,6 +126,7 @@ export default class AddRecipeForm extends React.Component {
         // console.log(JSON.stringify(this.state, null, 2))
         API.addRecipe(formData).then(
             // console.log('posted')
+            this.props.getRecipes()
         )
         this.setState({
             RecipeName: "",
@@ -149,7 +136,7 @@ export default class AddRecipeForm extends React.Component {
             RecipeIngredients: []
         });
 
-        this.props.getRecipes();
+        
 
     };
     
