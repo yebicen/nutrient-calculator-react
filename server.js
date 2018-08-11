@@ -28,7 +28,8 @@ require('./routes')(app);
 // Serve static content for the app from the "public" directory in the application directory.
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, '/client/build')));
+  // app.use(express.static(path.join(__dirname, '/client/build')));
+  app.use(express.static("client/build"));
 }
 
 else {
@@ -36,8 +37,8 @@ else {
 }
 
 app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  // res.sendFile(path.join(__dirname, "./client/public/index.html"));
+  // res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
 app.use(session({ secret: config.sessionKey, resave: true, saveUninitialized: true }));
