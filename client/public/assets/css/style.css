@@ -27,14 +27,19 @@
     background-color: #ADD8E6;
 }
 
-.recipeName {
+.recipeImage {
     padding: 15px;
     background-color: #fff;
 }
 
-.recipeDescription {
+.recipeName {
     padding: 15px;
     background-color: #eee;
+}
+
+.recipeDescription {
+    padding: 15px;
+    background-color: #ddd;
 }
 
 .recipesWrapper h2 {
