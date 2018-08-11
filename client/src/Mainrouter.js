@@ -17,6 +17,7 @@ const App = () =>
         <Router>
             <div>
                 <JumbotronComponent/>
+                
                 <NavBar />
                 <Route exact path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
