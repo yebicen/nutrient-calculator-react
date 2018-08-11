@@ -99,6 +99,7 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsSmall[recipeId].push(ingredientTotal)
+        console.log(JSON.stringify(ingredientTotalsSmall[recipeId]))
       }
 
       else if (data[i].Size === "md") {
@@ -117,7 +118,7 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsMedium[recipeId].push(ingredientTotal)
-
+        console.log(JSON.stringify(ingredientTotalsMedium[recipeId]))
       }
 
       else if (data[i].Size === "lg") {
@@ -139,24 +140,23 @@ exports.viewRecipes = function (req, res) {
       }
     }
 
-    var totalCaloriesSmall = 0;
-    var totalCarbsSmall = 0;
-    var totalSugarSmall = 0;
-    var totalFatSmall = 0;
-    var totalProteinSmall = 0;
-    var totalCaloriesMedium = 0;
-    var totalCarbsMedium = 0;
-    var totalSugarMedium = 0;
-    var totalFatMedium = 0;
-    var totalProteinMedium = 0;
-    var totalCaloriesLarge = 0;
-    var totalCarbsLarge = 0;
-    var totalSugarLarge = 0;
-    var totalFatLarge = 0;
-    var totalProteinLarge = 0;
 
     for (let recipeId in recipes) {
-
+      var totalCaloriesSmall = 0;
+      var totalCarbsSmall = 0;
+      var totalSugarSmall = 0;
+      var totalFatSmall = 0;
+      var totalProteinSmall = 0;
+      var totalCaloriesMedium = 0;
+      var totalCarbsMedium = 0;
+      var totalSugarMedium = 0;
+      var totalFatMedium = 0;
+      var totalProteinMedium = 0;
+      var totalCaloriesLarge = 0;
+      var totalCarbsLarge = 0;
+      var totalSugarLarge = 0;
+      var totalFatLarge = 0;
+      var totalProteinLarge = 0;
       for (let i = 0; i < ingredientTotalsSmall[recipeId].length; i++) {
         var Calories = parseInt(ingredientTotalsSmall[recipeId][i].Calories);
         var Carbs = parseInt(ingredientTotalsSmall[recipeId][i].Carbs);
@@ -243,45 +243,39 @@ exports.viewRecipes = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
-  console.log('==============')
-  console.log(req.file)
-  console.log('==============')
-  const imgPath = req.file.path.replace('client/public','');
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
-    RecipeDescription: req.body.RecipeDescription,
-    RecipeImage: imgPath
+    RecipeDescription: req.body.RecipeDescription
   }).then(function (newRecipe) {
     var promises = [];
-    RecipeIngredients = JSON.parse(req.body.RecipeIngredients)
-    for (var i = 0; i < RecipeIngredients.length; i++) {
+    for (var i = 0; i < req.body.RecipeIngredients.length; i++) {
       var RecipeId = newRecipe.dataValues.id;
       promises.push(
         db.RecipeAmount.create({
-          Amount: RecipeIngredients[i].AmountForSmall,
+          Amount: req.body.RecipeIngredients[i].AmountForSmall,
           Size: 'sm',
           Type: 'smoothie',
-          IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientId: req.body.RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );
 
       promises.push(
         db.RecipeAmount.create({
-          Amount: RecipeIngredients[i].AmountForMedium,
+          Amount: req.body.RecipeIngredients[i].AmountForMedium,
           Size: 'md',
           Type: 'smoothie',
-          IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientId: req.body.RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );
 
       promises.push(
         db.RecipeAmount.create({
-          Amount: RecipeIngredients[i].AmountForLarge,
+          Amount: req.body.RecipeIngredients[i].AmountForLarge,
           Size: 'lg',
           Type: 'smoothie',
-          IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientId: req.body.RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );
