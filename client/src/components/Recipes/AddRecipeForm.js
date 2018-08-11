@@ -21,7 +21,10 @@ export default class AddRecipeForm extends React.Component {
                     "id": null,
                     "IngredientName": ""
                 })
+<<<<<<< HEAD
                 console.log('Ingredientlist: ' + JSON.stringify(this.state.ingredientList, null, 2))
+=======
+>>>>>>> master
             })
 
     };
@@ -53,6 +56,7 @@ export default class AddRecipeForm extends React.Component {
     }
 
     handleRemoveIngredient = (idx) => () => {
+<<<<<<< HEAD
         console.log(idx)
         // console.log(JSON.stringify(this.state.RecipeIngredients,null,2))
         // this.setState({ RecipeIngredients: this.state.RecipeIngredients.filter((s, sidx) => idx !== sidx) });
@@ -61,19 +65,12 @@ export default class AddRecipeForm extends React.Component {
         this.setState({ RecipeIngredients: newIgrdients });
         console.log(JSON.stringify(this.state.RecipeIngredients, null, 2))
         // this.handleIngredientChange(idx)
+=======
+        let newIgrdients = this.state.RecipeIngredients
+        newIgrdients.splice(idx, 1)
+        this.setState({ RecipeIngredients: newIgrdients });
+>>>>>>> master
     }
-
-    // handleAmountChange = idx => event => {
-    //     const { name, value } = event.target;
-    //     const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
-    //         if (idx !== sidx) return addIngredient;
-    //         return {
-    //             ...addIngredient,
-    //             [name]: value
-    //         }
-    //     });
-    //     this.setState({ RecipeIngredients: newIngredients });
-    // }
 
     handleAmountSmallChange = (idx) => (evt) => {
         const newIngredients = this.state.RecipeIngredients.map((addIngredient, sidx) => {
@@ -108,10 +105,13 @@ export default class AddRecipeForm extends React.Component {
 
             for (let node of evt.target.children) {
                 if (node.value === evt.target.value) {
+<<<<<<< HEAD
                     //   this.setState({
                     //     selected: node.getAttribute('data-id')
                     //   });
                     console.log('ingredient id: ' + node.getAttribute('data-id'))
+=======
+>>>>>>> master
                     return (
                         {
                             ...addIngredient,
@@ -127,17 +127,22 @@ export default class AddRecipeForm extends React.Component {
     }
 
     handleFormSubmit = event => {
+<<<<<<< HEAD
         event.persist();
         // event.preventDefault();
         console.log("this is a handleFormSubmit")
         console.log(JSON.stringify(this.state, null, 2))
+=======
+        event.preventDefault();
+>>>>>>> master
         API.addRecipe(this.state).then(
             console.log('posted')
         )
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
-            RecipeType: ""
+            RecipeType: "",
+            RecipeIngredients: []
         });
 
     };
@@ -328,11 +333,15 @@ export default class AddRecipeForm extends React.Component {
                     ))}
 
                     <Row>
-                        <Button color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                        <Col>
+                            <Button className="addIngredientButton" color="info" onClick={this.handleAddIngredient}>Add Another Ingredient</Button>
+                        </Col>
                     </Row>
 
                     <Row>
-                        <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        <Col>
+                            <Button color="primary" onClick={this.handleFormSubmit}>Submit</Button>
+                        </Col>
                     </Row>
 
                 </Form> */}

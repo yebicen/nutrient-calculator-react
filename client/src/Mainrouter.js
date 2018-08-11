@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Ingredients from "./components/Ingredients";
 import Recipes from "./components/Recipes";
 import Admin from "./components/admin";
@@ -12,25 +12,24 @@ import Login from "./components/login";
 import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
  
-const App = () =>
+const Mainrouter = () =>
     <Container> 
         <Router>
+            <Switch>
             <div>
                 <JumbotronComponent/>
+                
                 <NavBar />
                 <Route exact path="/" component={Smoothie} />
-                <Route exact path="/Ingredients" component={Ingredients} />
-                <Route exact path="/Recipes" component={Recipes} />
+                <Route exact path="/ingredients" component={Ingredients} />
+                <Route exact path="/recipes" component={Recipes} />
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
                 <Route path="/image" component={Imguploader} /> 
             </div>
+            </Switch>
         </Router>
     </Container>
 
-    
-
-    
-
-export default App;
+export default Mainrouter;
