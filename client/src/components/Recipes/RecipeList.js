@@ -4,24 +4,22 @@ import API from '../../utils/API';
 
 
 export default class RecipeContainer extends React.Component {
-    state = {
-        dbRecipes: []
-    }
+    // state = {
+    //     dbRecipes: []
+    // }
 
-    getRecipes = () => {
-        API.getRecipes()
-            .then(res => {
-                this.setState({
-                    dbRecipes: res.data
-                })
-                console.log(JSON.stringify(this.state.dbRecipes, null, 2))
-            })
-
-
-    }
+    // getRecipes = () => {
+    //     API.getRecipes()
+    //         .then(res => {
+    //             this.setState({
+    //                 dbRecipes: res.data
+    //             })
+    //             console.log(JSON.stringify(this.state.dbRecipes, null, 2))
+    //         })
+    // }
 
     componentDidMount() {
-        this.getRecipes();
+        this.props.getRecipes();
     };
 
     render() {
@@ -29,10 +27,10 @@ export default class RecipeContainer extends React.Component {
             <div className="recipesWrapper">
             <Row className="infoBar">
                 <Col >
-                <h3>A total of <strong>{this.state.dbRecipes.length}</strong> Recipes:</h3>
+                <h3>A total of <strong>{this.props.dbRecipes.length}</strong> Recipes:</h3>
                 </Col>
                 </Row>
-                {this.state.dbRecipes.map(recipe => (
+                {this.props.dbRecipes.map(recipe => (
                     <div key={recipe.RecipeInfo[0].id} className="singleRecipeWrapper">
                     <div>
                         <Row className="recipeInfo">

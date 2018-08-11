@@ -15,7 +15,6 @@ import Imguploader from "./components/uploadimg";
 const Mainrouter = () =>
     <Container> 
         <Router>
-            <Switch>
             <div>
                 <JumbotronComponent/>
                 
@@ -28,7 +27,6 @@ const Mainrouter = () =>
                 <Route path="/users/profile" component={Profile} />
                 <Route path="/image" component={Imguploader} /> 
             </div>
-            </Switch>
         </Router>
     </Container>
 

@@ -149,6 +149,8 @@ export default class AddRecipeForm extends React.Component {
             RecipeIngredients: []
         });
 
+        this.props.getRecipes();
+
     };
     
     fileChangedHandler = (event) => {
