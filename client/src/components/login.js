@@ -37,8 +37,8 @@ export default class Login extends React.Component {
              usernameLgIn: "",
              passwordLgIn: ""
          })
-
-
+      window.location.reload(); 
+         
      }
      
      render() {

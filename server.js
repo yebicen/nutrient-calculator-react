@@ -70,9 +70,7 @@ app.post('/uploader', upload.single('selectedFile'), function (req, res, next) {
 require('./routes')(app);
 
 // Serve static content for the app from the "public" directory in the application directory.
-
 if (process.env.NODE_ENV === "production") {
-  // app.use(express.static(path.join(__dirname, '/client/build')));
   app.use(express.static("client/build"));
 }
 
