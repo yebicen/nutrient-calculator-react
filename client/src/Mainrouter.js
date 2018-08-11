@@ -12,7 +12,7 @@ import Login from "./components/login";
 import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
  
-const App = () =>
+const Mainrouter = () =>
     <Container> 
         <Router>
             <div>
@@ -30,4 +30,4 @@ const App = () =>
         </Router>
     </Container>
 
-export default App;
+export default Mainrouter;
