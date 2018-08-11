@@ -23,24 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
-require('./routes')(app);
-
-// Serve static content for the app from the "public" directory in the application directory.
-
-if (process.env.NODE_ENV === "production") {
-  // app.use(express.static(path.join(__dirname, '/client/build')));
-  app.use(express.static("client/build"));
-}
-
-else {
-  app.use(express.static(path.join(__dirname, '/client/public')));
-}
-
-app.get("*", function(req, res) {
-  // res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  res.sendFile(path.join(__dirname, "./client/public/index.html"));
-});
-
 app.use(session({ secret: config.sessionKey, resave: true, saveUninitialized: true }));
 
 app.use(passport.initialize());
@@ -84,6 +66,24 @@ app.post('/uploader', upload.single('selectedFile'), function (req, res, next) {
     });
   res.send;
 })
+
+require('./routes')(app);
+
+// Serve static content for the app from the "public" directory in the application directory.
+
+if (process.env.NODE_ENV === "production") {
+  // app.use(express.static(path.join(__dirname, '/client/build')));
+  app.use(express.static("client/build"));
+}
+
+else {
+  app.use(express.static(path.join(__dirname, '/client/public')));
+}
+
+app.get("*", function(req, res) {
+  // res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
+});
 
 // db.sequelize.sync({force: true}).then(function() {
   db.sequelize.sync().then(function() {
