@@ -127,7 +127,7 @@ export default class AddRecipeForm extends React.Component {
           formData.append('selectedFile', selectedFile);
           formData.append('RecipeType',RecipeType);
           formData.append('ingredientList',ingredientList);
-          formData.append('RecipeIngredients',RecipeIngredients);
+          formData.append('RecipeIngredients',JSON.stringify(RecipeIngredients));
         // console.log("this is a handleFormSubmit")
         // console.log(JSON.stringify(this.state, null, 2))
         API.addRecipe(formData).then(

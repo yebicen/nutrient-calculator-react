@@ -245,42 +245,43 @@ exports.viewRecipes = function (req, res) {
 exports.addRecipe = function (req, res) {
   console.log('==============')
   console.log(req.file)
-  console.log(JSON.stringify(req.body.RecipeIngredients,null,2))
   console.log('==============')
+  const imgPath = req.file.path.replace('client/public','');
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription,
-    RecipeImage: req.file.path
+    RecipeImage: imgPath
   }).then(function (newRecipe) {
     var promises = [];
-    for (var i = 0; i < req.body.RecipeIngredients.length; i++) {
+    RecipeIngredients = JSON.parse(req.body.RecipeIngredients)
+    for (var i = 0; i < RecipeIngredients.length; i++) {
       var RecipeId = newRecipe.dataValues.id;
       promises.push(
         db.RecipeAmount.create({
-          Amount: req.body.RecipeIngredients[i].AmountForSmall,
+          Amount: RecipeIngredients[i].AmountForSmall,
           Size: 'sm',
           Type: 'smoothie',
-          IngredientId: req.body.RecipeIngredients[i].IngredientId,
+          IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );
 
       promises.push(
         db.RecipeAmount.create({
-          Amount: req.body.RecipeIngredients[i].AmountForMedium,
+          Amount: RecipeIngredients[i].AmountForMedium,
           Size: 'md',
           Type: 'smoothie',
-          IngredientId: req.body.RecipeIngredients[i].IngredientId,
+          IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );
 
       promises.push(
         db.RecipeAmount.create({
-          Amount: req.body.RecipeIngredients[i].AmountForLarge,
+          Amount: RecipeIngredients[i].AmountForLarge,
           Size: 'lg',
           Type: 'smoothie',
-          IngredientId: req.body.RecipeIngredients[i].IngredientId,
+          IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: RecipeId
         })
       );

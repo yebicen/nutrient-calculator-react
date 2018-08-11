@@ -30,11 +30,17 @@ export default class RecipeContainer extends React.Component {
                 {this.state.dbRecipes.map(recipe => (
                     <div key={recipe.RecipeInfo[0].id} className="singleRecipeWrapper">
                         <Row className="recipeInfo">
+                            <Col lg="3" className="recipeImage">
+                                <div>
+                                <div><strong>Image:</strong></div>
+                                <img src={recipe.RecipeInfo[0].RecipeImage} className="img-fluid"/>
+                                </div>
+                            </Col>
                             <Col lg="3" className="recipeName">
                                 <div><strong>Recipe Name:</strong></div>
                                 {recipe.RecipeInfo[0].RecipeName}
                             </Col>
-                            <Col lg="9" className="recipeDescription">
+                            <Col lg="6" className="recipeDescription">
                                 <div><strong>Recipe Description:</strong></div>
                                 {recipe.RecipeInfo[0].RecipeDescription}
                             </Col>
@@ -64,11 +70,11 @@ export default class RecipeContainer extends React.Component {
                                 <Table striped>
                                     <thead>
                                         <tr>
-                                        <th>Total Calories</th>
-                                        <th>Total Carbs</th>
-                                        <th>Total Sugar</th>
-                                        <th>Total Fat</th>
-                                        <th>Total Protein</th>
+                                            <th>Total Calories</th>
+                                            <th>Total Carbs</th>
+                                            <th>Total Sugar</th>
+                                            <th>Total Fat</th>
+                                            <th>Total Protein</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -9,7 +9,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './uploads');
+      cb(null, './client/public/uploads');
     },
     filename: function (req, file, cb) {
       const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
