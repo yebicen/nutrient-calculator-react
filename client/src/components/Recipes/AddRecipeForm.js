@@ -8,6 +8,7 @@ export default class AddRecipeForm extends React.Component {
         RecipeName: "",
         RecipeDescription: "",
         RecipeType: "",
+        selectedFile: null,
         ingredientList: [],
         RecipeIngredients: []
     };
@@ -116,6 +117,16 @@ export default class AddRecipeForm extends React.Component {
         });
 
     };
+    
+    fileChangedHandler = (event) => {
+        const file = event.target.files[0];
+        console.log(file);
+        this.setState({selectedFile: event.target.files[0]})
+      }
+      
+
+
+
 
     render() {
 
@@ -131,7 +142,7 @@ export default class AddRecipeForm extends React.Component {
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeDescription">Recipe Descriptio</Label>
+                                <Label for="RecipeDescription">Recipe Description</Label>
                                 <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} placeholder="Recipe Description" />
                             </FormGroup>
                         </Col>
@@ -140,6 +151,13 @@ export default class AddRecipeForm extends React.Component {
                                 <Label for="RecipeType">Recipe Type</Label>
                                 <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} placeholder="Recipe Type" />
                             </FormGroup>
+                        </Col>
+                        <Col xs="6" sm="4">
+                            <FormGroup>
+                                <Label for="RecipeImage">Recipe Image</Label>
+                                <Input type="file" name="RecipeImage" onChange={this.fileChangedHandler} />
+                            </FormGroup>
+
                         </Col>
                     </Row>
 

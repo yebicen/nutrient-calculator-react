@@ -243,9 +243,14 @@ exports.viewRecipes = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
+  console.log('==============')
+  console.log(req.file)
+  console.log(req.body)
+  console.log('==============')
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
-    RecipeDescription: req.body.RecipeDescription
+    RecipeDescription: req.body.RecipeDescription,
+    RecipeImage: req.file.path
   }).then(function (newRecipe) {
     var promises = [];
     for (var i = 0; i < req.body.RecipeIngredients.length; i++) {

@@ -75,7 +75,7 @@ export default class Profile extends React.Component {
     return (
         <div className="container"> 
               
-          <h1>{username}'s Porfile</h1>
+          <h1>{firstname}'s Porfile</h1>
           <Form>
             <FormGroup>
               <Label>First Name</Label>
