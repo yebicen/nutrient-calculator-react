@@ -104,15 +104,40 @@ export default class AddRecipeForm extends React.Component {
         this.setState({ RecipeIngredients: newIngredients });
     }
 
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     API.addRecipe(this.state).then(
+    //         console.log('posted')
+    //     )
+    //     this.setState({
+    //         RecipeName: "",
+    //         RecipeDescription: "",
+    //         RecipeType: "",
+    //         RecipeIngredients: []
+    //     });
+
+    // };
+
     handleFormSubmit = event => {
         event.preventDefault();
-        API.addRecipe(this.state).then(
-            console.log('posted')
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients} = this.state;
+          let formData = new FormData();
+          formData.append('RecipeName',RecipeName);
+          formData.append('RecipeDescription',RecipeDescription);
+          formData.append('selectedFile', selectedFile);
+          formData.append('RecipeType',RecipeType);
+          formData.append('ingredientList',ingredientList);
+          formData.append('RecipeIngredients',RecipeIngredients);
+        // console.log("this is a handleFormSubmit")
+        // console.log(JSON.stringify(this.state, null, 2))
+        API.addRecipe(formData).then(
+            // console.log('posted')
         )
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
             RecipeType: "",
+            selectedFile:null,
             RecipeIngredients: []
         });
 

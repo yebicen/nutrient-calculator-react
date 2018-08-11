@@ -245,7 +245,7 @@ exports.viewRecipes = function (req, res) {
 exports.addRecipe = function (req, res) {
   console.log('==============')
   console.log(req.file)
-  console.log(req.body)
+  console.log(JSON.stringify(req.body.RecipeIngredients,null,2))
   console.log('==============')
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
