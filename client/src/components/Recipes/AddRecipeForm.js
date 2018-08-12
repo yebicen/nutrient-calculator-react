@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPlus,faTrash)
+library.add(faPlus, faTrash)
 
 
 export default class AddRecipeForm extends React.Component {
@@ -22,7 +22,7 @@ export default class AddRecipeForm extends React.Component {
     getIngredients = () => {
         API.getIngredients()
             .then(res => {
-                this.setState({ 
+                this.setState({
                     ingredientList: res.data
                 })
                 this.state.ingredientList.unshift({
@@ -114,49 +114,50 @@ export default class AddRecipeForm extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients} = this.state;
-          let formData = new FormData();
-          formData.append('RecipeName',RecipeName);
-          formData.append('RecipeDescription',RecipeDescription);
-          formData.append('selectedFile', selectedFile);
-          formData.append('RecipeType',RecipeType);
-          formData.append('ingredientList',ingredientList);
-          formData.append('RecipeIngredients',JSON.stringify(RecipeIngredients));
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients } = this.state;
+        let formData = new FormData();
+        formData.append('RecipeName', RecipeName);
+        formData.append('RecipeDescription', RecipeDescription);
+        formData.append('selectedFile', selectedFile);
+        formData.append('RecipeType', RecipeType);
+        formData.append('ingredientList', ingredientList);
+        formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
         // console.log("this is a handleFormSubmit")
         // console.log(JSON.stringify(this.state, null, 2))
-        API.addRecipe(formData).then(
+        API.addRecipe(formData).then(res => {
             // console.log('posted')
             this.props.getRecipes()
+        }
         )
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
             RecipeType: "",
-            selectedFile:null,
+            selectedFile: null,
             RecipeIngredients: []
         });
 
-        
+
 
     };
-    
+
     fileChangedHandler = (event) => {
         const file = event.target.files[0];
         console.log(file);
-        this.setState({selectedFile: event.target.files[0]})
-      }
+        this.setState({ selectedFile: event.target.files[0] })
+    }
 
     render() {
 
         return (
             <div className="addRecipeForm">
-            <h3>Add a New Recipe:</h3>
+                <h3>Add a New Recipe:</h3>
                 <Form>
                     <Row className="recipeInfo">
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeName">Recipe Name</Label>
-                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange}/>
+                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
@@ -168,7 +169,7 @@ export default class AddRecipeForm extends React.Component {
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeType">Recipe Type</Label>
-                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange}/>
+                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
@@ -246,7 +247,7 @@ export default class AddRecipeForm extends React.Component {
                             <Button className="addIngredientButton" color="success" onClick={this.handleAddIngredient}><FontAwesomeIcon icon="plus" /></Button>
                         </Col>
                         <Col lg="2">
-                        <Button className="submitRecipeButton" color="primary" onClick={this.handleFormSubmit}>Submit Recipe</Button>
+                            <Button className="submitRecipeButton" color="primary" onClick={this.handleFormSubmit}>Submit Recipe</Button>
                         </Col>
                     </Row>
 

@@ -296,24 +296,11 @@ exports.addRecipe = function (req, res) {
 
 
 exports.deleteRecipe = function (req, res) {
-  var promises = {
-    recipeAmountDestroy: db.RecipeAmount.destroy({
-      where: {
-        RecipeId: req.params.id
-      }
-    }),
-    recipeDestroy: db.Recipe.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-  };
-
-  sequelize.Promise.props(promises).then(function (results) {
-    /// each promise is resolved here, results:
-    results.recipeAmountDestroy;
-    results.recipeDestroy;
-  });
+  db.Recipe.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
 };
 
 
