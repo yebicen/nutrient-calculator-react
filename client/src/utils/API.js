@@ -19,8 +19,9 @@ export default {
         return axios.put(`/api/ingredients/edit/${editIngredientId}`, editState);
     },
     addRecipe: async function(newRecipe) {
-        let addRecipe = await axios.post('/api/recipes/new', newRecipe) 
-        return addRecipe
+        // let addRecipe = await axios.post('/api/recipes/new', newRecipe) 
+        // return addRecipe
+        return axios.post('/api/recipes/new', newRecipe) 
     },
     getRecipes: function() {
         return axios.get('/api/recipes');
