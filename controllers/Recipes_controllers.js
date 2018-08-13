@@ -253,8 +253,8 @@ exports.getOneRecipe = function (req, res) {
           }
         ]
       })
-        .then(function (recipe) {
-          let ingredients = {};
+        .then(function (dbRecipe) {
+          let recipe = {};
 
           //allows to check if array already contains value
           //JSON.stringify converts objects to strings to allow for accurate comparison
@@ -266,31 +266,46 @@ exports.getOneRecipe = function (req, res) {
             return false;
           }
 
-          for (let i = 0; i < recipe.length; i++) {
-            const ingredientId = recipe[i].dataValues.IngredientId;
-            console.log(ingredientId)
-            // console.log(recipe[i].dataValues.IngredientId)
-            if (!ingredients[ingredientId]) {
-              ingredients[ingredientId] = [];
+          for (let i = 0; i < dbRecipe.length; i++) {
+            const ingredientId = dbRecipe[i].dataValues.IngredientId;
+            if (!recipe[ingredientId]) {
+              recipe[ingredientId] = [];
             }
 
             //Use Array.prototype.contains to push only unique recipe info into the recipe recipeId object
-            if (!ingredients[ingredientId].contains(ingredientId)) {
-              ingredients[ingredientId].push(recipe[i]);
-              
+            if (!recipe[ingredientId].contains(ingredientId)) {
+              recipe[ingredientId].push(dbRecipe[i]);   
             }
           }
+          console.log(dbRecipe[0].Recipe.dataValues)
+          
+          const newData = {
+            RecipeId: dbRecipe[0].Recipe.dataValues.id,
+            RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
+            RecipeDescription: dbRecipe[0].Recipe.dataValues.RecipeDescription,
+            RecipeImage: dbRecipe[0].Recipe.dataValues.RecipeImage,
+            RecipeIngredients: []
+          };
 
-          console.log(ingredients)
 
-            // console.log(recipe[0].Recipe)
-            // console.log(recipe[0].RecipeAmount)
-            // console.log(recipe[0])
-            // console.log('======================')
-            // console.log('======================')
-            // console.log('======================')
-            // console.log(recipe[0].dataValues)
-            res.json(ingredients)
+          for (let ingredientId in recipe) {
+            // console.log('====================')
+            // console.log(recipe[ingredientId][0].dataValues.IngredientId)
+            // console.log(recipe[ingredientId][0].dataValues.Size)
+            // console.log(recipe[ingredientId][0].dataValues.Amount)
+            let ingredients = {
+              IngedientId: recipe[ingredientId][0].dataValues.IngredientId,
+              Size: recipe[ingredientId][0].dataValues.Size,
+              Amount: recipe[ingredientId][0].dataValues.Amount       
+            }
+            // newData.recipeIngredients.push(recipe[ingredientId])
+            newData.RecipeIngredients.push(ingredients)
+
+          }
+
+          console.log(newData)
+
+            res.json(newData)
           })
 
     });

@@ -32,15 +32,15 @@ export default class RecipeContainer extends React.Component {
     toggleEditModal = (editRecipeName, editRecipeId) => {
         API.getOneRecipe(editRecipeId)
             .then(res => {
-                console.log(res)
-                // this.setState({
-                //     editModal: !this.state.editModal,
-                //     editRecipeName: editRecipeName,
-                //     editRecipeId: editRecipeId,
-                //     prepopulateForm: res.data
-                // })
 
-                // this.state.editModal==true ? this.child.setEditState() : null;
+                this.setState({
+                    editModal: !this.state.editModal,
+                    editRecipeName: editRecipeName,
+                    editRecipeId: editRecipeId,
+                    prepopulateForm: res.data
+                })
+
+                this.state.editModal==true ? this.child.setEditState() : null;
 
             })
     }

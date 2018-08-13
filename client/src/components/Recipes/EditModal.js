@@ -14,15 +14,19 @@ export default class EditModal extends React.Component {
 
     setEditState() {
         this.setState({
-            RecipeName: this.props.prepopulateForm.RecipeName,
+            RecipeName: this.props.prepopulateForm[0],
             RecipeDescription: this.props.prepopulateForm.RecipeDescription,
             RecipeType: this.props.prepopulateForm.RecipeType,
             // selectedFile: null,
             ingredientList: this.props.prepopulateForm.ingredientList,
             RecipeIngredients: this.props.prepopulateForm.RecipeIngredients
         })
-        console.log(this.props.prepopulateForm)
-        console.log(this.state)
+        console.log('prepopulateform:' + JSON.stringify(this.props.prepopulateForm,null,2))
+        // console.log(this.state)
+        // setTimeout(function(){
+        // console.log(this.state)
+        // }, 2000);
+
     }
 
     handleInputChange = event => {
