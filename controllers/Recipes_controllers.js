@@ -241,7 +241,9 @@ exports.viewRecipes = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
-  const imgPath = req.file.path.replace('client/public','');
+  const imgPath = req.file.path.replace('client/public', '');
+  // const imgPath = ('TEST');
+
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription,
@@ -283,12 +285,10 @@ exports.addRecipe = function (req, res) {
     }
 
     sequelize.Promise.all(promises).then(function () {
-      // console.log('All done YAYYYYYYY!!!!!!!');
+      res.send()
     });
 
   });
-
-
 
 };
 
@@ -298,6 +298,8 @@ exports.deleteRecipe = function (req, res) {
     where: {
       id: req.params.id
     }
+  }).then(function () {
+    res.send();
   })
 };
 
@@ -310,6 +312,6 @@ exports.editRecipe = function (req, res) {
         id: req.body.id
       }
     }).then(function () {
-      res.redirect('/recipes');
+      res.send();
     });
 };
