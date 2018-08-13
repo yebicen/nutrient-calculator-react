@@ -231,9 +231,34 @@ exports.viewRecipes = function (req, res) {
         }
       });
     }
-
     res.json(newData)
   })
+};
+
+exports.getOneRecipe = function (req, res) {
+
+  db.Recipe.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function (recipeInfo) {
+    db.RecipeAmount.findAll({
+      where: {
+        RecipeId: recipeInfo.dataValues.id
+      },
+      include: [
+        {
+          model: db.Recipe,
+          as: 'Recipe'
+        }
+      ]
+    })
+    .then(function(recipe) {
+      console.log(recipe)
+    })
+    
+  });
 };
 
 //query recipes by id
@@ -305,6 +330,7 @@ exports.deleteRecipe = function (req, res) {
 
 
 exports.editRecipe = function (req, res) {
+  console.log('EDITING RECIPE')
   db.Recipe.update(
     req.body,
     {
@@ -314,4 +340,5 @@ exports.editRecipe = function (req, res) {
     }).then(function () {
       res.send();
     });
+  
 };

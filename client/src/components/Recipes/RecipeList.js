@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Table, Row, Col, Button } from 'reactstrap';
 import API from '../../utils/API';
 import DeleteModal from './DeleteModal';
+import EditModal from './EditModal';
 
 
 export default class RecipeContainer extends React.Component {
@@ -26,6 +27,21 @@ export default class RecipeContainer extends React.Component {
             deleteRecipeName: deleteRecipeName,
             deleteRecipeId: deleteRecipeId
         });
+    }
+
+    toggleEditModal = (editRecipeName, editRecipeId) => {
+        API.getOneRecipe(editRecipeId)
+            .then(res => {
+                this.setState({
+                    editModal: !this.state.editModal,
+                    editRecipeName: editRecipeName,
+                    editRecipeId: editRecipeId,
+                    prepopulateForm: res.data
+                })
+
+                this.state.editModal==true ? this.child.setEditState() : null;
+
+            })
     }
 
     render() {
@@ -55,9 +71,9 @@ export default class RecipeContainer extends React.Component {
                                 </Col>
 
                                 <Col lg="2" className="recipeDeleteEdit">
-                                <div><strong>Actions:</strong></div>
+                                    <div><strong>Actions:</strong></div>
                                     <Button className="deleteRecipeButton" color="danger" onClick={() => this.toggleDeleteModal(recipe.RecipeInfo[0].RecipeName, recipe.RecipeInfo[0].id)}>Delete</Button>
-                                    <Button className="editRecipeButton" color="secondary" disabled>Edit</Button>
+                                    <Button className="editRecipeButton" color="secondary"onClick={() => this.toggleEditModal(recipe.RecipeInfo[0].RecipeName, recipe.RecipeInfo[0].id)}>Edit</Button>
                                 </Col>
 
                             </Row>
@@ -202,6 +218,14 @@ export default class RecipeContainer extends React.Component {
                                 modal={this.state.deleteModal}
                                 deleteRecipeName={this.state.deleteRecipeName}
                                 deleteRecipeId={this.state.deleteRecipeId}
+                                getRecipes={this.props.getRecipes}
+                            />
+                            <EditModal ref={instance => { this.child = instance; }}
+                                toggle={this.toggleEditModal}
+                                modal={this.state.editModal}
+                                editRecipeName={this.state.editRecipeName}
+                                editRecipeId={this.state.editRecipeId}
+                                prepopulateForm={this.state.prepopulateForm}
                                 getRecipes={this.props.getRecipes}
                             />
 
