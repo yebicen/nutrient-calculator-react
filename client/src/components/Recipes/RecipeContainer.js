@@ -16,10 +16,10 @@ export default class IngredientContainer extends React.Component {
     API.getRecipes()
       .then(res => {
         console.log('getRecipes Fired')
+        console.log(res.data)
         this.setState({
           dbRecipes: res.data
         })
-        console.log(this.state)
       })
   }
 

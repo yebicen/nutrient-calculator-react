@@ -99,7 +99,6 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsSmall[recipeId].push(ingredientTotal)
-        console.log(JSON.stringify(ingredientTotalsSmall[recipeId]))
       }
 
       else if (data[i].Size === "md") {
@@ -118,7 +117,6 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsMedium[recipeId].push(ingredientTotal)
-        console.log(JSON.stringify(ingredientTotalsMedium[recipeId]))
       }
 
       else if (data[i].Size === "lg") {

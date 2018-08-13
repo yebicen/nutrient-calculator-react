@@ -124,11 +124,13 @@ export default class AddRecipeForm extends React.Component {
         formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
         // console.log("this is a handleFormSubmit")
         // console.log(JSON.stringify(this.state, null, 2))
-        API.addRecipe(formData).then(res => {
-            // console.log('posted')
+        // const response = await API.addRecipe(formData);
+        API.addRecipe(formData).then(result => {
             this.props.getRecipes()
         }
         )
+
+
         this.setState({
             RecipeName: "",
             RecipeDescription: "",
@@ -136,8 +138,6 @@ export default class AddRecipeForm extends React.Component {
             selectedFile: null,
             RecipeIngredients: []
         });
-
-
 
     };
 
@@ -150,6 +150,7 @@ export default class AddRecipeForm extends React.Component {
     render() {
 
         return (
+
             <div className="addRecipeForm">
                 <h3>Add a New Recipe:</h3>
                 <Form>
