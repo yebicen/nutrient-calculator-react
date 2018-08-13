@@ -31,11 +31,9 @@ export default class EditModal extends React.Component {
                 "id": null,
                 "IngredientName": ""
             })
+            console.log(this.state)
         })
-        // this.setState({
-
-        // })
-        console.log(this.state)
+       
     }
 
     // getIngredients = () => {

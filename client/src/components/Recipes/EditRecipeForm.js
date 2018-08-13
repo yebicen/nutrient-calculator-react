@@ -10,7 +10,7 @@ library.add(faPlus, faTrash)
 
 
 export default class EditRecipeForm extends React.Component {
-
+    
     handleFormSubmit = event => {
         event.preventDefault();
         const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients } = this.state;
@@ -41,7 +41,7 @@ export default class EditRecipeForm extends React.Component {
 
 
     render() {
-
+        // console.log(this.props.state)
         return (
 
             <div className="addRecipeForm">

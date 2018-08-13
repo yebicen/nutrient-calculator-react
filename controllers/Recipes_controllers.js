@@ -295,8 +295,10 @@ exports.getOneRecipe = function (req, res) {
             // console.log(recipe[ingredientId][0].dataValues.Amount)
             let ingredients = {
               IngedientId: recipe[ingredientId][0].dataValues.IngredientId,
-              Size: recipe[ingredientId][0].dataValues.Size,
-              Amount: recipe[ingredientId][0].dataValues.Amount       
+              // Size: recipe[ingredientId][0].dataValues.Size,
+              AmountForSmall: recipe[ingredientId][0].dataValues.Amount,
+              AmountForMedium: recipe[ingredientId][1].dataValues.Amount,
+              AmountForLarge: recipe[ingredientId][2].dataValues.Amount       
             }
             // newData.recipeIngredients.push(recipe[ingredientId])
             newData.RecipeIngredients.push(ingredients)
