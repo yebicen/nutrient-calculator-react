@@ -99,7 +99,6 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsSmall[recipeId].push(ingredientTotal)
-        console.log(JSON.stringify(ingredientTotalsSmall[recipeId]))
       }
 
       else if (data[i].Size === "md") {
@@ -118,7 +117,6 @@ exports.viewRecipes = function (req, res) {
           Protein: data[i].Ingredient.Protein * data[i].Amount
         }
         ingredientTotalsMedium[recipeId].push(ingredientTotal)
-        console.log(JSON.stringify(ingredientTotalsMedium[recipeId]))
       }
 
       else if (data[i].Size === "lg") {
@@ -296,24 +294,11 @@ exports.addRecipe = function (req, res) {
 
 
 exports.deleteRecipe = function (req, res) {
-  var promises = {
-    recipeAmountDestroy: db.RecipeAmount.destroy({
-      where: {
-        RecipeId: req.params.id
-      }
-    }),
-    recipeDestroy: db.Recipe.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-  };
-
-  sequelize.Promise.props(promises).then(function (results) {
-    /// each promise is resolved here, results:
-    results.recipeAmountDestroy;
-    results.recipeDestroy;
-  });
+  db.Recipe.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
 };
 
 

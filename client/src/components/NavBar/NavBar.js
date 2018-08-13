@@ -70,19 +70,23 @@ export default class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Hello, {firstname}</NavbarBrand>
+        {loggedIn &&<NavbarBrand href="/">Hello, {firstname}</NavbarBrand>}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="/">Home</NavLink>
               </NavItem>
+              {loggedIn &&
               <NavItem>
                 <NavLink href="/recipes">Recipes</NavLink>
               </NavItem>
+              }
+              {loggedIn &&
               <NavItem>
                 <NavLink href="/ingredients">Ingredients</NavLink>
               </NavItem>
+              }
               <NavItem>
                 {loggedIn?
                 <NavLink href="/users/sign-out" onClick={e=>this.logoutHandler(e)}>Logout</NavLink>
@@ -90,9 +94,11 @@ export default class NavBar extends React.Component {
                 <NavLink href="/users/login" onClick={e=>this.loginHandler(e)}>Login</NavLink>
                 }
               </NavItem>
+              {loggedIn &&
               <NavItem>
                 <NavLink href="/users/admin">Admin</NavLink>
               </NavItem>
+              }
               {loggedIn &&
               <NavItem>
                 <NavLink href="/users/profile">Profile</NavLink>

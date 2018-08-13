@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Recipe.associate = function(models) {
         // associations can be defined here
-        Recipe.hasMany(models.RecipeAmount);
+        Recipe.hasMany(models.RecipeAmount,{onDelete: 'CASCADE'});
     }
 
     return Recipe;
