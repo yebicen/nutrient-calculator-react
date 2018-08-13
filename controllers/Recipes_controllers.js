@@ -236,29 +236,64 @@ exports.viewRecipes = function (req, res) {
 };
 
 exports.getOneRecipe = function (req, res) {
-
   db.Recipe.findOne({
     where: {
       id: req.params.id
     }
   })
-  .then(function (recipeInfo) {
-    db.RecipeAmount.findAll({
-      where: {
-        RecipeId: recipeInfo.dataValues.id
-      },
-      include: [
-        {
-          model: db.Recipe,
-          as: 'Recipe'
-        }
-      ]
-    })
-    .then(function(recipe) {
-      console.log(recipe)
-    })
-    
-  });
+    .then(function (recipeInfo) {
+      db.RecipeAmount.findAll({
+        where: {
+          RecipeId: recipeInfo.dataValues.id
+        },
+        include: [
+          {
+            model: db.Recipe,
+            as: 'Recipe'
+          }
+        ]
+      })
+        .then(function (recipe) {
+          let ingredients = {};
+
+          //allows to check if array already contains value
+          //JSON.stringify converts objects to strings to allow for accurate comparison
+          Array.prototype.contains = function (value) {
+            for (var i = 0; i < this.length; i++) {
+              if (JSON.stringify(this[i]) === JSON.stringify(value))
+                return true;
+            }
+            return false;
+          }
+
+          for (let i = 0; i < recipe.length; i++) {
+            const ingredientId = recipe[i].dataValues.IngredientId;
+            console.log(ingredientId)
+            // console.log(recipe[i].dataValues.IngredientId)
+            if (!ingredients[ingredientId]) {
+              ingredients[ingredientId] = [];
+            }
+
+            //Use Array.prototype.contains to push only unique recipe info into the recipe recipeId object
+            if (!ingredients[ingredientId].contains(ingredientId)) {
+              ingredients[ingredientId].push(recipe[i]);
+              
+            }
+          }
+
+          console.log(ingredients)
+
+            // console.log(recipe[0].Recipe)
+            // console.log(recipe[0].RecipeAmount)
+            // console.log(recipe[0])
+            // console.log('======================')
+            // console.log('======================')
+            // console.log('======================')
+            // console.log(recipe[0].dataValues)
+            res.json(ingredients)
+          })
+
+    });
 };
 
 //query recipes by id
@@ -340,5 +375,5 @@ exports.editRecipe = function (req, res) {
     }).then(function () {
       res.send();
     });
-  
+
 };
