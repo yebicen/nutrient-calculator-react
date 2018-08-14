@@ -75,21 +75,23 @@ export default class EditRecipeForm extends React.Component {
                         </Col>
                     </Row>
 
-                    {this.props.state.RecipeIngredients.map((addIngredient, idx) => (
+                    {this.props.state.RecipeIngredients.map((editIngredient, idx) => (
                         <Row key={idx} className="formIngredient">
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
                                     <Input type="select"
                                         name="IngredientName"
-                                        value={addIngredient.IngredientName}
+                                        value={editIngredient.IngredientName}
+                                        id={editIngredient.IngredientName}
                                         onChange={this.props.handleIngredientChange(idx)}
-                                        id="SelectIngredientName">
-
+                                        // id="SelectIngredientName"
+                                        >
                                         {this.props.state.ingredientList.map(option => (
                                             <option key={option.id}
                                                 data-id={option.id}
-                                                value={option.IngredientName} >
+                                                value={option.IngredientName} 
+                                                >
                                                 {option.IngredientName}
                                             </option>
                                         ))}
@@ -102,8 +104,8 @@ export default class EditRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountSmall"
                                         placeholder=""
-                                        value={addIngredient.AmountForSmall}
-                                        data-id={addIngredient.IngredientName}
+                                        value={editIngredient.AmountForSmall}
+                                        data-id={editIngredient.IngredientName}
                                         onChange={this.props.handleAmountSmallChange(idx)}
                                     />
                                 </FormGroup>
@@ -114,7 +116,7 @@ export default class EditRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountMedium"
                                         placeholder=""
-                                        value={addIngredient.AmountForMedium}
+                                        value={editIngredient.AmountForMedium}
                                         onChange={this.props.handleAmountMediumChange(idx)}
                                     />
                                 </FormGroup>
@@ -125,7 +127,7 @@ export default class EditRecipeForm extends React.Component {
                                     <Input type="text"
                                         name="AmountLarge"
                                         placeholder=""
-                                        value={addIngredient.AmountForLarge}
+                                        value={editIngredient.AmountForLarge}
                                         onChange={this.props.handleAmountLargeChange(idx)}
                                     />
                                 </FormGroup>

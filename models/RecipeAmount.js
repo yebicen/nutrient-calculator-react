@@ -12,6 +12,10 @@ module.exports = function (sequelize, DataTypes) {
                 isIn: [['sm', 'md', 'lg']]
             }
         },
+        IngredientName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         //Smoothie, or Acai Bowl, etc.
         Type: {
             type: DataTypes.STRING,

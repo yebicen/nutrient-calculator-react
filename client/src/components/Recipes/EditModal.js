@@ -16,24 +16,25 @@ export default class EditModal extends React.Component {
 
     setEditState() {
         API.getIngredients()
-        .then(res => {
-            this.setState({
-                RecipeName: this.props.prepopulateForm.RecipeName,
-                RecipeDescription: this.props.prepopulateForm.RecipeDescription,
-                RecipeImage: this.props.prepopulateForm.RecipeImage,
-                // RecipeType: this.props.prepopulateForm.RecipeType,
-                // selectedFile: null,
-                ingredientList: this.props.prepopulateForm.ingredientList,
-                RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
-                ingredientList: res.data
+            .then(res => {
+                this.setState({
+                    RecipeName: this.props.prepopulateForm.RecipeName,
+                    RecipeDescription: this.props.prepopulateForm.RecipeDescription,
+                    RecipeImage: this.props.prepopulateForm.RecipeImage,
+                    // RecipeType: this.props.prepopulateForm.RecipeType,
+                    // selectedFile: null,
+                    ingredientList: this.props.prepopulateForm.ingredientList,
+                    RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
+                    ingredientList: res.data
+                })
+                this.state.ingredientList.unshift({
+                    "id": null,
+                    "IngredientName": ""
+                })
+
+                console.log(this.state)
             })
-            this.state.ingredientList.unshift({
-                "id": null,
-                "IngredientName": ""
-            })
-            console.log(this.state)
-        })
-       
+
     }
 
     // getIngredients = () => {
@@ -151,8 +152,8 @@ export default class EditModal extends React.Component {
         const { toggle, modal, editRecipeName, editRecipeId } = this.props
         return (
             <div>
-                <Modal isOpen={modal} fade={false} toggle={() => toggle("","")}>
-                    <ModalHeader toggle={() => toggle("","")}>Edit {editRecipeName}</ModalHeader>
+                <Modal isOpen={modal} fade={false} toggle={() => toggle("", "")}>
+                    <ModalHeader toggle={() => toggle("", "")}>Edit {editRecipeName}</ModalHeader>
                     <ModalBody>
                         <EditRecipeForm
                             key={editRecipeId}
@@ -164,7 +165,7 @@ export default class EditModal extends React.Component {
                             handleAmountSmallChange={this.handleAmountSmallChange}
                             handleAmountMediumChange={this.handleAmountMediumChange}
                             handleAmountLargeChange={this.handleAmountLargeChange}
-                            handleIngredientChange={this.handleIngredientChange}s
+                            handleIngredientChange={this.handleIngredientChange} s
                         />
                     </ModalBody>
                     <ModalFooter>

@@ -287,15 +287,13 @@ exports.getOneRecipe = function (req, res) {
             RecipeIngredients: []
           };
 
-
           for (let ingredientId in recipe) {
             // console.log('====================')
-            // console.log(recipe[ingredientId][0].dataValues.IngredientId)
             // console.log(recipe[ingredientId][0].dataValues.Size)
             // console.log(recipe[ingredientId][0].dataValues.Amount)
             let ingredients = {
               IngedientId: recipe[ingredientId][0].dataValues.IngredientId,
-              // Size: recipe[ingredientId][0].dataValues.Size,
+              IngredientName: recipe[ingredientId][0].dataValues.IngredientName,
               AmountForSmall: recipe[ingredientId][0].dataValues.Amount,
               AmountForMedium: recipe[ingredientId][1].dataValues.Amount,
               AmountForLarge: recipe[ingredientId][2].dataValues.Amount       
@@ -336,6 +334,7 @@ exports.addRecipe = function (req, res) {
           Size: 'sm',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
@@ -346,6 +345,7 @@ exports.addRecipe = function (req, res) {
           Size: 'md',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
@@ -356,6 +356,7 @@ exports.addRecipe = function (req, res) {
           Size: 'lg',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
