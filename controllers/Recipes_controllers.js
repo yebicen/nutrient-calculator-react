@@ -277,7 +277,7 @@ exports.getOneRecipe = function (req, res) {
               recipe[ingredientId].push(dbRecipe[i]);   
             }
           }
-          console.log(dbRecipe[0].Recipe.dataValues)
+          // console.log(dbRecipe[0].Recipe.dataValues)
           
           const newData = {
             RecipeId: dbRecipe[0].Recipe.dataValues.id,
@@ -303,7 +303,7 @@ exports.getOneRecipe = function (req, res) {
 
           }
 
-          console.log(newData)
+          // console.log(newData)
 
             res.json(newData)
           })
@@ -316,8 +316,8 @@ exports.getOneRecipe = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
+  console.log(req.file)
   const imgPath = req.file.path.replace('client/public', '');
-  // const imgPath = ('TEST');
 
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
@@ -384,14 +384,25 @@ exports.deleteRecipe = function (req, res) {
 
 exports.editRecipe = function (req, res) {
   console.log('EDITING RECIPE')
-  db.Recipe.update(
-    req.body,
-    {
-      where: {
-        id: req.body.id
-      }
-    }).then(function () {
+  console.log(req.file)
+  let imgPath;
+  if (req.file===undefined) {
+    imgPath= req.body.RecipeImage
+  }
+  else {
+    imgPath = req.file.path.replace('client/public', '');
+  }
+  
+  console.log('imgPath: '+ imgPath)
+  console.log(req.body)
+  // db.Recipe.update(
+  //   req.body,
+  //   {
+  //     where: {
+  //       id: req.body.id
+  //     }
+  //   }).then(function () {
       res.send();
-    });
+  //   });
 
 };

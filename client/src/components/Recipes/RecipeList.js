@@ -30,9 +30,9 @@ export default class RecipeContainer extends React.Component {
     }
 
     toggleEditModal = (editRecipeName, editRecipeId) => {
+        if (!this.state.editModal) {
         API.getOneRecipe(editRecipeId)
             .then(res => {
-
                 this.setState({
                     editModal: !this.state.editModal,
                     editRecipeName: editRecipeName,
@@ -43,6 +43,7 @@ export default class RecipeContainer extends React.Component {
                 this.state.editModal==true ? this.child.setEditState() : null;
 
             })
+        }
     }
 
     render() {

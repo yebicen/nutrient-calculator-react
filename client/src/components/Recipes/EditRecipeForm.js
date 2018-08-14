@@ -11,32 +11,32 @@ library.add(faPlus, faTrash)
 
 export default class EditRecipeForm extends React.Component {
     
-    handleFormSubmit = event => {
-        event.preventDefault();
-        const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients } = this.state;
-        let formData = new FormData();
-        formData.append('RecipeName', RecipeName);
-        formData.append('RecipeDescription', RecipeDescription);
-        formData.append('selectedFile', selectedFile);
-        formData.append('RecipeType', RecipeType);
-        formData.append('ingredientList', ingredientList);
-        formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
-        // console.log("this is a handleFormSubmit")
-        // console.log(JSON.stringify(this.state, null, 2))
-        // const response = await API.addRecipe(formData);
-        API.addRecipe(formData).then(result => {
-            this.props.getRecipes()
-        }
-        )
-        this.setState({
-            RecipeName: "",
-            RecipeDescription: "",
-            RecipeType: "",
-            selectedFile: null,
-            RecipeIngredients: []
-        });
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients } = this.state;
+    //     let formData = new FormData();
+    //     formData.append('RecipeName', RecipeName);
+    //     formData.append('RecipeDescription', RecipeDescription);
+    //     formData.append('selectedFile', selectedFile);
+    //     formData.append('RecipeType', RecipeType);
+    //     formData.append('ingredientList', ingredientList);
+    //     formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
+    //     // console.log("this is a handleFormSubmit")
+    //     // console.log(JSON.stringify(this.state, null, 2))
+    //     // const response = await API.addRecipe(formData);
+    //     API.addRecipe(formData).then(result => {
+    //         this.props.getRecipes()
+    //     }
+    //     )
+    //     this.setState({
+    //         RecipeName: "",
+    //         RecipeDescription: "",
+    //         RecipeType: "",
+    //         selectedFile: null,
+    //         RecipeIngredients: []
+    //     });
 
-    };
+    // };
 
 
 
@@ -45,7 +45,6 @@ export default class EditRecipeForm extends React.Component {
         return (
 
             <div className="addRecipeForm">
-                <h3>Add a New Recipe:</h3>
                 <Form>
                     <Row className="recipeInfo">
                         <Col xs="6" sm="4">
@@ -68,7 +67,10 @@ export default class EditRecipeForm extends React.Component {
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeImage">Recipe Image</Label>
+                                <div className="currentImage">
+                                <img src={this.props.state.RecipeImage} className="img-fluid"/>
+                                </div>
+                                <Label for="RecipeImage">Replace Image</Label>
                                 <Input className="btn btn-secondary" type="file" name="RecipeImage" onChange={this.props.fileChangedHandler} />
                             </FormGroup>
 
@@ -142,9 +144,9 @@ export default class EditRecipeForm extends React.Component {
                         <Col lg="10">
                             <Button className="addIngredientButton" color="success" onClick={this.props.handleAddIngredient}><FontAwesomeIcon icon="plus" /></Button>
                         </Col>
-                        <Col lg="2">
+                        {/* <Col lg="2">
                             <Button className="submitRecipeButton" color="primary" onClick={this.props.handleFormSubmit}>Submit Recipe</Button>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                 </Form>

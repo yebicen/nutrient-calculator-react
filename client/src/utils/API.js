@@ -32,6 +32,6 @@ export default {
         return axios.delete(`/api/recipes/delete/${deleteRecipeId}`);
     },
     editRecipe: function(editRecipeId, editState) {
-        return axios.put(`/api/ingredients/edit/${editRecipeId}`, editState);
+        return axios.put(`/api/recipes/edit/${editRecipeId}`, editState);
     },
 };

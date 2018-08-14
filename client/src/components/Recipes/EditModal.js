@@ -27,32 +27,15 @@ export default class EditModal extends React.Component {
                     RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
                     ingredientList: res.data
                 })
-                this.state.ingredientList.unshift({
-                    "id": null,
-                    "IngredientName": ""
-                })
+                // this.state.ingredientList.unshift({
+                //     "id": null,
+                //     "IngredientName": ""
+                // })
 
                 console.log(this.state)
             })
 
     }
-
-    // getIngredients = () => {
-    //     API.getIngredients()
-    //         .then(res => {
-    //             this.setState({
-    //                 ingredientList: res.data
-    //             })
-    //             this.state.ingredientList.unshift({
-    //                 "id": null,
-    //                 "IngredientName": ""
-    //             })
-    //         })
-    // };
-
-    // componentDidMount() {
-    //     this.getIngredients();
-    // };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -62,9 +45,31 @@ export default class EditModal extends React.Component {
     };
 
     confirmEdit = (editRecipeId, editState) => {
-        API.editRecipe(editRecipeId, editState)
+
+        // event.preventDefault();
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients } = this.state;
+        let formData = new FormData();
+        formData.append('RecipeName', RecipeName);
+        formData.append('RecipeDescription', RecipeDescription);
+        formData.append('selectedFile', selectedFile);
+        formData.append('RecipeImage', RecipeImage);
+        // formData.append('RecipeType', RecipeType);
+        formData.append('ingredientList', ingredientList);
+        formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
+        API.editRecipe(editRecipeId, formData)
             .then(this.props.getRecipes());
         this.props.toggle();
+        this.setState({
+            RecipeName: "",
+            RecipeDescription: "",
+            RecipeImage: "",
+            // RecipeType: "",
+            selectedFile: null,
+            ingredientList: [],
+            RecipeIngredients: []
+        });
+
+        console.log(editState);
     }
 
     handleAddIngredient = () => {
@@ -169,7 +174,7 @@ export default class EditModal extends React.Component {
                         />
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="danger" onClick={() => this.confirmEdit(editRecipeId, this.state)}>Submit</Button>{' '}
+                        <Button color="danger" onClick={() => this.confirmEdit(editRecipeId, this.state)}>Submit</Button>
                         <Button color="primary" onClick={() => toggle("", "")}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
