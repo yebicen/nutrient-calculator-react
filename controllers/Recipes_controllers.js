@@ -231,9 +231,84 @@ exports.viewRecipes = function (req, res) {
         }
       });
     }
-
     res.json(newData)
   })
+};
+
+exports.getOneRecipe = function (req, res) {
+  db.Recipe.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(function (recipeInfo) {
+      db.RecipeAmount.findAll({
+        where: {
+          RecipeId: recipeInfo.dataValues.id
+        },
+        include: [
+          {
+            model: db.Recipe,
+            as: 'Recipe'
+          }
+        ]
+      })
+        .then(function (dbRecipe) {
+          let recipe = {};
+
+          //allows to check if array already contains value
+          //JSON.stringify converts objects to strings to allow for accurate comparison
+          Array.prototype.contains = function (value) {
+            for (var i = 0; i < this.length; i++) {
+              if (JSON.stringify(this[i]) === JSON.stringify(value))
+                return true;
+            }
+            return false;
+          }
+
+          for (let i = 0; i < dbRecipe.length; i++) {
+            const ingredientId = dbRecipe[i].dataValues.IngredientId;
+            if (!recipe[ingredientId]) {
+              recipe[ingredientId] = [];
+            }
+
+            //Use Array.prototype.contains to push only unique recipe info into the recipe recipeId object
+            if (!recipe[ingredientId].contains(ingredientId)) {
+              recipe[ingredientId].push(dbRecipe[i]);   
+            }
+          }
+          // console.log(dbRecipe[0].Recipe.dataValues)
+          
+          const newData = {
+            RecipeId: dbRecipe[0].Recipe.dataValues.id,
+            RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
+            RecipeDescription: dbRecipe[0].Recipe.dataValues.RecipeDescription,
+            RecipeImage: dbRecipe[0].Recipe.dataValues.RecipeImage,
+            RecipeIngredients: []
+          };
+
+          for (let ingredientId in recipe) {
+            // console.log('====================')
+            // console.log(recipe[ingredientId][0].dataValues.Size)
+            // console.log(recipe[ingredientId][0].dataValues.Amount)
+            let ingredients = {
+              IngedientId: recipe[ingredientId][0].dataValues.IngredientId,
+              IngredientName: recipe[ingredientId][0].dataValues.IngredientName,
+              AmountForSmall: recipe[ingredientId][0].dataValues.Amount,
+              AmountForMedium: recipe[ingredientId][1].dataValues.Amount,
+              AmountForLarge: recipe[ingredientId][2].dataValues.Amount       
+            }
+            // newData.recipeIngredients.push(recipe[ingredientId])
+            newData.RecipeIngredients.push(ingredients)
+
+          }
+
+          // console.log(newData)
+
+            res.json(newData)
+          })
+
+    });
 };
 
 //query recipes by id
@@ -241,8 +316,8 @@ exports.viewRecipes = function (req, res) {
 //add up calories, carbs, sugars, fat, protein
 
 exports.addRecipe = function (req, res) {
+  console.log(req.file)
   const imgPath = req.file.path.replace('client/public', '');
-  // const imgPath = ('TEST');
 
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
@@ -259,6 +334,7 @@ exports.addRecipe = function (req, res) {
           Size: 'sm',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
@@ -269,6 +345,7 @@ exports.addRecipe = function (req, res) {
           Size: 'md',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
@@ -279,6 +356,7 @@ exports.addRecipe = function (req, res) {
           Size: 'lg',
           Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
+          IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
         })
       );
@@ -305,13 +383,26 @@ exports.deleteRecipe = function (req, res) {
 
 
 exports.editRecipe = function (req, res) {
-  db.Recipe.update(
-    req.body,
-    {
-      where: {
-        id: req.body.id
-      }
-    }).then(function () {
+  console.log('EDITING RECIPE')
+  console.log(req.file)
+  let imgPath;
+  if (req.file===undefined) {
+    imgPath= req.body.RecipeImage
+  }
+  else {
+    imgPath = req.file.path.replace('client/public', '');
+  }
+  
+  console.log('imgPath: '+ imgPath)
+  console.log(req.body)
+  // db.Recipe.update(
+  //   req.body,
+  //   {
+  //     where: {
+  //       id: req.body.id
+  //     }
+  //   }).then(function () {
       res.send();
-    });
+  //   });
+
 };

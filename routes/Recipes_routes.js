@@ -22,9 +22,11 @@ const upload = multer({ storage: storage });
 
 router.get('/', Recipes_controllers.viewRecipes);
 
+router.get('/:id', Recipes_controllers.getOneRecipe)
+
 router.post('/new', upload.single('selectedFile'), Recipes_controllers.addRecipe);
 
-router.put('/update/:id', Recipes_controllers.editRecipe);
+router.put('/edit/:id', upload.single('selectedFile'), Recipes_controllers.editRecipe);
 
 router.delete('/delete/:id', Recipes_controllers.deleteRecipe);
 

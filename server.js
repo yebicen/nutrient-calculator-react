@@ -32,40 +32,40 @@ app.use(authCheck);
 app.use(flash());
 
 
-//upload images using multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads');
-  },
-  filename: function (req, file, cb) {
-    const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
-    // cb(null, file.fieldname + '-' + Date.now());
-    cb(null, newFilename);
-  }
-})
+// //upload images using multer
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './uploads');
+//   },
+//   filename: function (req, file, cb) {
+//     const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
+//     // cb(null, file.fieldname + '-' + Date.now());
+//     cb(null, newFilename);
+//   }
+// })
  
-const upload = multer({ storage: storage })
-app.post('/uploader', upload.single('selectedFile'), function (req, res, next) {
-  // req.files is array of `photos` files
-  // req.body will contain the text fields, if there were any
-  //  console.log(req.body);
-   console.log(req.file);
-   console.log(req.body.recipeId);
-   const newData = { RecipeImage: req.file.path };
-   console.log(newData);
-  db.Recipe.update(
-    newData,
-    {
-      where: {
-        id: req.body.recipeId
-      }
-    }).then(function (result) {
-      console.log("image url updated");
-      res.json(result);
-      // res.redirect('/recipes');
-    });
-  res.send;
-})
+// const upload = multer({ storage: storage })
+// app.post('/uploader', upload.single('selectedFile'), function (req, res, next) {
+//   // req.files is array of `photos` files
+//   // req.body will contain the text fields, if there were any
+//   //  console.log(req.body);
+//    console.log(req.file);
+//    console.log(req.body.recipeId);
+//    const newData = { RecipeImage: req.file.path };
+//    console.log(newData);
+//   db.Recipe.update(
+//     newData,
+//     {
+//       where: {
+//         id: req.body.recipeId
+//       }
+//     }).then(function (result) {
+//       console.log("image url updated");
+//       res.json(result);
+//       // res.redirect('/recipes');
+//     });
+//   res.send;
+// })
 
 require('./routes')(app);
 
