@@ -11,6 +11,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+// import { Router, Route, Link } from 'react-router-dom';
+import history from '../../history';
 import UserAPI from "../../utils/UserAPI";
 
 export default class NavBar extends React.Component {
@@ -48,7 +50,7 @@ export default class NavBar extends React.Component {
     e.preventDefault();
     UserAPI.logoutUser()
     .then(res => {      
-      
+      history.push('/');
     })
     .catch(err => console.log(err));
     this.setState({ 
