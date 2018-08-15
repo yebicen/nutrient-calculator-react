@@ -13,7 +13,7 @@ import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
  
 
-const Mainrouter = () =>
+const App = () =>
     <Container> 
         <Router basename={process.env.PUBLIC_URL}>
             <div>
@@ -30,4 +30,4 @@ const Mainrouter = () =>
         </Router>
     </Container>
 
-export default Mainrouter;
+export default App;
