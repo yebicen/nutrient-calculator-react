@@ -18,7 +18,6 @@ const Mainrouter = () =>
         <Router basename={process.env.PUBLIC_URL}>
             <div>
                 <JumbotronComponent/>
-                
                 <NavBar />
                 <Route path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
