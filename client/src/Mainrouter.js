@@ -12,9 +12,10 @@ import Login from "./components/login";
 import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
  
+
 const Mainrouter = () =>
     <Container> 
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <div>
                 <JumbotronComponent/>
                 
