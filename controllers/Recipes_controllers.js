@@ -2,6 +2,16 @@ var db = require('../models');
 var sequelize = require('sequelize');
 var Promise = require("bluebird");
 
+//allows to check if array already contains value
+//JSON.stringify converts objects to strings to allow for accurate comparison
+Array.prototype.contains = function (value) {
+  for (var i = 0; i < this.length; i++) {
+    if (JSON.stringify(this[i]) === JSON.stringify(value))
+      return true;
+  }
+  return false;
+}
+
 exports.index = function (req, res) {
   // var loggedIn = false;
   // var userText = "";
@@ -38,16 +48,6 @@ exports.viewRecipes = function (req, res) {
     let ingredientTotalsMedium = {};
     let ingredientTotalsLarge = {};
     const newData = [];
-
-    //allows to check if array already contains value
-    //JSON.stringify converts objects to strings to allow for accurate comparison
-    Array.prototype.contains = function (value) {
-      for (var i = 0; i < this.length; i++) {
-        if (JSON.stringify(this[i]) === JSON.stringify(value))
-          return true;
-      }
-      return false;
-    }
 
     for (let i = 0; i < data.length; i++) {
       // console.log('DATA  :' + JSON.stringify(data[i],null,2))
@@ -256,16 +256,6 @@ exports.getOneRecipe = function (req, res) {
         .then(function (dbRecipe) {
           let recipe = {};
 
-          //allows to check if array already contains value
-          //JSON.stringify converts objects to strings to allow for accurate comparison
-          Array.prototype.contains = function (value) {
-            for (var i = 0; i < this.length; i++) {
-              if (JSON.stringify(this[i]) === JSON.stringify(value))
-                return true;
-            }
-            return false;
-          }
-
           for (let i = 0; i < dbRecipe.length; i++) {
             const ingredientId = dbRecipe[i].dataValues.IngredientId;
             if (!recipe[ingredientId]) {
@@ -274,11 +264,11 @@ exports.getOneRecipe = function (req, res) {
 
             //Use Array.prototype.contains to push only unique recipe info into the recipe recipeId object
             if (!recipe[ingredientId].contains(ingredientId)) {
-              recipe[ingredientId].push(dbRecipe[i]);   
+              recipe[ingredientId].push(dbRecipe[i]);
             }
           }
           // console.log(dbRecipe[0].Recipe.dataValues)
-          
+
           const newData = {
             RecipeId: dbRecipe[0].Recipe.dataValues.id,
             RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
@@ -296,7 +286,7 @@ exports.getOneRecipe = function (req, res) {
               IngredientName: recipe[ingredientId][0].dataValues.IngredientName,
               AmountForSmall: recipe[ingredientId][0].dataValues.Amount,
               AmountForMedium: recipe[ingredientId][1].dataValues.Amount,
-              AmountForLarge: recipe[ingredientId][2].dataValues.Amount       
+              AmountForLarge: recipe[ingredientId][2].dataValues.Amount
             }
             // newData.recipeIngredients.push(recipe[ingredientId])
             newData.RecipeIngredients.push(ingredients)
@@ -305,8 +295,8 @@ exports.getOneRecipe = function (req, res) {
 
           // console.log(newData)
 
-            res.json(newData)
-          })
+          res.json(newData)
+        })
 
     });
 };
@@ -384,25 +374,34 @@ exports.deleteRecipe = function (req, res) {
 
 exports.editRecipe = function (req, res) {
   console.log('EDITING RECIPE')
+  console.log('==============')
   console.log(req.file)
+  console.log('==============')
+  console.log(req.body)
+
   let imgPath;
-  if (req.file===undefined) {
-    imgPath= req.body.RecipeImage
+  if (req.file === undefined) {
+    imgPath = req.body.RecipeImage
   }
   else {
     imgPath = req.file.path.replace('client/public', '');
   }
-  
-  console.log('imgPath: '+ imgPath)
-  console.log(req.body)
-  // db.Recipe.update(
-  //   req.body,
-  //   {
-  //     where: {
-  //       id: req.body.id
-  //     }
-  //   }).then(function () {
+
+  console.log('==============')
+  console.log('imgPath: ' + imgPath)
+
+
+  db.Recipe.update({
+    RecipeName: req.body.RecipeName,
+    RecipeDescription: req.body.RecipeDescription,
+    RecipeImage: imgPath
+  },
+    {
+      where: {
+        id: req.body.RecipeId
+      }
+    }).then(function () {
       res.send();
-  //   });
+    });
 
 };

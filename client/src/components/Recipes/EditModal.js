@@ -5,6 +5,7 @@ import EditRecipeForm from './EditRecipeForm'
 
 export default class EditModal extends React.Component {
     state = {
+        RecipeId: "",
         RecipeName: "",
         RecipeDescription: "",
         RecipeImage: "",
@@ -49,6 +50,7 @@ export default class EditModal extends React.Component {
         // event.preventDefault();
         const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients } = this.state;
         let formData = new FormData();
+        formData.append('RecipeId', editRecipeId);
         formData.append('RecipeName', RecipeName);
         formData.append('RecipeDescription', RecipeDescription);
         formData.append('selectedFile', selectedFile);
@@ -60,6 +62,7 @@ export default class EditModal extends React.Component {
             .then(this.props.getRecipes());
         this.props.toggle();
         this.setState({
+            RecipeId: "",
             RecipeName: "",
             RecipeDescription: "",
             RecipeImage: "",
