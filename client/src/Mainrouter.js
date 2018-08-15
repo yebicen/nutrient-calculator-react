@@ -19,7 +19,7 @@ const Mainrouter = () =>
                 <JumbotronComponent/>
                 
                 <NavBar />
-                <Route exact path="/" component={Smoothie} />
+                <Route path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
                 <Route exact path="/recipes" component={Recipes} />
                 <Route path="/users/admin" component={Admin} />

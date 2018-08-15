@@ -12,7 +12,8 @@ export default class EditModal extends React.Component {
         // RecipeType: "",
         selectedFile: null,
         ingredientList: [],
-        RecipeIngredients: []
+        RecipeIngredients: [],
+        RecipeAmounts: []
     };
 
     setEditState() {
@@ -26,6 +27,7 @@ export default class EditModal extends React.Component {
                     // selectedFile: null,
                     ingredientList: this.props.prepopulateForm.ingredientList,
                     RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
+                    RecipeAmounts: this.props.prepopulateForm.RecipeAmounts,
                     ingredientList: res.data
                 })
                 // this.state.ingredientList.unshift({
@@ -48,7 +50,7 @@ export default class EditModal extends React.Component {
     confirmEdit = (editRecipeId, editState) => {
 
         // event.preventDefault();
-        const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients } = this.state;
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients, RecipeAmounts } = this.state;
         let formData = new FormData();
         formData.append('RecipeId', editRecipeId);
         formData.append('RecipeName', RecipeName);
@@ -58,6 +60,7 @@ export default class EditModal extends React.Component {
         // formData.append('RecipeType', RecipeType);
         formData.append('ingredientList', ingredientList);
         formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
+        formData.append('RecipeAmounts', JSON.stringify(RecipeAmounts));
         API.editRecipe(editRecipeId, formData)
             .then(this.props.getRecipes());
         this.props.toggle();
@@ -69,7 +72,8 @@ export default class EditModal extends React.Component {
             // RecipeType: "",
             selectedFile: null,
             ingredientList: [],
-            RecipeIngredients: []
+            RecipeIngredients: [],
+            RecipeAmounts: []
         });
 
         console.log(editState);
@@ -85,7 +89,18 @@ export default class EditModal extends React.Component {
                     AmountForMedium: '',
                     AmountForLarge: ''
                 }
+            ]),
+
+            RecipeAmounts: this.state.RecipeAmounts.concat([
+                {
+                    IngredientName: '',
+                    IngredientId: null,
+                    AmountForSmall: '',
+                    AmountForMedium: '',
+                    AmountForLarge: ''
+                }
             ])
+            
         });
         // console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
     }

@@ -268,14 +268,15 @@ exports.getOneRecipe = function (req, res) {
             }
           }
           console.log('====================')
-          console.log(dbRecipe[0])
+          // console.log(dbRecipe[0])
 
           const newData = {
             RecipeId: dbRecipe[0].Recipe.dataValues.id,
             RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
             RecipeDescription: dbRecipe[0].Recipe.dataValues.RecipeDescription,
             RecipeImage: dbRecipe[0].Recipe.dataValues.RecipeImage,
-            RecipeIngredients: []
+            RecipeIngredients: [],
+            RecipeAmounts: dbRecipe
           };
 
           for (let ingredientId in recipe) {
@@ -288,25 +289,26 @@ exports.getOneRecipe = function (req, res) {
               AmountForSmall: recipe[ingredientId][0].dataValues.Amount,
               AmountForMedium: recipe[ingredientId][1].dataValues.Amount,
               AmountForLarge: recipe[ingredientId][2].dataValues.Amount,
-              Small: {
-                Amount: recipe[ingredientId][0].dataValues.Amount,
-                RecipeAmountId: recipe[ingredientId][0].dataValues.id
-              },
-              Medium: {
-                Amount: recipe[ingredientId][1].dataValues.Amount,
-                RecipeAmountId: recipe[ingredientId][1].dataValues.id
-              },
-              Large: {
-                Amount: recipe[ingredientId][2].dataValues.Amount,
-                RecipeAmountId: recipe[ingredientId][2].dataValues.id
-              }
+              // Small: {
+              //   Amount: recipe[ingredientId][0].dataValues.Amount,
+              //   RecipeAmountId: recipe[ingredientId][0].dataValues.id
+              // },
+              // Medium: {
+              //   Amount: recipe[ingredientId][1].dataValues.Amount,
+              //   RecipeAmountId: recipe[ingredientId][1].dataValues.id
+              // },
+              // Large: {
+              //   Amount: recipe[ingredientId][2].dataValues.Amount,
+              //   RecipeAmountId: recipe[ingredientId][2].dataValues.id
+              // }
+              
             }
             // newData.recipeIngredients.push(recipe[ingredientId])
             newData.RecipeIngredients.push(ingredients)
 
           }
 
-          // console.log(newData)
+          console.log(newData)
 
           res.json(newData)
         })
@@ -413,6 +415,8 @@ exports.editRecipe = function (req, res) {
     // console.log(res)
     let newRecipeAmounts = {};
     newRecipeIngredients = JSON.parse(req.body.RecipeIngredients)
+    console.log('=======newRecipeIngredients=======')
+    console.log(newRecipeIngredients[0].Small.RecipeAmountId)
 
     for (let i = 0; i < newRecipeIngredients.length; i++) {
       const SmallRecipeAmountId = newRecipeIngredients[i].Small.RecipeAmountId;
@@ -473,7 +477,6 @@ exports.editRecipe = function (req, res) {
 
     console.log('=======OLD RecipeAmount Ids=======')
     for (let i=0; i<oldRecipeAmounts.length; i++) {
-      if (oldRecipeAmounts.contains())
     console.log(oldRecipeAmounts[i].dataValues.id)
     }
 
