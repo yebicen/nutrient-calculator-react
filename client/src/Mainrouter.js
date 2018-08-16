@@ -1,6 +1,7 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Link, Redirect } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 // import createHistory from 'history/createBrowserHistory'
 import history from './history';
 import Ingredients from "./components/Ingredients";
@@ -23,12 +24,13 @@ const Mainrouter = () =>
                 <JumbotronComponent/>
                 
                 <NavBar />
+                <Route path="/login" component={Login} />
                 <Route exact path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
                 <Route exact path="/recipes" component={Recipes} />
-                <Route path="/users/admin" component={Admin} />
-                <Route path="/users/login" component={Login} />
-                <Route path="/users/profile" component={Profile} />
+                <Route path="/admin" component={Admin} />
+                
+                <Route path="/profile" component={Profile} />
                 <Route path="/image" component={Imguploader} /> 
 
                 </div>

@@ -32,16 +32,7 @@ exports.findUser = function (req, res) {
           }
         }).then(function(dbUser){
           res.json(dbUser);
-          // console.log(dbUser);
-          // res.render("editprofile",{
-          //   layout: 'main',
-          //    firstname: dbUser[0].firstname,
-          //    lastname: dbUser[0].lastname,
-          //    username: dbUser[0].username,
-          //    password: dbUser[0].password,
-          //    email: dbUser[0].email,
-          //    id: dbUser[0].id
-          //  });
+    
         });
 };
 //for admin to add new user
