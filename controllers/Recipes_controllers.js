@@ -275,8 +275,7 @@ exports.getOneRecipe = function (req, res) {
             RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
             RecipeDescription: dbRecipe[0].Recipe.dataValues.RecipeDescription,
             RecipeImage: dbRecipe[0].Recipe.dataValues.RecipeImage,
-            RecipeIngredients: [],
-            RecipeAmounts: dbRecipe
+            RecipeIngredients: []
           };
 
           for (let ingredientId in recipe) {
@@ -301,7 +300,7 @@ exports.getOneRecipe = function (req, res) {
               //   Amount: recipe[ingredientId][2].dataValues.Amount,
               //   RecipeAmountId: recipe[ingredientId][2].dataValues.id
               // }
-              
+
             }
             // newData.recipeIngredients.push(recipe[ingredientId])
             newData.RecipeIngredients.push(ingredients)
@@ -388,11 +387,11 @@ exports.deleteRecipe = function (req, res) {
 
 
 exports.editRecipe = function (req, res) {
-  console.log('EDITING RECIPE')
-  console.log('==============')
-  console.log(req.file)
-  console.log('==============')
-  console.log(req.body)
+  // console.log('EDITING RECIPE')
+  // console.log('==============')
+  // console.log(req.file)
+  // console.log('==============')
+  // console.log(req.body)
 
   let imgPath;
   if (req.file === undefined) {
@@ -402,99 +401,81 @@ exports.editRecipe = function (req, res) {
     imgPath = req.file.path.replace('client/public', '');
   }
 
-  console.log('==============')
-  console.log('imgPath: ' + imgPath)
-  
+  // console.log('==============')
+  // console.log('imgPath: ' + imgPath)
 
-  db.RecipeAmount.findAll({
-    where: {
-      RecipeId: req.body.RecipeId
-    }
-  }).then(function (oldRecipeAmounts) {
-    
-    // console.log(res)
-    let newRecipeAmounts = {};
-    newRecipeIngredients = JSON.parse(req.body.RecipeIngredients)
-    console.log('=======newRecipeIngredients=======')
-    console.log(newRecipeIngredients[0].Small.RecipeAmountId)
-
-    for (let i = 0; i < newRecipeIngredients.length; i++) {
-      const SmallRecipeAmountId = newRecipeIngredients[i].Small.RecipeAmountId;
-      const MediumRecipeAmountId = newRecipeIngredients[i].Medium.RecipeAmountId;
-      const LargeRecipeAmountId = newRecipeIngredients[i].Large.RecipeAmountId;
-      // newRecipeAmounts.push(SmallRecipeAmountId,MediumRecipeAmountId,LargeRecipeAmountId)
-      if (!newRecipeAmounts[SmallRecipeAmountId]) {
-        newRecipeAmounts[SmallRecipeAmountId] = [];
-      }
-
-      if (!newRecipeAmounts[MediumRecipeAmountId]) {
-        newRecipeAmounts[MediumRecipeAmountId] = [];
-      }
-
-      if (!newRecipeAmounts[LargeRecipeAmountId]) {
-        newRecipeAmounts[LargeRecipeAmountId] = [];
-      }
-
-      if (!newRecipeAmounts[SmallRecipeAmountId].contains(newRecipeIngredients[i].Small.RecipeAmountId)) {
-        recipeAmount = {
-          id: newRecipeIngredients[i].Small.RecipeAmountId,
-          Amount: newRecipeIngredients[i].Small.Amount,
-          Size: 'sm',
-          IngredientName: newRecipeIngredients[i].IngredientName,
-          IngredientId: newRecipeIngredients[i].IngredientId,
-          RecipeId: req.body.RecipeId
-        }
-        newRecipeAmounts[SmallRecipeAmountId].push(recipeAmount);
-
-      }
-
-      if (!newRecipeAmounts[MediumRecipeAmountId].contains(newRecipeIngredients[i].Medium.RecipeAmountId)) {
-        recipeAmount = {
-          id: newRecipeIngredients[i].Medium.RecipeAmountId,
-          Amount: newRecipeIngredients[i].Medium.Amount,
-          Size: 'sm',
-          IngredientName: newRecipeIngredients[i].IngredientName,
-          IngredientId: newRecipeIngredients[i].IngredientId,
-          RecipeId: req.body.RecipeId
-        }
-        newRecipeAmounts[MediumRecipeAmountId].push(recipeAmount);
-      }
-      if (!newRecipeAmounts[LargeRecipeAmountId].contains(newRecipeIngredients[i].Large.RecipeAmountId)) {
-        recipeAmount = {
-          id: newRecipeIngredients[i].Large.RecipeAmountId,
-          Amount: newRecipeIngredients[i].Large.Amount,
-          Size: 'sm',
-          IngredientName: newRecipeIngredients[i].IngredientName,
-          IngredientId: newRecipeIngredients[i].IngredientId,
-          RecipeId: req.body.RecipeId
-        }
-        newRecipeAmounts[LargeRecipeAmountId].push(recipeAmount);
-      }
-      
-    }
-    console.log('=======NEW RecipeAmounts=======')
-    console.log(newRecipeAmounts)
-
-    console.log('=======OLD RecipeAmount Ids=======')
-    for (let i=0; i<oldRecipeAmounts.length; i++) {
-    console.log(oldRecipeAmounts[i].dataValues.id)
-    }
-
-    
-
-  }).then(function () {
-    db.Recipe.update({
+  db.Recipe.update(
+    {
       RecipeName: req.body.RecipeName,
       RecipeDescription: req.body.RecipeDescription,
       RecipeImage: imgPath
     },
-      {
+    // req.body,
+    {
+      where: {
+        id: req.body.RecipeId
+      }
+    })
+    .then(function () {
+      console.log('DELETE !!!')
+      console.log('==============')
+      db.RecipeAmount.destroy({
         where: {
-          id: req.body.RecipeId
+          RecipeId: req.body.RecipeId
         }
-      }).then(function () {
-        res.send();
-      });
-  })
+      })
+    })
+    .then(function () {
+      console.log('NOW ADD !!!')
+      console.log('==============')
+      console.log(req.body)
+      console.log('==============')
+      const RecipeIngredients = JSON.parse(req.body.RecipeIngredients);
+      const RecipeAmounts = [];
+      for (let i = 0; i < RecipeIngredients.length; i++) {
+        const RecipeAmountsSmall = {
+          Amount: RecipeIngredients[i].AmountForSmall,
+          Size: 'sm',
+          IngredientName: RecipeIngredients[i].IngredientName,
+          Type: "smoothie",
+          IngredientId: RecipeIngredients[i].IngredientId,
+          RecipeId: req.body.RecipeId
+        }
+        const RecipeAmountsMedium = {
+          Amount: RecipeIngredients[i].AmountForMedium,
+          Size: 'md',
+          IngredientName: RecipeIngredients[i].IngredientName,
+          Type: "smoothie",
+          IngredientId: RecipeIngredients[i].IngredientId,
+          RecipeId: req.body.RecipeId
+        }
+        const RecipeAmountsLarge = {
+          Amount: RecipeIngredients[i].AmountForLarge,
+          Size: 'lg',
+          IngredientName: RecipeIngredients[i].IngredientName,
+          Type: "smoothie",
+          IngredientId: RecipeIngredients[i].IngredientId,
+          RecipeId: req.body.RecipeId
+        }
+        RecipeAmounts.push(RecipeAmountsSmall, RecipeAmountsMedium, RecipeAmountsLarge)
+      }
+      console.log(RecipeAmounts)
+      for (let i = 0; i < RecipeAmounts.length; i++) {
+        let RecipeAmount=RecipeAmounts[i]
+        console.log('=========== RecipeAmount')
+        console.log(RecipeAmount)
+        db.RecipeAmount.create({
+          Amount: RecipeAmount.Amount,
+          Size: RecipeAmount.Size,
+          IngredientName: RecipeAmount.IngredientName,
+          Type: RecipeAmount.Type,
+          IngredientId: RecipeAmount.IngredientId,
+          RecipeId: RecipeAmount.RecipeId
+        })
+      }
+    })
+    .then(function () {
 
-};
+      res.send();
+    })
+}

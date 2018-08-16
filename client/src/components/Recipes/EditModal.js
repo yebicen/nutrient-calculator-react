@@ -12,8 +12,7 @@ export default class EditModal extends React.Component {
         // RecipeType: "",
         selectedFile: null,
         ingredientList: [],
-        RecipeIngredients: [],
-        RecipeAmounts: []
+        RecipeIngredients: []
     };
 
     setEditState() {
@@ -27,7 +26,6 @@ export default class EditModal extends React.Component {
                     // selectedFile: null,
                     ingredientList: this.props.prepopulateForm.ingredientList,
                     RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
-                    RecipeAmounts: this.props.prepopulateForm.RecipeAmounts,
                     ingredientList: res.data
                 })
                 // this.state.ingredientList.unshift({
@@ -82,16 +80,6 @@ export default class EditModal extends React.Component {
     handleAddIngredient = () => {
         this.setState({
             RecipeIngredients: this.state.RecipeIngredients.concat([
-                {
-                    IngredientName: '',
-                    IngredientId: null,
-                    AmountForSmall: '',
-                    AmountForMedium: '',
-                    AmountForLarge: ''
-                }
-            ]),
-
-            RecipeAmounts: this.state.RecipeAmounts.concat([
                 {
                     IngredientName: '',
                     IngredientId: null,
