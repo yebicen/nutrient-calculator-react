@@ -11,8 +11,11 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+// import { Router, Route, Link } from 'react-router-dom';
+import history from '../../history';
 import UserAPI from "../../utils/UserAPI";
 
+console.log(history);
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +51,8 @@ export default class NavBar extends React.Component {
     e.preventDefault();
     UserAPI.logoutUser()
     .then(res => {      
-      
+      history.replace('/');
+      console.log(history);
     })
     .catch(err => console.log(err));
     this.setState({ 
@@ -96,17 +100,17 @@ export default class NavBar extends React.Component {
                 {loggedIn?
                 <NavLink href="/users/sign-out" onClick={e=>this.logoutHandler(e)}>Logout</NavLink>
                   :
-                <NavLink href="/users/login" onClick={e=>this.loginHandler(e)}>Login</NavLink>
+                <NavLink href="/login" onClick={e=>this.loginHandler(e)}>Login</NavLink>
                 }
               </NavItem>
               {loggedIn &&
               <NavItem>
-                <NavLink href="/users/admin">Admin</NavLink>
+                <NavLink href="/admin">Admin</NavLink>
               </NavItem>
               }
               {loggedIn &&
               <NavItem>
-                <NavLink href="/users/profile">Profile</NavLink>
+                <NavLink href="/profile">Profile</NavLink>
               </NavItem>             
               }
             </Nav>

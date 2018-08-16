@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import UserAPI from "../utils/UserAPI";
+import history from '../history';
 
+console.log(history.location);
 export default class Login extends React.Component {
     constructor (props) {
         super(props);
@@ -32,7 +34,7 @@ export default class Login extends React.Component {
           console.log("logged In");
          })
         .catch(err => console.log(err));
-      
+        history.replace('/');
          this.setState({
              usernameLgIn: "",
              passwordLgIn: ""

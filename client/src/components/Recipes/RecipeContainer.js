@@ -4,7 +4,6 @@ import AddRecipeForm from './AddRecipeForm';
 import RecipeList from './RecipeList';
 import API from '../../utils/API';
 
-
 export default class IngredientContainer extends React.Component {
 
   state = {
@@ -28,11 +27,13 @@ export default class IngredientContainer extends React.Component {
   };
 
   render() {
+    
     return (
       <Container>
         <AddRecipeForm getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes} />
         <RecipeList getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes} />
       </Container>
     );
+  
   }
 }

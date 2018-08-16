@@ -1,6 +1,9 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Link, Redirect } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+// import createHistory from 'history/createBrowserHistory'
+import history from './history';
 import Ingredients from "./components/Ingredients";
 import Recipes from "./components/Recipes";
 import Admin from "./components/admin";
@@ -17,20 +20,21 @@ import StickyFooter from 'react-sticky-footer';
 
 const App = () =>
     <div class="w-screen mt-4">
-        <Router>
+        <Router history={history}>
             <div>
                 <JumbotronComponent />
 
                 <NavBar />
+                <Route path="/login" component={Login} />
                 <Route exact path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
                 <Route exact path="/contact" component={Contact} />
                 <Route exact path="/recipes" component={Recipes} />
-                <Route path="/users/admin" component={Admin} />
-                <Route path="/users/login" component={Login} />
-                <Route path="/users/profile" component={Profile} />
-                <Route path="/image" component={Imguploader} />
-            </div>
+                <Route path="/admin" component={Admin} />      
+                <Route path="/profile" component={Profile} />
+                <Route path="/image" component={Imguploader} /> 
+
+                </div>
         </Router>
 
         <StickyFooter
