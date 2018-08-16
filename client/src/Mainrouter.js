@@ -11,23 +11,43 @@ import Smoothie from "./components/Smoothie";
 import Login from "./components/login";
 import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
- 
+import Contact from "./components/contact";
+import StickyFooter from 'react-sticky-footer';
+
 
 const App = () =>
-    <Container> 
-        <Router basename={process.env.PUBLIC_URL}>
+    <div class="w-screen mt-4">
+        <Router>
             <div>
-                <JumbotronComponent/>
+                <JumbotronComponent />
+
                 <NavBar />
                 <Route exact path="/" component={Smoothie} />
                 <Route exact path="/ingredients" component={Ingredients} />
+                <Route exact path="/contact" component={Contact} />
                 <Route exact path="/recipes" component={Recipes} />
                 <Route path="/users/admin" component={Admin} />
                 <Route path="/users/login" component={Login} />
                 <Route path="/users/profile" component={Profile} />
-                <Route path="/image" component={Imguploader} /> 
+                <Route path="/image" component={Imguploader} />
             </div>
         </Router>
-    </Container>
+
+        <StickyFooter
+            bottomThreshold={50}
+            normalStyles={{
+                backgroundColor: "silver",
+                padding: "2rem"
+            }}
+            stickyStyles={{
+                backgroundColor: "rgba(255,255,255,.8)",
+                padding: "2rem"
+            }}
+        >
+            2200 Colorado Ave
+ Santa Monica, CA 90404; email@email.com
+        </StickyFooter>
+
+    </div>
 
 export default App;
