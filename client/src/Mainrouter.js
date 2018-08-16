@@ -15,16 +15,9 @@ import Profile from "./components/profile";
 import Imguploader from "./components/uploadimg";
 import Contact from "./components/contact";
 
-<<<<<<< HEAD
 const App = () =>
     <div className="w-screen mt-4">
         <Router history={history}>
-=======
-
-const Mainrouter = () =>
-    <div class="w-screen mt-4">
-        <Router>
->>>>>>> parent of 54e6221... fix merge problem
             <div>
                 <NavBar />
                 <Route path="/login" component={Login} />

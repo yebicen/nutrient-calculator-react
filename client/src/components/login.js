@@ -34,7 +34,7 @@ export default class Login extends React.Component {
           console.log("logged In");
          })
         .catch(err => console.log(err));
-        history.replace('/');
+        history.push('/');
          this.setState({
              usernameLgIn: "",
              passwordLgIn: ""
@@ -50,13 +50,13 @@ export default class Login extends React.Component {
               <Form inline>
                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                    <label for="usernameLgIn" className="mr-sm-2">Userame: </label>                
-                   <input id="usernameLgIn" name = "usernameLgIn" value = {this.state.usernameLgIn} onChange = {this.handleLoginChange} />                
+                   <Input id="usernameLgIn" name = "usernameLgIn" value = {this.state.usernameLgIn} onChange = {this.handleLoginChange} />                
                 </FormGroup>
                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                    <label for="passwordLgIn" className="mr-sm-2">Password: </label>               
-                   <input id="passwordLgIn" name = "passwordLgIn" value = {this.state.passwordLgIn} onChange = {this.handleLoginChange} />               
+                   <Input id="passwordLgIn" name = "passwordLgIn" value = {this.state.passwordLgIn} onChange = {this.handleLoginChange} />               
                 </FormGroup>
-                <button onClick = {this.handleLoginSubmit} >Submit </button>
+                <Button onClick = {this.handleLoginSubmit} >Submit </Button>
 
               </Form>
            </div>
