@@ -92,11 +92,11 @@ exports.viewRecipes = function (req, res) {
 
         let ingredientTotal = {
           id: data[i].Ingredient.id,
-          Calories: data[i].Ingredient.Calories * data[i].Amount,
-          Carbs: data[i].Ingredient.Carbs * data[i].Amount,
-          Sugar: data[i].Ingredient.Sugar * data[i].Amount,
-          Fat: data[i].Ingredient.Fat * data[i].Amount,
-          Protein: data[i].Ingredient.Protein * data[i].Amount
+          Calories: parseFloat(data[i].Ingredient.Calories) *  parseFloat(data[i].Amount),
+          Carbs:  parseFloat(data[i].Ingredient.Carbs) *  parseFloat(data[i].Amount),
+          Sugar:  parseFloat(data[i].Ingredient.Sugar) *  parseFloat(data[i].Amount),
+          Fat:  parseFloat(data[i].Ingredient.Fat) *  parseFloat(data[i].Amount),
+          Protein: parseFloat(data[i].Ingredient.Protein) *  parseFloat(data[i].Amount)
         }
         ingredientTotalsSmall[recipeId].push(ingredientTotal)
       }
@@ -156,11 +156,11 @@ exports.viewRecipes = function (req, res) {
       var totalFatLarge = 0;
       var totalProteinLarge = 0;
       for (let i = 0; i < ingredientTotalsSmall[recipeId].length; i++) {
-        var Calories = parseInt(ingredientTotalsSmall[recipeId][i].Calories);
-        var Carbs = parseInt(ingredientTotalsSmall[recipeId][i].Carbs);
-        var Sugar = parseInt(ingredientTotalsSmall[recipeId][i].Sugar);
-        var Fat = parseInt(ingredientTotalsSmall[recipeId][i].Fat);
-        var Protein = parseInt(ingredientTotalsSmall[recipeId][i].Protein);
+        var Calories = parseFloat(ingredientTotalsSmall[recipeId][i].Calories);
+        var Carbs = parseFloat(ingredientTotalsSmall[recipeId][i].Carbs);
+        var Sugar = parseFloat(ingredientTotalsSmall[recipeId][i].Sugar);
+        var Fat = parseFloat(ingredientTotalsSmall[recipeId][i].Fat);
+        var Protein = parseFloat(ingredientTotalsSmall[recipeId][i].Protein);
         totalCaloriesSmall += Calories;
         totalCarbsSmall += Carbs;
         totalSugarSmall += Sugar;
@@ -169,11 +169,11 @@ exports.viewRecipes = function (req, res) {
       }
 
       for (let i = 0; i < ingredientTotalsMedium[recipeId].length; i++) {
-        var Calories = parseInt(ingredientTotalsMedium[recipeId][i].Calories);
-        var Carbs = parseInt(ingredientTotalsMedium[recipeId][i].Carbs);
-        var Sugar = parseInt(ingredientTotalsMedium[recipeId][i].Sugar);
-        var Fat = parseInt(ingredientTotalsMedium[recipeId][i].Fat);
-        var Protein = parseInt(ingredientTotalsMedium[recipeId][i].Protein);
+        var Calories = parseFloat(ingredientTotalsMedium[recipeId][i].Calories);
+        var Carbs = parseFloat(ingredientTotalsMedium[recipeId][i].Carbs);
+        var Sugar = parseFloat(ingredientTotalsMedium[recipeId][i].Sugar);
+        var Fat = parseFloat(ingredientTotalsMedium[recipeId][i].Fat);
+        var Protein = parseFloat(ingredientTotalsMedium[recipeId][i].Protein);
         totalCaloriesMedium += Calories;
         totalCarbsMedium += Carbs;
         totalSugarMedium += Sugar;
@@ -182,11 +182,11 @@ exports.viewRecipes = function (req, res) {
       }
 
       for (let i = 0; i < ingredientTotalsLarge[recipeId].length; i++) {
-        var Calories = parseInt(ingredientTotalsLarge[recipeId][i].Calories);
-        var Carbs = parseInt(ingredientTotalsLarge[recipeId][i].Carbs);
-        var Sugar = parseInt(ingredientTotalsLarge[recipeId][i].Sugar);
-        var Fat = parseInt(ingredientTotalsLarge[recipeId][i].Fat);
-        var Protein = parseInt(ingredientTotalsLarge[recipeId][i].Protein);
+        var Calories = parseFloat(ingredientTotalsLarge[recipeId][i].Calories);
+        var Carbs = parseFloat(ingredientTotalsLarge[recipeId][i].Carbs);
+        var Sugar = parseFloat(ingredientTotalsLarge[recipeId][i].Sugar);
+        var Fat = parseFloat(ingredientTotalsLarge[recipeId][i].Fat);
+        var Protein = parseFloat(ingredientTotalsLarge[recipeId][i].Protein);
         totalCaloriesLarge += Calories;
         totalCarbsLarge += Carbs;
         totalSugarLarge += Sugar;
@@ -200,31 +200,31 @@ exports.viewRecipes = function (req, res) {
           small: {
             ingredients: smallIngredients[recipeId],
             nutritionTotals: {
-              Calories: totalCaloriesSmall,
-              Carbs: totalCarbsSmall,
-              Sugar: totalSugarSmall,
-              Fat: totalFatSmall,
-              Protein: totalProteinSmall
+              Calories: totalCaloriesSmall.toFixed(2),
+              Carbs: totalCarbsSmall.toFixed(2),
+              Sugar: totalSugarSmall.toFixed(2),
+              Fat: totalFatSmall.toFixed(2),
+              Protein: totalProteinSmall.toFixed(2)
             }
           },
           medium: {
             ingredients: mediumIngredients[recipeId],
             nutritionTotals: {
-              Calories: totalCaloriesMedium,
-              Carbs: totalCarbsMedium,
-              Sugar: totalSugarMedium,
-              Fat: totalFatMedium,
-              Protein: totalProteinMedium
+              Calories: totalCaloriesMedium.toFixed(2),
+              Carbs: totalCarbsMedium.toFixed(2),
+              Sugar: totalSugarMedium.toFixed(2),
+              Fat: totalFatMedium.toFixed(2),
+              Protein: totalProteinMedium.toFixed(2)
             }
           },
           large: {
             ingredients: largeIngredients[recipeId],
             nutritionTotals: {
-              Calories: totalCaloriesLarge,
-              Carbs: totalCarbsLarge,
-              Sugar: totalSugarLarge,
-              Fat: totalFatLarge,
-              Protein: totalProteinLarge
+              Calories: totalCaloriesLarge.toFixed(2),
+              Carbs: totalCarbsLarge.toFixed(2),
+              Sugar: totalSugarLarge.toFixed(2),
+              Fat: totalFatLarge.toFixed(2),
+              Protein: totalProteinLarge.toFixed(2)
             }
           },
 
@@ -321,6 +321,8 @@ exports.getOneRecipe = function (req, res) {
 
 exports.addRecipe = function (req, res) {
   console.log(req.file)
+  console.log('=====================')
+  console.log(req.body)
   const imgPath = req.file.path.replace('client/public', '');
 
   db.Recipe.create({
