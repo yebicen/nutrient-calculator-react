@@ -274,6 +274,7 @@ exports.getOneRecipe = function (req, res) {
             RecipeId: dbRecipe[0].Recipe.dataValues.id,
             RecipeName: dbRecipe[0].Recipe.dataValues.RecipeName,
             RecipeDescription: dbRecipe[0].Recipe.dataValues.RecipeDescription,
+            RecipeType: dbRecipe[0].Recipe.dataValues.RecipeType,
             RecipeImage: dbRecipe[0].Recipe.dataValues.RecipeImage,
             RecipeIngredients: []
           };
@@ -328,6 +329,7 @@ exports.addRecipe = function (req, res) {
   db.Recipe.create({
     RecipeName: req.body.RecipeName,
     RecipeDescription: req.body.RecipeDescription,
+    RecipeType: req.body.RecipeType,
     RecipeImage: imgPath
   }).then(function (newRecipe) {
     RecipeIngredients = JSON.parse(req.body.RecipeIngredients)
@@ -338,7 +340,6 @@ exports.addRecipe = function (req, res) {
         db.RecipeAmount.create({
           Amount: RecipeIngredients[i].AmountForSmall,
           Size: 'sm',
-          Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
           IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
@@ -349,7 +350,6 @@ exports.addRecipe = function (req, res) {
         db.RecipeAmount.create({
           Amount: RecipeIngredients[i].AmountForMedium,
           Size: 'md',
-          Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
           IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
@@ -360,7 +360,6 @@ exports.addRecipe = function (req, res) {
         db.RecipeAmount.create({
           Amount: RecipeIngredients[i].AmountForLarge,
           Size: 'lg',
-          Type: 'smoothie',
           IngredientId: RecipeIngredients[i].IngredientId,
           IngredientName: RecipeIngredients[i].IngredientName,
           RecipeId: RecipeId
@@ -410,6 +409,7 @@ exports.editRecipe = function (req, res) {
     {
       RecipeName: req.body.RecipeName,
       RecipeDescription: req.body.RecipeDescription,
+      RecipeType: req.body.RecipeType,
       RecipeImage: imgPath
     },
     // req.body,
@@ -439,7 +439,6 @@ exports.editRecipe = function (req, res) {
           Amount: RecipeIngredients[i].AmountForSmall,
           Size: 'sm',
           IngredientName: RecipeIngredients[i].IngredientName,
-          Type: "smoothie",
           IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: req.body.RecipeId
         }
@@ -447,7 +446,6 @@ exports.editRecipe = function (req, res) {
           Amount: RecipeIngredients[i].AmountForMedium,
           Size: 'md',
           IngredientName: RecipeIngredients[i].IngredientName,
-          Type: "smoothie",
           IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: req.body.RecipeId
         }
@@ -455,7 +453,6 @@ exports.editRecipe = function (req, res) {
           Amount: RecipeIngredients[i].AmountForLarge,
           Size: 'lg',
           IngredientName: RecipeIngredients[i].IngredientName,
-          Type: "smoothie",
           IngredientId: RecipeIngredients[i].IngredientId,
           RecipeId: req.body.RecipeId
         }
@@ -470,7 +467,6 @@ exports.editRecipe = function (req, res) {
           Amount: RecipeAmount.Amount,
           Size: RecipeAmount.Size,
           IngredientName: RecipeAmount.IngredientName,
-          Type: RecipeAmount.Type,
           IngredientId: RecipeAmount.IngredientId,
           RecipeId: RecipeAmount.RecipeId
         })

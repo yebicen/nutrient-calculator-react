@@ -9,6 +9,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true
         },
+        //Smoothie, or Acai Bowl, etc.
+       RecipeType: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 50],
+            }
+        },
         RecipeImage: {
             type: DataTypes.STRING,
             allowNull: true

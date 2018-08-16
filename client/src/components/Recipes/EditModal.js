@@ -9,7 +9,7 @@ export default class EditModal extends React.Component {
         RecipeName: "",
         RecipeDescription: "",
         RecipeImage: "",
-        // RecipeType: "",
+        RecipeType: "",
         selectedFile: null,
         ingredientList: [],
         RecipeIngredients: []
@@ -22,7 +22,7 @@ export default class EditModal extends React.Component {
                     RecipeName: this.props.prepopulateForm.RecipeName,
                     RecipeDescription: this.props.prepopulateForm.RecipeDescription,
                     RecipeImage: this.props.prepopulateForm.RecipeImage,
-                    // RecipeType: this.props.prepopulateForm.RecipeType,
+                    RecipeType: this.props.prepopulateForm.RecipeType,
                     // selectedFile: null,
                     ingredientList: this.props.prepopulateForm.ingredientList,
                     RecipeIngredients: this.props.prepopulateForm.RecipeIngredients,
@@ -55,7 +55,7 @@ export default class EditModal extends React.Component {
         formData.append('RecipeDescription', RecipeDescription);
         formData.append('selectedFile', selectedFile);
         formData.append('RecipeImage', RecipeImage);
-        // formData.append('RecipeType', RecipeType);
+        formData.append('RecipeType', RecipeType);
         formData.append('ingredientList', ingredientList);
         formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
         formData.append('RecipeAmounts', JSON.stringify(RecipeAmounts));

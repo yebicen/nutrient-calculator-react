@@ -15,15 +15,6 @@ module.exports = function (sequelize, DataTypes) {
         IngredientName: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        //Smoothie, or Acai Bowl, etc.
-        Type: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1, 50],
-                //isIn: [[ 'Classic Smoothies', 'Light Smoothies', 'Meal Replacements', 'Teas and Coffee', 'Shots']]
-            }
         }
     });
     RecipeAmount.associate = function (models) {
