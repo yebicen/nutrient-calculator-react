@@ -1,10 +1,9 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table, Container } from 'reactstrap';
 import Adduser from "./adduser";
 import UserAPI from "../utils/UserAPI";
 import Userrow from "./userrow";
 import Edituserrow from "./edituserrow";
-import './admin.css'
 
 
 export default class Admin extends React.Component {
@@ -132,6 +131,7 @@ export default class Admin extends React.Component {
 
     const {editModeID, firstname, lastname, username, role, password, email, id, userList} = this.state;
     return (
+      <Container>
     <div>
      <h5>Current Users</h5>
      <form>
@@ -205,6 +205,7 @@ export default class Admin extends React.Component {
             handleUserchange={this.handleUserChange}/>
      
      </div>
+     </Container>
     )
    }
 

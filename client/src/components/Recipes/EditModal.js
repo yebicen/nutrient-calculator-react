@@ -63,7 +63,6 @@ export default class EditModal extends React.Component {
         API.editRecipe(editRecipeId, formData)
             .then(result => {
                 this.props.getRecipes()
-                console.log('DONE EDITING, NOW GET RECIPE')
             }
             );
         this.props.toggle();

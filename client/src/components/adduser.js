@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from 'reactstrap';
-import './admin.css'
 
 
 const Adduser = props => (
@@ -44,7 +43,6 @@ const Adduser = props => (
      </div>
     </form>  
   </div>
-
 );
 
 export default Adduser;
