@@ -20,7 +20,7 @@ import StickyFooter from 'react-sticky-footer';
 
 const Mainrouter = () =>
     <div class="w-screen mt-4">
-        <Router>
+        <Router history={history}>
             <div>
                 <JumbotronComponent />
 
