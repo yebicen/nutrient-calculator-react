@@ -3,6 +3,7 @@ import { Container } from 'reactstrap';
 import AddRecipeForm from './AddRecipeForm';
 import RecipeList from './RecipeList';
 import API from '../../utils/API';
+import NavBar from '../NavBar'
 
 export default class IngredientContainer extends React.Component {
 
@@ -29,6 +30,7 @@ export default class IngredientContainer extends React.Component {
   render() {
     
     return (
+      
       <Container>
         <AddRecipeForm getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes} />
         <RecipeList getRecipes={this.getRecipes} dbRecipes={this.state.dbRecipes} />
