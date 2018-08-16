@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
     const RecipeAmount = sequelize.define("RecipeAmount", {
         Amount: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(10,2),
             allowNull: false
         },
         Size: {
