@@ -73,7 +73,7 @@ export default class NavBar extends React.Component {
     const {user, isAdmin, loggedIn, firstname} = this.state;
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="warning" light expand="md">
         {loggedIn &&<NavbarBrand href="/">Hello, {firstname}</NavbarBrand>}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
