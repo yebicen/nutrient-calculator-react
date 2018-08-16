@@ -166,30 +166,34 @@ export default class AddRecipeForm extends React.Component {
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeName">Recipe Name</Label>
-                                <Input type="text" name="RecipeName" value={this.state.RecipeName} onChange={this.handleInputChange} />
+                                <Input type="text" name="RecipeName" placeholder="Name for your recipe" value={this.state.RecipeName} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeDescription">Recipe Description</Label>
-                                <Input type="text" name="RecipeDescription" value={this.state.RecipeDescription} onChange={this.handleInputChange} />
+                                <Label for="RecipeDescription">Description</Label>
+                                <Input type="text" name="RecipeDescription" placeholder="Enter description" value={this.state.RecipeDescription} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeType">Recipe Type</Label>
-                                <Input type="text" name="RecipeType" value={this.state.RecipeType} onChange={this.handleInputChange} />
+                                <Label for="RecipeType">Type</Label>
+                                <Input type="text" name="RecipeType" placeholder="E.g smoothie" value={this.state.RecipeType} onChange={this.handleInputChange} />
                             </FormGroup>
                         </Col>
                         <Col xs="6" sm="4">
                             <FormGroup>
-                                <Label for="RecipeImage">Recipe Image</Label>
+                                <Label for="RecipeImage">Image</Label>
                                 <Input className="btn btn-secondary" type="file" key={this.state.filekey || ''} name="RecipeImage" onChange={this.fileChangedHandler} />
                             </FormGroup>
 
                         </Col>
                     </Row>
-
+                    <Row className="ingredientTitleRow">
+                        <Col>
+                            <strong>Ingredients:</strong>
+                        </Col>
+                    </Row>
                     {this.state.RecipeIngredients.map((addIngredient, idx) => (
                         <Row key={idx} className="formIngredient">
                             <Col xs="12" sm="3" md="2">
@@ -213,7 +217,7 @@ export default class AddRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountSmall">Amount for Small</Label>
+                                    <Label for="AmountSmall">Small</Label>
                                     <Input type="text"
                                         name="AmountSmall"
                                         placeholder=""
@@ -225,7 +229,7 @@ export default class AddRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountMedium">Amount for Medium</Label>
+                                    <Label for="AmountMedium">Medium</Label>
                                     <Input type="text"
                                         name="AmountMedium"
                                         placeholder=""
@@ -236,7 +240,7 @@ export default class AddRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountLarge">Amount for Large</Label>
+                                    <Label for="AmountLarge">Large</Label>
                                     <Input type="text"
                                         name="AmountLarge"
                                         placeholder=""

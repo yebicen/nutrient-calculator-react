@@ -10,7 +10,7 @@ library.add(faPlus, faTrash)
 
 
 export default class EditRecipeForm extends React.Component {
-    
+
     // handleFormSubmit = event => {
     //     event.preventDefault();
     //     const { selectedFile, RecipeName, RecipeDescription, RecipeType, ingredientList, RecipeIngredients } = this.state;
@@ -47,39 +47,45 @@ export default class EditRecipeForm extends React.Component {
             <div className="addRecipeForm">
                 <Form>
                     <Row className="recipeInfo">
-                        <Col xs="6" sm="4">
+                        <Col xs="12" sm="12">
                             <FormGroup>
                                 <Label for="RecipeName">Recipe Name</Label>
                                 <Input type="text" name="RecipeName" value={this.props.state.RecipeName} onChange={this.props.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        <Col xs="6" sm="4">
+                        <Col xs="12" sm="12">
                             <FormGroup>
                                 <Label for="RecipeDescription">Recipe Description</Label>
                                 <Input type="text" name="RecipeDescription" value={this.props.state.RecipeDescription} onChange={this.props.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        <Col xs="6" sm="4">
+                        <Col xs="12" sm="12">
                             <FormGroup>
                                 <Label for="RecipeType">Recipe Type</Label>
                                 <Input type="text" name="RecipeType" value={this.props.state.RecipeType} onChange={this.props.handleInputChange} />
                             </FormGroup>
                         </Col>
-                        <Col xs="6" sm="4">
+                        <Col xs="12" sm="3">
+                            <div className="currentImage">
+                                <img src={this.props.state.RecipeImage} className="img-fluid" />
+                            </div>
+                        </Col>
+                        <Col xs="12" sm="5">
                             <FormGroup>
-                                <div className="currentImage">
-                                <img src={this.props.state.RecipeImage} className="img-fluid"/>
-                                </div>
                                 <Label for="RecipeImage">Replace Image</Label>
                                 <Input className="btn btn-secondary" type="file" name="RecipeImage" onChange={this.props.fileChangedHandler} />
                             </FormGroup>
 
                         </Col>
                     </Row>
-
+                    <Row className="ingredientTitleRow">
+                        <Col>
+                            <strong>Ingredients:</strong>
+                        </Col>
+                    </Row>
                     {this.props.state.RecipeIngredients.map((editIngredient, idx) => (
                         <Row key={idx} className="formIngredient">
-                            <Col xs="12" sm="3" md="2">
+                            <Col xs="12" sm="3" md="3">
                                 <FormGroup>
                                     <Label for="SelectIngredientName">Select Ingredient</Label>
                                     <Input type="select"
@@ -87,13 +93,13 @@ export default class EditRecipeForm extends React.Component {
                                         value={editIngredient.IngredientName}
                                         id={editIngredient.IngredientName}
                                         onChange={this.props.handleIngredientChange(idx)}
-                                        // id="SelectIngredientName"
-                                        >
+                                    // id="SelectIngredientName"
+                                    >
                                         {this.props.state.ingredientList.map(option => (
                                             <option key={option.id}
                                                 data-id={option.id}
-                                                value={option.IngredientName} 
-                                                >
+                                                value={option.IngredientName}
+                                            >
                                                 {option.IngredientName}
                                             </option>
                                         ))}
@@ -102,7 +108,7 @@ export default class EditRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountSmall">Amount for Small</Label>
+                                    <Label for="AmountSmall">Small</Label>
                                     <Input type="text"
                                         name="AmountSmall"
                                         placeholder=""
@@ -114,7 +120,7 @@ export default class EditRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountMedium">Amount for Medium</Label>
+                                    <Label for="AmountMedium">Medium</Label>
                                     <Input type="text"
                                         name="AmountMedium"
                                         placeholder=""
@@ -125,7 +131,7 @@ export default class EditRecipeForm extends React.Component {
                             </Col>
                             <Col xs="12" sm="3" md="2">
                                 <FormGroup>
-                                    <Label for="AmountLarge">Amount for Large</Label>
+                                    <Label for="AmountLarge">Large</Label>
                                     <Input type="text"
                                         name="AmountLarge"
                                         placeholder=""
