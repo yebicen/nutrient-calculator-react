@@ -8,15 +8,21 @@ var Recipes_controllers = require('../controllers/Recipes_controllers');
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './client/public/uploads');
-    },
-    filename: function (req, file, cb) {
-      const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
-      // cb(null, file.fieldname + '-' + Date.now());
-      cb(null, newFilename);
+  destination: function (req, file, cb) {
+    if (process.env.NODE_ENV === "production") {
+      cb(null, './client/build/uploads');
     }
-  })
+    else {
+    cb(null, './client/public/uploads');
+    }
+  },
+  filename: function (req, file, cb) {
+    const newFilename = `${uuidv4()}${path.extname(file.originalname)}`;
+    // cb(null, file.fieldname + '-' + Date.now());
+    cb(null, newFilename);
+  }
+})
+
    
 const upload = multer({ storage: storage });
 
