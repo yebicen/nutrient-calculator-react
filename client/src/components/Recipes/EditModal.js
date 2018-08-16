@@ -168,7 +168,7 @@ export default class EditModal extends React.Component {
         const { toggle, modal, editRecipeName, editRecipeId } = this.props
         return (
             <div>
-                <Modal isOpen={modal} fade={false} toggle={() => toggle("", "")}>
+                <Modal className="editmodal" isOpen={modal} fade={false} toggle={() => toggle("", "")}>
                     <ModalHeader toggle={() => toggle("", "")}>Edit {editRecipeName}</ModalHeader>
                     <ModalBody>
                         <EditRecipeForm

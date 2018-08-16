@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import API from '../../utils/API';
 import IngredientForm from './IngredientForm'
 
@@ -29,7 +29,7 @@ export default class AddIngredientForm extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     API.addIngredient(this.state).then(
-        this.props.getIngredients()
+      this.props.getIngredients()
     )
     this.setState({
       IngredientName: "",
@@ -44,15 +44,20 @@ export default class AddIngredientForm extends React.Component {
     });
   };
 
-  render () {
+  render() {
     return (
       <div className="addIngredientForm">
-      <IngredientForm 
-        handleInputChange={this.handleInputChange} 
-        state={this.state}
-      />
-      <Button onClick={this.handleFormSubmit}>Submit</Button>
+        <Row className="ingredientTitleRow">
+          <Col>
+            <strong>Add an Ingredient:</strong>
+          </Col>
+        </Row>
+        <IngredientForm
+          handleInputChange={this.handleInputChange}
+          state={this.state}
+        />
+        <Button onClick={this.handleFormSubmit}>Submit</Button>
       </div>
-      )
+    )
   }
 }
