@@ -1,0 +1,11 @@
+.jumbotron {
+    height: 600px;
+    background-image: url("http://blog.orgain.com/wp-content/uploads/2016/04/Recipe-AntiInflam-Header-1.jpg");
+    background-size: cover;}
+
+h1{
+    margin-top: 280px;
+    font-size: 30px;
+    color: white;       
+}
+
