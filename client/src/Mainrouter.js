@@ -16,7 +16,7 @@ import Imguploader from "./components/uploadimg";
 import Contact from "./components/contact";
 
 const App = () =>
-    <div class="w-screen mt-4">
+    <div className="w-screen mt-4">
         <Router history={history}>
             <div>
                 <NavBar />

@@ -14,9 +14,10 @@ export default class AddRecipeForm extends React.Component {
         RecipeName: "",
         RecipeDescription: "",
         RecipeType: "",
-        selectedFile: null,
+        selectedFile: "",
         ingredientList: [],
-        RecipeIngredients: []
+        RecipeIngredients: [],
+        filekey: ''
     };
 
     getIngredients = () => {
@@ -136,12 +137,22 @@ export default class AddRecipeForm extends React.Component {
             RecipeIngredients: []
         });
 
+        this.resetFileInput();
+
     };
 
     fileChangedHandler = (event) => {
         const file = event.target.files[0];
-        console.log(file);
+        // console.log(file);
         this.setState({ selectedFile: event.target.files[0] })
+    }
+
+    resetFileInput = () => {
+        let randomString = Math.random().toString(36);
+
+        this.setState({
+            filekey: randomString
+        });
     }
 
     render() {
@@ -173,7 +184,7 @@ export default class AddRecipeForm extends React.Component {
                         <Col xs="6" sm="4">
                             <FormGroup>
                                 <Label for="RecipeImage">Recipe Image</Label>
-                                <Input className="btn btn-secondary" type="file" name="RecipeImage" onChange={this.fileChangedHandler} />
+                                <Input className="btn btn-secondary" type="file" key={this.state.filekey || ''} name="RecipeImage" onChange={this.fileChangedHandler} />
                             </FormGroup>
 
                         </Col>
