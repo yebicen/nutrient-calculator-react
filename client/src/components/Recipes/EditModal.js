@@ -59,9 +59,15 @@ export default class EditModal extends React.Component {
         formData.append('ingredientList', ingredientList);
         formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
         formData.append('RecipeAmounts', JSON.stringify(RecipeAmounts));
+
         API.editRecipe(editRecipeId, formData)
-            .then(this.props.getRecipes());
+            .then(result => {
+                this.props.getRecipes()
+                console.log('DONE EDITING, NOW GET RECIPE')
+            }
+            );
         this.props.toggle();
+
         this.setState({
             RecipeId: "",
             RecipeName: "",
@@ -88,7 +94,7 @@ export default class EditModal extends React.Component {
                     AmountForLarge: ''
                 }
             ])
-            
+
         });
         // console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
     }
