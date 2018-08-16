@@ -15,7 +15,7 @@ import Contact from "./components/contact";
 import StickyFooter from 'react-sticky-footer';
 
 
-const Mainrouter = () =>
+const App = () =>
     <div class="w-screen mt-4">
         <Router>
             <div>
@@ -50,4 +50,4 @@ const Mainrouter = () =>
 
     </div>
 
-export default Mainrouter;
+export default App;

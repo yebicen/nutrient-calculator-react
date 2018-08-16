@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Mainrouter from "./Mainrouter"
+import App from "./Mainrouter"
 // import Admin from "./components/admin";
 
-ReactDOM.render(<Mainrouter />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
 

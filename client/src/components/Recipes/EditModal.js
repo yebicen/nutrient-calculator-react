@@ -5,6 +5,7 @@ import EditRecipeForm from './EditRecipeForm'
 
 export default class EditModal extends React.Component {
     state = {
+        RecipeId: "",
         RecipeName: "",
         RecipeDescription: "",
         RecipeImage: "",
@@ -47,8 +48,9 @@ export default class EditModal extends React.Component {
     confirmEdit = (editRecipeId, editState) => {
 
         // event.preventDefault();
-        const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients } = this.state;
+        const { selectedFile, RecipeName, RecipeDescription, RecipeType, RecipeImage, ingredientList, RecipeIngredients, RecipeAmounts } = this.state;
         let formData = new FormData();
+        formData.append('RecipeId', editRecipeId);
         formData.append('RecipeName', RecipeName);
         formData.append('RecipeDescription', RecipeDescription);
         formData.append('selectedFile', selectedFile);
@@ -56,17 +58,26 @@ export default class EditModal extends React.Component {
         // formData.append('RecipeType', RecipeType);
         formData.append('ingredientList', ingredientList);
         formData.append('RecipeIngredients', JSON.stringify(RecipeIngredients));
+        formData.append('RecipeAmounts', JSON.stringify(RecipeAmounts));
+
         API.editRecipe(editRecipeId, formData)
-            .then(this.props.getRecipes());
+            .then(result => {
+                this.props.getRecipes()
+                console.log('DONE EDITING, NOW GET RECIPE')
+            }
+            );
         this.props.toggle();
+
         this.setState({
+            RecipeId: "",
             RecipeName: "",
             RecipeDescription: "",
             RecipeImage: "",
             // RecipeType: "",
             selectedFile: null,
             ingredientList: [],
-            RecipeIngredients: []
+            RecipeIngredients: [],
+            RecipeAmounts: []
         });
 
         console.log(editState);
@@ -83,6 +94,7 @@ export default class EditModal extends React.Component {
                     AmountForLarge: ''
                 }
             ])
+
         });
         // console.log('RecipeIngredients:' + JSON.stringify(this.state.RecipeIngredients, null, 2))
     }

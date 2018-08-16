@@ -44,6 +44,16 @@ export default class RecipeContainer extends React.Component {
 
             })
         }
+
+        else {
+            this.setState({
+                editModal: !this.state.editModal,
+                // editRecipeName: editRecipeName,
+                // editRecipeId: editRecipeId
+            })
+
+            this.state.editModal==true ? this.child.setEditState() : null;
+        }
     }
 
     render() {
