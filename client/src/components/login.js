@@ -54,13 +54,13 @@ export default class Login extends React.Component {
                     <Row className="loginForm">
                         <Col md="3">
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                <label for="usernameLgIn" className="mr-sm-2">Userame: </label>
+                                <Label className="mr-sm-2">Userame: </Label>
                                 <Input id="usernameLgIn" name="usernameLgIn" value={this.state.usernameLgIn} onChange={this.handleLoginChange} />
                             </FormGroup>
                         </Col>
                         <Col md="3">
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                <label for="passwordLgIn" className="mr-sm-2">Password: </label>
+                                <Label className="mr-sm-2">Password: </Label>
                                 <Input id="passwordLgIn" name="passwordLgIn" value={this.state.passwordLgIn} onChange={this.handleLoginChange} />
                             </FormGroup>
                         </Col>
@@ -79,5 +79,5 @@ export default class Login extends React.Component {
 
     }
 
-
+ 
 }

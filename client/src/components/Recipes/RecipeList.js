@@ -33,6 +33,8 @@ export default class RecipeContainer extends React.Component {
         if (!this.state.editModal) {
         API.getOneRecipe(editRecipeId)
             .then(res => {
+                console.log('======= RES DATA========')
+                console.log(res.data)
                 this.setState({
                     editModal: !this.state.editModal,
                     editRecipeName: editRecipeName,
