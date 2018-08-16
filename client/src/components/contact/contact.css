@@ -1,0 +1,29 @@
+.contactwrapper{
+    background-image: url("http://images.media-allrecipes.com/images/81024.jpg");
+    background-size: cover;}
+
+
+.contactform{
+ position: relative;
+ left: 350px;
+ width: 200px;
+}
+
+.contactaddress{
+    position: relative;
+    top:100px;
+    left: 0;
+    width:220px;
+}
+
+
+h4{
+    margin-top: 20px;
+    font-size: 25px;  
+    color:rgb(110, 108, 108)
+}
+
+p{
+    color:rgb(117, 115, 115)
+}
+
