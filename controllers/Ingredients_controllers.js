@@ -34,7 +34,9 @@ exports.deleteIngredient = function (req, res) {
 
 exports.editIngredient = function (req, res) {
   console.log('req body: ' + req.body);
-  db.Ingredient.update(req.body, {
+  db.Ingredient.update(
+    req.body, 
+    {
     where: {
       id: req.params.id
     }
