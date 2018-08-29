@@ -1,4 +1,4 @@
-
+![Alt Text](nu_1.gif)
 
 # Nutrient Calculator
 Purpose of this application is to allow the users to calculate nutritional values in juices and smoothies.
