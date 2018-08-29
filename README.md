@@ -1,4 +1,4 @@
-![Alt Text](nu_1.gif)
+![Alt Text](nu_3.gif)
 
 ![Alt Text](nu_2.gif)
 
