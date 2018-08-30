@@ -1,7 +1,8 @@
+## Home Page and Login, Add Ingredient Demo:
 ![Alt Text](nu_3.gif)
-
+## Add Recipe and Nutrition Summary Demo:
 ![Alt Text](nu_2.gif)
-
+## Admin and Contact Page Demo:
 ![Alt Text](nu_4.gif)
 
 # Nutrient Calculator
